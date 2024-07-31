@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    background-color: black;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none;
+    user-select: none;       /*關閉點擊效果*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    background-color: transparent;
+    color: inherit;
+    outline: none;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+  .home {
+    /* max-width: 1200px; */
+    max-width: 100vw;
+    height: 100vh;
+    margin: auto;
+    text-align: center;
+    background-image: url("../public/bg.png");
+  }
+
+  .home__petname{
+    position: absolute;
+    left: 15%;
+    top: 0%;
+  }
+
+  .petname__name{
+    font-size: 36px;
+    font-weight: 900;
+    margin: 30px 0px;
+  }
+  
+  .home__information{
+    position: absolute;
+    left: 15%;
+    top: 15%;
+  }
+
+  .information__stat{
+    font-size: 30px;
+    font-weight: 600;
+    margin: 10px 0px;
+  }
+
+  .home__actionpoint{
+    position: absolute;
+    right: 10%;
+    top: 5%;
+  }
+
+  .actionpoint__bg{
+    position: absolute;
+    right: -10%;
+    top: 5%;
+    z-index: 0;
+    width: 200px; /* 宽度 */
+    height: 120px; /* 高度 */
+    background-color: rgba(255, 163, 218, 0.5); /* 背景色 */
+    clip-path: polygon(20% 60%, 100% 0%, 120% 100%, 0% 100%); /* 定义不規則四邊形的頂點 */
+  }
+
+  .actionpoint__title{
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  .actionpoint__point{
+    z-index: 2;
+    font-size: 55px;
+    font-weight: 900;
+  }
+
+
+  .home__button{
+    position: absolute;
+    right: 10%;
+    top: 20%;
+  }
+  
+  .button__action{
+    width: 210px; /* 平行四邊形的寬度 */
+    height: 75px; /* 平行四邊形的高度 */
+    background-color: black; /* 平行四邊形的背景色 */
+    transform: skew(-20deg); /* 傾斜度 */
+  }
+
+  .button__word{
+    transform: skew(20deg); /* 傾斜度 */
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    padding: 10px 0px 0px 0px;
+  }
+
+  .button__line{
+    position: relative;
+    top: -30px;
+    right: -10px;
+    z-index: 2;
+    width: 190px;
+    color: white;
+    border: 1px white solid;
+  }
+
+
+  .ending__title{
+    padding :100px 0px;
+    font-size : 90px; 
+    font-weight: 900;
+  }
+
+
+  .animation-container{
+    position: absolute;
+    bottom: 100px;
+    left: 50%; /* 將 left 設置為 50% */
+    transform: translateX(-50%); /* 使用 transform 來水平居中 */
+    width: 500px;
+    height: 500px;
+  }
+
+  .button__newgame{
+    width: 210px; 
+    height: 75px; 
+    background-color: black; /* 平行四邊形的背景色 */
+    transform: skew(-20deg); /* 傾斜度 */
+  }
+
+  .ending__button{
+    position: absolute;
+    left: 90%; /* 將 left 設置為 50% */
+    transform: translateX(-50%); /* 使用 transform 來水平居中 */
+    bottom:10%;
+  }
