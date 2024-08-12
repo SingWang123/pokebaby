@@ -2,17 +2,17 @@
 import React from "react";
 import { useState } from "react";
 import { registerUser } from "lib/firebase";
-import { User } from "firebase/auth";
 import { Signin } from "./signin";
+import { useAuthContext } from "@context/AuthContext";
 
 type SignupProps = {
     toggleSignup : () => void;
-    user : User | null ;
 };
 
-export const Signup:React.FC<SignupProps> = ({toggleSignup, user}) => {
+export const Signup : React.FC<SignupProps> = ({toggleSignup}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {user} = useAuthContext();
     
     const handleSignup = () => {
         if (email.trim() === "" || password.trim() === "") {
@@ -85,7 +85,7 @@ export const Signup:React.FC<SignupProps> = ({toggleSignup, user}) => {
                     </button>
                 </div>
             ):(
-                <Signin toggleSignup = {toggleSignup} user = {user}/>
+                <Signin toggleSignup = {toggleSignup} />
             )}
         </>
     )

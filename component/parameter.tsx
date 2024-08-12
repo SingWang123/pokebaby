@@ -2,15 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import { useParameter } from '@context/ParameterContext';
 import { getPetParameter } from 'lib/firebase';
-import { User } from 'firebase/auth';
+import { useAuthContext } from '@context/AuthContext';
 
-type ParameterProps = {
-    user : User | null ;
-};
-
-const Parameter: React.FC<ParameterProps> = ({ user }) => {
+const Parameter = () => {
     const [petData, setPetData] = useState<any[]>([]); // 用於保存從資料庫獲取的資料
     const { petParameter } = useParameter();
+    const {user} = useAuthContext();
   
     useEffect(() => {
         let unsubscribe: (() => void) | undefined;

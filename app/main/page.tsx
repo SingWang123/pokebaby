@@ -1,15 +1,44 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { EggAnimation, BraveAAnimation, CoolAAnimation, DedicationAAnimation, DexterityAAnimation, PerseveranceAAnimation } from 'component/animation';
-import { useParameter } from '@context/ParameterContext';
+import { PetParameter, useParameter } from '@context/ParameterContext';
 import Parameter from 'component/parameter';
 import { Ending } from 'component/ending';
-import { useAuth, writePetParameter } from 'lib/firebase';
+import { getPetParameter, writePetParameter } from 'lib/firebase';
+import { useAuthContext } from '@context/AuthContext';
 
 export default function HomePage() {
-    const { petParameter, setPetParameter } = useParameter();
+    const {petParameter, setPetParameter } = useParameter();
     const [highestAttribute,setHighestAttribute] = useState<string | null>("");
-    const {user} = useAuth();
+    const {user} = useAuthContext();
+
+    //從資料庫撈資料，轉換格式存到Context中
+    useEffect(() => {
+        let unsubscribe: (() => void) | undefined;
+    
+        if (user) {
+            unsubscribe = getPetParameter(user.uid, (data) => {
+                if (data.length > 0) {
+                    const petDataItem = data[0]; // 只需要第一個資料
+                    const updatedPetParameter: PetParameter = {
+                        round: petDataItem.round,
+                        brave: petDataItem.brave,
+                        perseverance: petDataItem.perseverance,
+                        cool: petDataItem.cool,
+                        dexterity: petDataItem.dexterity,
+                        dedication: petDataItem.dedication,
+                    };
+                    setPetParameter(updatedPetParameter);
+                }
+            });
+        }
+    
+        return () => {
+            if (unsubscribe) {
+                unsubscribe();
+            }
+        };
+    }, [user, setPetParameter]);
 
     useEffect(() => {
         if (petParameter.round === 5){
@@ -104,7 +133,7 @@ export default function HomePage() {
                 <div className = 'home__petname'>
                     <div className = 'petname__name'>寵物蛋1號</div>
                 </div>
-                <Parameter user = {user} />
+                <Parameter />
                 {/* <div className = 'home__actionpoint'>
                     <div className = 'actionpoint__title'>還剩</div>
                     <div className = 'actionpoint__point'>{petParameter.round}回合</div>

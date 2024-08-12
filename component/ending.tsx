@@ -3,10 +3,13 @@ import React, { useState,useEffect } from 'react';
 import { useParameter } from '@context/ParameterContext';
 import { EggAnimation, BraveAAnimation, CoolAAnimation, DedicationAAnimation, DexterityAAnimation, PerseveranceAAnimation } from '../component/animation';
 import { writePetParameter } from 'lib/firebase';
+import { useAuthContext } from '@context/AuthContext';
+
 
 export const Ending = () => { 
     const { petParameter, setPetParameter } = useParameter();  
     const [endingHighestAttribute,setEndingHighestAttribute] = useState<string | null>("");
+    const {user} = useAuthContext();
 
     useEffect(() => {
         if (petParameter.round === 0){
@@ -27,9 +30,9 @@ export const Ending = () => {
 
     const handleNewGame = () => {
 
-        // writePetParameter(
-        //     10, 0, 0, 0, 0, 0, user?.uid
-        // )
+        writePetParameter(
+            10, 0, 0, 0, 0, 0, user?.uid
+        )
 
         setPetParameter({
             round: 10,

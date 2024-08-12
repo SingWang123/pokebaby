@@ -4,15 +4,16 @@ import { useState } from "react";
 import { signinOut, signinUser } from "lib/firebase";
 import Link from "next/link";
 import { User } from "firebase/auth";
+import { useAuthContext } from "@context/AuthContext";
 
 type SigninProps = {
     toggleSignup : () => void;
-    user : User | null ;
 };
 
-export const Signin : React.FC<SigninProps> = ({toggleSignup, user}) => {
+export const Signin : React.FC<SigninProps> = ({toggleSignup}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {user} = useAuthContext();
     
     const handleSignin = () => {
         if (email.trim() === "" || password.trim() === "") {

@@ -1,4 +1,4 @@
-import React, { Children, ReactNode, useEffect, useState } from "react";
+import React, { PropsWithChildren} from "react";
 import { createContext, useContext } from "react";
 import { useAuth } from "lib/firebase";
 import { User } from "firebase/auth";
@@ -10,13 +10,21 @@ interface AuthContextType {
 //創建一個Context
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// //設定provider
-// export const AuthProvider = ({ children }: {children: ReactNode}) => {
-//     const [user, setUser] = useState<User | null>(null);
+//設定provider
+export const AuthProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+    const { user } = useAuth();
 
-//     useEffect(() => {
-//         const unsubscribe = 
+    return (
+        <AuthContext.Provider value = {{user}}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
 
-//     })
-
-// }
+export const useAuthContext = () => {
+    const context = useContext(AuthContext);
+    if (!context){
+        throw new Error ("useAuthContext錯誤")
+    }
+    return context;
+}

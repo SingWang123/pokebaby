@@ -21,9 +21,9 @@ export default function HomePage() {
                 </div>
                 {
                     switchSignup ? (
-                        <Signup toggleSignup = {toggleSignup} user = {user}/>
+                        <Signup toggleSignup = {toggleSignup} />
                     ):(
-                        <Signin toggleSignup = {toggleSignup} user = {user}/>
+                        <Signin toggleSignup = {toggleSignup} />
                     )
                 }
             </div>
