@@ -1,9 +1,11 @@
 "use client";
 import React, { PropsWithChildren } from 'react';
 import '../styles/globals.css';
+import "../styles/signin.css" ;
 import { ParameterProvider } from '@context/ParameterContext'; // 確保路徑正確
 
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
+
   return (
     <ParameterProvider>
       <html lang="en">

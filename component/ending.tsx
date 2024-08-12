@@ -2,6 +2,7 @@
 import React, { useState,useEffect } from 'react';
 import { useParameter } from '@context/ParameterContext';
 import { EggAnimation, BraveAAnimation, CoolAAnimation, DedicationAAnimation, DexterityAAnimation, PerseveranceAAnimation } from '../component/animation';
+import { writePetParameter } from 'lib/firebase';
 
 export const Ending = () => { 
     const { petParameter, setPetParameter } = useParameter();  
@@ -25,6 +26,11 @@ export const Ending = () => {
     }, [petParameter.round]);
 
     const handleNewGame = () => {
+
+        // writePetParameter(
+        //     10, 0, 0, 0, 0, 0, user?.uid
+        // )
+
         setPetParameter({
             round: 10,
             brave: 0,
