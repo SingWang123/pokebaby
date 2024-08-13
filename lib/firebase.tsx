@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { collection, doc, getFirestore, initializeFirestore, setDoc, query, onSnapshot, getDoc } from 'firebase/firestore';
+import { collection, doc, getFirestore, initializeFirestore, setDoc, query, onSnapshot, getDoc, updateDoc, FieldValue } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
 import { useState ,useEffect } from "react";
 import { User } from "firebase/auth";
@@ -95,7 +95,7 @@ export async function writePetParameter(
     dedication : number, 
     uid : string | null | undefined 
 ) {
-    if (!uid) {
+    if (!uid || typeof uid !== 'string') {
         console.error('UID is missing');
         return; // 或者拋出錯誤
     }
@@ -109,12 +109,12 @@ export async function writePetParameter(
         
         // 設定檔案資料
         await setDoc(docRef, {
-            round: round,
-            brave: brave,
-            perseverance: perseverance,
-            cool: cool,
-            dexterity: dexterity,
-            dedication: dedication,
+            round: round || 0,
+            brave: brave || 0,
+            perseverance: perseverance || 0,
+            cool: cool || 0,
+            dexterity: dexterity || 0,
+            dedication: dedication || 0,
         });
         console.log('寫入寵物數據成功');
     } catch (error: any) {
@@ -138,7 +138,7 @@ export async function writeBackpack(
     count : number, 
     uid : string | null | undefined 
 ) {
-    if (!uid) {
+    if (!uid || typeof uid !== 'string') {
         console.error('UID is missing');
         return; // 或者拋出錯誤
     }
@@ -162,6 +162,11 @@ export async function writeBackpack(
 
         //檢查ID是否存在，存在就加數字，不存在就新增道具
         if (backpackData[foodid]){
+            // await updateDoc(docRef,{
+            //     [foodid]:{
+            //         count: FieldValue.increment(count)
+            //     }
+            // });
             backpackData[foodid].count += count;
         } else {
             backpackData[foodid] = {foodid: foodid, count: count};

@@ -15,7 +15,7 @@ const Parameter = () => {
         if (user) {
           unsubscribe = getPetParameter(user.uid, setPetData);
         }
-    
+        console.log(petData);
         return () => {
           if (unsubscribe) {
             unsubscribe();
