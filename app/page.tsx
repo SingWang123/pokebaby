@@ -3,10 +3,8 @@ import React from 'react';
 import { Signup } from 'component/signup';
 import { Signin } from 'component/signin';
 import { useState } from 'react';
-import { useAuth } from 'lib/firebase';
 
 export default function HomePage() {
-    const {user} = useAuth();
     const [switchSignup, setSwitchSignup] = useState(false);
 
     const toggleSignup = () => {

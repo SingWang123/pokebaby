@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { collection, doc, getFirestore, setDoc, query, onSnapshot } from 'firebase/firestore';
+import { collection, doc, getFirestore, initializeFirestore, setDoc, query, onSnapshot, getDoc } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
 import { useState ,useEffect } from "react";
 import { User } from "firebase/auth";
@@ -15,6 +15,11 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+// // 初始化 Firestore 並強制使用 Long Polling
+// const firestore = initializeFirestore(app, {
+//     experimentalForceLongPolling: true,
+//   });
+
 export { app };
 export const auth = getAuth();
 
@@ -111,12 +116,66 @@ export async function writePetParameter(
             dexterity: dexterity,
             dedication: dedication,
         });
-
-        console.log('Document successfully written!');
+        console.log('寫入寵物數據成功');
     } catch (error: any) {
         console.error('Error writing document: ', error);
     }
-  }
+}
+
+interface BackpackItem{
+    foodid : number;
+    count : number;
+}
+
+interface BackpackData{
+    [key: number]: BackpackItem;
+}
+
+
+//當得到的道具寫進去背包資料庫
+export async function writeBackpack(
+    foodid : number, 
+    count : number, 
+    uid : string | null | undefined 
+) {
+    if (!uid) {
+        console.error('UID is missing');
+        return; // 或者拋出錯誤
+    }
+
+    try {
+        // 引用collection
+        const collectionRef = collection(db, uid);
+        
+        // 引用doc 檔案
+        const docRef = doc(collectionRef, "Backpack");
+
+        //取得目前背包資料
+        const docSnap = await getDoc(docRef);
+
+        let backpackData:BackpackData = {};
+
+        //若背包內有東西，讓backpackData等於目前資料庫資料
+        if (docSnap.exists()){
+            backpackData = docSnap.data() as BackpackData;
+        }
+
+        //檢查ID是否存在，存在就加數字，不存在就新增道具
+        if (backpackData[foodid]){
+            backpackData[foodid].count += count;
+        } else {
+            backpackData[foodid] = {foodid: foodid, count: count};
+        }
+        
+        // 設定檔案資料
+        await setDoc(docRef, backpackData);
+
+        console.log('寫入背包數據成功');
+    } catch (error: any) {
+        console.error('Error writing document: ', error);
+    }
+}
+
 
 
 //讀取資料庫資料

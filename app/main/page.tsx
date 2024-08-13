@@ -6,11 +6,21 @@ import Parameter from 'component/parameter';
 import { Ending } from 'component/ending';
 import { getPetParameter, writePetParameter } from 'lib/firebase';
 import { useAuthContext } from '@context/AuthContext';
+import { useRouter } from 'next/navigation';
+import { GetRandomFood } from 'component/getfood';
 
 export default function HomePage() {
     const {petParameter, setPetParameter } = useParameter();
     const [highestAttribute,setHighestAttribute] = useState<string | null>("");
     const {user} = useAuthContext();
+    const router = useRouter();
+
+    //檢查登入狀態，未登入踢回首頁
+    useEffect(() => {
+        if (!user) {
+          router.push('/'); // 如果未登入，重定向到首頁或登入頁面
+        }
+      }, [user, router]);
 
     //從資料庫撈資料，轉換格式存到Context中
     useEffect(() => {
@@ -111,56 +121,57 @@ export default function HomePage() {
     }
 
     return (
-    <div className = "home">
-        {
-            petParameter.round <= 0 ?
-            <Ending />:
-            petParameter.round <= 5 ? 
-            (
-                highestAttribute === "brave" ?  <BraveAAnimation /> :
-                    highestAttribute === "cool" ?  <CoolAAnimation /> :
-                        highestAttribute === "dedication" ?   <DedicationAAnimation /> :
-                            highestAttribute === "dexterity" ?   <DexterityAAnimation /> :
-                                highestAttribute === "perseverance" ?   <PerseveranceAAnimation />:
-                                    <EggAnimation />
-            ) :
-            <EggAnimation />
-        }
-        {
-            petParameter.round <= 0 ?
-            <div></div>:
-            <>
-                <div className = 'home__petname'>
-                    <div className = 'petname__name'>寵物蛋1號</div>
-                </div>
-                <Parameter />
-                {/* <div className = 'home__actionpoint'>
-                    <div className = 'actionpoint__title'>還剩</div>
-                    <div className = 'actionpoint__point'>{petParameter.round}回合</div>
-                    <div className = 'actionpoint__bg'></div>    
-                </div> */}
-                <div className = 'home__button'>
-                    <div className = "button__action">
-                        <p 
-                            className = "button__word"
-                            onClick = {handleFeeding}
-                        >
-                            互動
-                        </p>
-                        <hr className = "button__line"></hr>
+        <div className = "home">
+            {
+                petParameter.round <= 0 ?
+                <Ending />:
+                petParameter.round <= 5 ? 
+                (
+                    highestAttribute === "brave" ?  <BraveAAnimation /> :
+                        highestAttribute === "cool" ?  <CoolAAnimation /> :
+                            highestAttribute === "dedication" ?   <DedicationAAnimation /> :
+                                highestAttribute === "dexterity" ?   <DexterityAAnimation /> :
+                                    highestAttribute === "perseverance" ?   <PerseveranceAAnimation />:
+                                        <EggAnimation />
+                ) :
+                <EggAnimation />
+            }
+            {
+                petParameter.round <= 0 ?
+                <div></div>:
+                <>
+                    <div className = 'home__petname'>
+                        <div className = 'petname__name'>寵物蛋1號</div>
                     </div>
-                    <div className = "button__action">
-                        <p 
-                            className = "button__word"
-                            onClick = {handleFeeding}    
-                        >
-                            餵食
-                        </p>
-                        <hr className = "button__line"></hr>
+                    <Parameter />
+                    {/* <div className = 'home__actionpoint'>
+                        <div className = 'actionpoint__title'>還剩</div>
+                        <div className = 'actionpoint__point'>{petParameter.round}回合</div>
+                        <div className = 'actionpoint__bg'></div>    
+                    </div> */}
+                    <div className = 'home__button'>
+                        <div className = "button__action">
+                            <p 
+                                className = "button__word"
+                                onClick = {handleFeeding}
+                            >
+                                互動
+                            </p>
+                            <hr className = "button__line"></hr>
+                        </div>
+                        <div className = "button__action">
+                            <p 
+                                className = "button__word"
+                                onClick = {handleFeeding}    
+                            >
+                                餵食
+                            </p>
+                            <hr className = "button__line"></hr>
+                        </div>
+                        <GetRandomFood />
                     </div>
-                </div>
-            </>
-        }
-    </div>
+                </>
+            }
+        </div>
     );
 }

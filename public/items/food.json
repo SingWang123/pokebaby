@@ -1,0 +1,41 @@
+[
+    {
+      "id": 1,
+      "icon": "/icons/0001.png",
+      "name": "蘋果",
+      "weight": 100,
+      "effect": {    
+        "brave": 3,
+        "perseverance": 0,
+        "cool": 0,
+        "dexterity": 0,
+        "dedication": 0
+      }
+    },
+    {
+      "id": 2,
+      "icon": "/icons/0002.png",
+      "name": "橘子",
+      "weight": 100,
+      "effect": {    
+        "brave": 0,
+        "perseverance": 0,
+        "cool": 0,
+        "dexterity": 3,
+        "dedication": 0
+      }
+    },
+    {
+      "id": 3,
+      "icon": "/icons/0003.png",
+      "name": "醃漬橘子",
+      "weight": 30,
+      "effect": {    
+        "brave": 0,
+        "perseverance": 0,
+        "cool": 0,
+        "dexterity": 10,
+        "dedication": 0
+      }
+    }
+  ]

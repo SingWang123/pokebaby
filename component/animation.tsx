@@ -12,7 +12,7 @@ export const EggAnimation = () => {
         renderer: 'svg', // 
         loop: true, // 重複動畫
         autoplay: true, // 自動播放
-        path: "/egg_animation.json" // 要讀取的json檔案位置
+        path: "/lottie/egg_animation.json" // 要讀取的json檔案位置
       });
 
       return () => {
@@ -34,7 +34,7 @@ export const BraveAAnimation = () => {
         renderer: 'svg', // 
         loop: true, // 重複動畫
         autoplay: true, // 自動播放
-        path: "/brave_a_animation.json" // 要讀取的json檔案位置
+        path: "/lottie/brave_a_animation.json" // 要讀取的json檔案位置
       });
 
       return () => {
@@ -56,7 +56,7 @@ export const CoolAAnimation = () => {
         renderer: 'svg', // 
         loop: true, // 重複動畫
         autoplay: true, // 自動播放
-        path: "/cool_a_animation.json" // 要讀取的json檔案位置
+        path: "/lottie/cool_a_animation.json" // 要讀取的json檔案位置
       });
 
       return () => {
@@ -78,7 +78,7 @@ export const DedicationAAnimation = () => {
         renderer: 'svg', // 
         loop: true, // 重複動畫
         autoplay: true, // 自動播放
-        path: "/dedication_a_animation.json" // 要讀取的json檔案位置
+        path: "/lottie/dedication_a_animation.json" // 要讀取的json檔案位置
       });
 
       return () => {
@@ -100,7 +100,7 @@ export const PerseveranceAAnimation = () => {
         renderer: 'svg', // 
         loop: true, // 重複動畫
         autoplay: true, // 自動播放
-        path: "/perseverance_a_animation.json" // 要讀取的json檔案位置
+        path: "/lottie/perseverance_a_animation.json" // 要讀取的json檔案位置
       });
 
       return () => {
@@ -122,7 +122,7 @@ export const DexterityAAnimation = () => {
         renderer: 'svg', // 
         loop: true, // 重複動畫
         autoplay: true, // 自動播放
-        path: "/dexterity_a_animation.json" // 要讀取的json檔案位置
+        path: "/lottie/dexterity_a_animation.json" // 要讀取的json檔案位置
       });
 
       return () => {

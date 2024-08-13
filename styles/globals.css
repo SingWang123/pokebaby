@@ -145,3 +145,19 @@ body {
     transform: translateX(-50%); /* 使用 transform 來水平居中 */
     bottom:10%;
   }
+
+  /* .fade-out{
+    animation: fade 3s forwards;
+  }
+
+  @keyframes fade {
+    0% {
+      opacity: 1; 
+    }
+    99% {
+      opacity: 1; 
+    }
+    100% {
+      opacity: 0; 
+    }
+  } */
