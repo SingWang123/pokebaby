@@ -5,11 +5,11 @@
       "name": "蘋果",
       "weight": 100,
       "effect": {    
-        "brave": 3,
-        "perseverance": 0,
-        "cool": 0,
-        "dexterity": 0,
-        "dedication": 0
+        "勇敢": 3,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
       }
     },
     {
@@ -18,11 +18,11 @@
       "name": "橘子",
       "weight": 100,
       "effect": {    
-        "brave": 0,
-        "perseverance": 0,
-        "cool": 0,
-        "dexterity": 3,
-        "dedication": 0
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 3,
+        "奉獻": 0
       }
     },
     {
@@ -31,11 +31,11 @@
       "name": "醃漬橘子",
       "weight": 30,
       "effect": {    
-        "brave": 0,
-        "perseverance": 0,
-        "cool": 0,
-        "dexterity": 10,
-        "dedication": 0
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 10,
+        "奉獻": 0
       }
     }
   ]

@@ -2,7 +2,7 @@
 import React, { useState,useEffect } from 'react';
 import { useParameter } from '@context/ParameterContext';
 import { EggAnimation, BraveAAnimation, CoolAAnimation, DedicationAAnimation, DexterityAAnimation, PerseveranceAAnimation } from '../component/animation';
-import { writePetParameter } from 'lib/firebase';
+import { writePetParameter } from 'lib/WriteData';
 import { useAuthContext } from '@context/AuthContext';
 
 

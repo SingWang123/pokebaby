@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react"
 import foodData from "public/items/food.json";
-import { writeBackpack, writeCooldownTime } from "lib/firebase";
+import { writeBackpack, writeCooldownTime } from "lib/WriteData";
 import { useAuthContext } from "@context/AuthContext";
-import { setInterval } from "timers/promises";
+import { loadCooldownTime } from "lib/LoadData";
 
 interface FoodEffect {
     brave: number;
@@ -20,14 +20,41 @@ interface Food {
     effect: FoodEffect;
 }
 
-
 export const GetRandomFood = () => {
   const {user} = useAuthContext();
-  const [food, setfood] = useState<Food[]>(foodData);
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
   const [isCoolingDown, setIsCoolingDown] = useState<boolean>(false);
-  const [cooldownTime, setCooldownTime] = useState<number>(60);
+  const [cooldownTime, setCooldownTime] = useState<number>(600);
+  const minutes = Math.floor(cooldownTime / 60); // 计算分钟数
+  const seconds = cooldownTime % 60; // 计算剩余的秒数
 
+  // 從資料庫撈資料，存到setCooldownTime中（一登入就撈取）
+  useEffect(() => {
+    if (user) {
+        loadCooldownTime(user?.uid, (data) => {
+            if (data) {
+                if (data.isCoolingdown){
+                  const lastUpdateTimestamp = data.lastUpdateTime.seconds +  data.lastUpdateTime.nanoseconds / 1e9 ; 
+                  const currentTime = Math.floor(Date.now() / 1000);
+
+                  //計算冷卻結束時間
+                  const cooldownEndTime = lastUpdateTimestamp + data.cooldownTime;
+
+                  if (currentTime >= cooldownEndTime) {
+                    setIsCoolingDown(false);
+                    setCooldownTime(0);
+                  } else {
+                    const remainingTime = Math.floor(cooldownEndTime - currentTime);
+                    setIsCoolingDown(true);
+                    setCooldownTime(remainingTime);
+                  }
+                }
+            }
+        });
+    }
+  }, [user]);
+
+  //冷卻時間倒數計時
   useEffect(() => {
     let timer: number | null = null; // 使用 number | null 類型
 
@@ -56,9 +83,7 @@ export const GetRandomFood = () => {
     if (isCoolingDown && cooldownTime > 0 && user) {
         writeCooldownTime(true, cooldownTime, new Date(), user.uid);
     }
-}, [isCoolingDown, user]);
-
-
+  }, [isCoolingDown, user]);
 
   const handleGetFood = () =>{
     if (!isCoolingDown){
@@ -83,7 +108,7 @@ export const GetRandomFood = () => {
 
               //設定冷卻時間
               setIsCoolingDown(true);
-              setCooldownTime(60);
+              setCooldownTime(600);
 
               //將冷卻時間寫入資料庫
               // writeCooldownTime(true, cooldownTime, new Date, user?.uid)
@@ -94,21 +119,33 @@ export const GetRandomFood = () => {
     }
   }
 
+
+
+
   return (
     <>
+    {isCoolingDown ? (
+      <>
+        <div className="button__action" style={{ margin: "80px 0px 0px 0px", backgroundColor: "gray" }}>
+          <p className="button__word" onClick={handleGetFood}>
+            領取食物
+          </p>
+          <hr className="button__line"></hr>
+        </div>
+        {minutes === 0 ? 
+          (<p>冷卻中 {seconds}秒</p>):
+          (<p>冷卻中 {minutes}分 {seconds}秒</p>)
+        }
+      </>
+    ) : (
+      // 如果未冷却，显示按钮
       <div className="button__action" style={{ margin: "80px 0px" }}>
-        <p 
-          className="button__word"
-          onClick={handleGetFood}    
-        >
+        <p className="button__word" onClick={handleGetFood}>
           領取食物
         </p>
         <hr className="button__line"></hr>
       </div>
-      {isCoolingDown ? 
-        <p>冷卻中 {cooldownTime}s </p>:
-        <></>
-      }
+    )}
 
       {selectedFood && (
         <div className = "fade-out">

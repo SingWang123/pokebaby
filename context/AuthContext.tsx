@@ -1,6 +1,6 @@
 import React, { PropsWithChildren} from "react";
 import { createContext, useContext } from "react";
-import { useAuth } from "lib/firebase";
+import { useAuth } from "lib/FirebaseAuth";
 import { User } from "firebase/auth";
 
 interface AuthContextType {

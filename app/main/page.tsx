@@ -1,13 +1,16 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { EggAnimation, BraveAAnimation, CoolAAnimation, DedicationAAnimation, DexterityAAnimation, PerseveranceAAnimation } from 'component/animation';
-import { PetParameter, useParameter } from '@context/ParameterContext';
 import Parameter from 'component/parameter';
 import { Ending } from 'component/ending';
-import { getPetParameter, writePetParameter } from 'lib/firebase';
+import { GetRandomFood } from 'component/getfood';
+import { writePetParameter } from 'lib/WriteData';
+import { loadCooldownTime, getPetParameter } from 'lib/LoadData';
+import { PetParameter, useParameter } from '@context/ParameterContext';
 import { useAuthContext } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { GetRandomFood } from 'component/getfood';
+import { Backpack } from 'component/backpack';
+
 
 export default function HomePage() {
     const {petParameter, setPetParameter } = useParameter();
@@ -22,7 +25,7 @@ export default function HomePage() {
         }
       }, [user, router]);
 
-    // 從資料庫撈資料，存到Context中（一開始就撈取，登入時可以找到之前紀錄）
+    // 從資料庫撈資料，存到Context中（一登入就撈取，登入時可以從之前紀錄）
     useEffect(() => {
         if (user) {
             getPetParameter(user.uid, (data) => {
@@ -40,7 +43,6 @@ export default function HomePage() {
                 }
             });
         }
-
     }, [user, setPetParameter]);
 
     useEffect(() => {
@@ -163,6 +165,7 @@ export default function HomePage() {
                         </div>
                         <GetRandomFood />
                     </div>
+                    <Backpack />
                 </>
             }
         </div>

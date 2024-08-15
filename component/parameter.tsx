@@ -1,8 +1,6 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PetParameter, useParameter } from '@context/ParameterContext';
-import { getPetParameter } from 'lib/firebase';
-import { useAuthContext } from '@context/AuthContext';
 
 const Parameter = () => {
     const { petParameter, setPetParameter} = useParameter();

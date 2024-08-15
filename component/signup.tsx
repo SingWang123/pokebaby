@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import { registerUser } from "lib/firebase";
+import { registerUser } from "lib/FirebaseAuth";
 import { Signin } from "./signin";
 import { useAuthContext } from "@context/AuthContext";
 
