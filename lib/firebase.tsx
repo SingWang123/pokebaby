@@ -3,6 +3,7 @@ import { collection, doc, getFirestore, initializeFirestore, setDoc, query, onSn
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
 import { useState ,useEffect } from "react";
 import { User } from "firebase/auth";
+import { PetParameter } from "@context/ParameterContext";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -132,7 +133,7 @@ interface BackpackData{
 }
 
 
-//當得到的道具寫進去背包資料庫
+//將得到的道具寫進去背包資料庫
 export async function writeBackpack(
     foodid : number, 
     count : number, 
@@ -162,11 +163,6 @@ export async function writeBackpack(
 
         //檢查ID是否存在，存在就加數字，不存在就新增道具
         if (backpackData[foodid]){
-            // await updateDoc(docRef,{
-            //     [foodid]:{
-            //         count: FieldValue.increment(count)
-            //     }
-            // });
             backpackData[foodid].count += count;
         } else {
             backpackData[foodid] = {foodid: foodid, count: count};
@@ -181,33 +177,90 @@ export async function writeBackpack(
     }
 }
 
+// interface CooldownTimeType{
+//     isCoolingdown: boolean,
+//     cooldownTime: number,
+//     lastUpdateTime: Date, 
+// }
+
+
+//將得到的道具寫進去背包資料庫
+export async function writeCooldownTime(
+    isCoolingdown: boolean,
+    cooldownTime: number,
+    lastUpdateTime: Date, 
+    uid : string | null | undefined 
+) {
+    if (!uid || typeof uid !== 'string') {
+        console.error('UID is missing');
+        return; // 或者拋出錯誤
+    }
+
+    try {
+        // 引用collection
+        const collectionRef = collection(db, uid);
+        
+        // 引用doc 檔案
+        const docRef = doc(collectionRef, "CooldownTime");
+        
+        // 設定檔案資料
+        await setDoc(docRef, {
+            isCoolingdown: isCoolingdown || false,
+            cooldownTime: cooldownTime || 0,
+            lastUpdateTime: lastUpdateTime, 
+        });
+
+        console.log('寫入冷卻時間成功');
+    } catch (error: any) {
+        console.error('Error writing document: ', error);
+    }
+}
+
 
 
 //讀取資料庫資料
-export const getPetParameter = (uid : string | null | undefined, callback: (data: any) => void) =>{
+export const getPetParameter = async (uid : string | null | undefined, callback: (data: any) => void) =>{
     if (!uid) {
         console.error("Invalid UID");
         return; // 或者拋出錯誤
     }
     
-    const collectionRef = collection(db, uid);
-    const q = query(collectionRef);
-    
-    //監聽數據即時更新
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const data: any[] = [];
-        querySnapshot.forEach((doc) => {
-            data.push({ id: doc.id, ...doc.data() });
-        });
-        callback(data);
-        console.log(data);
-    }, (error) => {
-        console.error("Error getting documents: ", error);
-    });
+    const docRef = doc(db, uid, "PetParameter"); //指定文檔路徑
+    try {
+        const docSnap = await getDoc(docRef);
 
-    // 返回一个函数用于停止监听
-    return unsubscribe;
+        if (docSnap.exists()){
+            const data = {id:docSnap.id,...docSnap.data()};
+            callback(data);
+            console.log(data);
+        } else {
+            console.error("No such document!");
+            callback(null);
+        }
+    } catch (error) {
+        console.error("Error getting document:", error);
+        callback(null);
+    }
 }
+
+//     const collectionRef = collection(db, uid);
+//     const q = query(collectionRef);
+    
+//     //監聽數據即時更新
+//     const unsubscribe = onSnapshot(q, (querySnapshot) => {
+//         const data: any[] = [];
+//         querySnapshot.forEach((doc) => {
+//             data.push({ id: doc.id, ...doc.data() });
+//         });
+//         callback(data);
+//         console.log(data);
+//     }, (error) => {
+//         console.error("Error getting documents: ", error);
+//     });
+
+//     // 返回一个函数用于停止监听
+//     return unsubscribe;
+// }
 
 // export async function writeUserData(type : string, money : number, reason : string, uid : string | null | undefined) {
 //     const db = getDatabase();

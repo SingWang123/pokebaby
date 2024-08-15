@@ -1,7 +1,8 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import foodData from "public/items/food.json";
-import { writeBackpack } from "lib/firebase";
+import { writeBackpack, writeCooldownTime } from "lib/firebase";
 import { useAuthContext } from "@context/AuthContext";
+import { setInterval } from "timers/promises";
 
 interface FoodEffect {
     brave: number;
@@ -24,12 +25,43 @@ export const GetRandomFood = () => {
   const {user} = useAuthContext();
   const [food, setfood] = useState<Food[]>(foodData);
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
+  const [isCoolingDown, setIsCoolingDown] = useState<boolean>(false);
+  const [cooldownTime, setCooldownTime] = useState<number>(60);
 
-  // const [foodImg, setFoodImg] = useState(false);
+  useEffect(() => {
+    let timer: number | null = null; // 使用 number | null 類型
 
-  // console.log(foodData[0]["effect"]["brave"]);
+    if (isCoolingDown) {
+      timer = window.setInterval(() => {
+        setCooldownTime(prev => {
+          if (prev <= 1) {
+            setIsCoolingDown(false);
+            writeCooldownTime(false, 0, new Date, user?.uid)
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (timer !== null) {
+        window.clearInterval(timer);
+      }
+    };
+  }, [isCoolingDown]);
+
+  useEffect(() => {
+    // 這裡可以處理冷卻時間和寫入資料庫
+    if (isCoolingDown && cooldownTime > 0 && user) {
+        writeCooldownTime(true, cooldownTime, new Date(), user.uid);
+    }
+}, [isCoolingDown, user]);
+
+
 
   const handleGetFood = () =>{
+    if (!isCoolingDown){
       let totalWeight:number = 0;
       for (let i=0; i < foodData.length; i++){
           totalWeight =  totalWeight+= foodData[i]["weight"];
@@ -43,24 +75,23 @@ export const GetRandomFood = () => {
           random -= food.weight;
           if (random < 0) {
               setSelectedFood(food);
+              console.log("已選擇食物:", food); // 應該能顯示正確的食物
+
+              if(user){
+                writeBackpack(food.id, 1, user?.uid)
+              }
+
+              //設定冷卻時間
+              setIsCoolingDown(true);
+              setCooldownTime(60);
+
+              //將冷卻時間寫入資料庫
+              // writeCooldownTime(true, cooldownTime, new Date, user?.uid)
+
               break;
           }
       }
-      console.log(selectedFood);
-      //需檢查 selectedFood 不得為空
-      if (selectedFood){
-        writeBackpack(
-          selectedFood.id,
-          1, 
-          user?.uid
-        );
-      } else {
-        console.error("沒有得到物品")
-      }
-      
-
-      // setFoodImg(true);
-      // const totalWeight = food.reduce((sum, food) => sum + food.weight, 0);
+    }
   }
 
   return (
@@ -74,6 +105,10 @@ export const GetRandomFood = () => {
         </p>
         <hr className="button__line"></hr>
       </div>
+      {isCoolingDown ? 
+        <p>冷卻中 {cooldownTime}s </p>:
+        <></>
+      }
 
       {selectedFood && (
         <div className = "fade-out">

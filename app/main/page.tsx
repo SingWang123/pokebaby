@@ -22,32 +22,25 @@ export default function HomePage() {
         }
       }, [user, router]);
 
-    //從資料庫撈資料，轉換格式存到Context中
+    // 從資料庫撈資料，存到Context中（一開始就撈取，登入時可以找到之前紀錄）
     useEffect(() => {
-        let unsubscribe: (() => void) | undefined;
-    
         if (user) {
-            unsubscribe = getPetParameter(user.uid, (data) => {
-                if (data.length > 0) {
-                    const petDataItem = data[0]; // 只需要第一個資料
+            getPetParameter(user.uid, (data) => {
+                if (data) {
+                    // const petDataItem = data; 
                     const updatedPetParameter: PetParameter = {
-                        round: petDataItem.round,
-                        brave: petDataItem.brave,
-                        perseverance: petDataItem.perseverance,
-                        cool: petDataItem.cool,
-                        dexterity: petDataItem.dexterity,
-                        dedication: petDataItem.dedication,
+                        round: data.round,
+                        brave: data.brave,
+                        perseverance: data.perseverance,
+                        cool: data.cool,
+                        dexterity: data.dexterity,
+                        dedication: data.dedication,
                     };
                     setPetParameter(updatedPetParameter);
                 }
             });
         }
-    
-        return () => {
-            if (unsubscribe) {
-                unsubscribe();
-            }
-        };
+
     }, [user, setPetParameter]);
 
     useEffect(() => {
