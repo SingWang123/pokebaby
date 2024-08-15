@@ -3,7 +3,6 @@ import React from "react";
 import { useState } from "react";
 import { signinOut, signinUser } from "lib/FirebaseAuth";
 import Link from "next/link";
-import { User } from "firebase/auth";
 import { useAuthContext } from "@context/AuthContext";
 
 type SigninProps = {

@@ -1,10 +1,11 @@
-import { useAuth } from "lib/FirebaseAuth"
+"use client";
 import { getBackpackItems } from "lib/LoadData";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import foodData from "public/items/food.json";
+import { useAuthContext } from "@context/AuthContext";
 
 export const Backpack = () => {
-    const {user} = useAuth();
+    const {user} = useAuthContext();
     const [showBackpack, setShowBackpack] = useState(false);
     const [backpackArray, setBackpackArray] = useState<BackpackItem[]>([]);
 
@@ -14,15 +15,16 @@ export const Backpack = () => {
         effect : {[key:string]: number};
     }
 
-    useEffect(() => {
+    const findBackpackItems = () => {
         if (user) {
             getBackpackItems(user?.uid, (data) => {
                 if (data) {
-                    console.log(data);
+                    // 將撈出來的 食物資料存成一個array
                     const backpackitmes = Object.keys(data)
                         .filter(key => !isNaN(Number(key)))
                         .map(key => data[key]);
                     
+                    // 用新的array 對照 json檔案的資料，整理成背包顯示需要的資料
                     const updateBackpackArray = backpackitmes.map (item => {
                         const matchedID = foodData.find(jsonItem => jsonItem.id === item.foodid);
 
@@ -44,11 +46,12 @@ export const Backpack = () => {
                 }
             });
         }
-      }, [showBackpack]);
+    };
 
 
     const toggleShowBackpack = () => {
         setShowBackpack((preState) => !preState);
+        findBackpackItems();
     }
 
     return (
@@ -64,15 +67,23 @@ export const Backpack = () => {
                             />
                         </div>
                         <div className = "backpack">
+                            <div 
+                                className = "backpack__closebutton"
+                                onClick = {toggleShowBackpack}
+                            >
+                            </div>
                             {backpackArray.map((record, index) => (
-                                <div>
-                                    <img src = {backpackArray[index].icon} />
-                                    <div>
+                                <div key = {index} className = "backpack__list">
+                                    <img 
+                                        src = {backpackArray[index].icon}
+                                        className = "backpack__icon" 
+                                    />
+                                    <div className = "backpack__word">
                                         數量：{backpackArray[index].count}
                                     </div>
-                                    <div>
+                                    <div className = "backpack__word">
                                         {Object.entries(record.effect).map(([key, value]) => (
-                                            value > 0 && <div key={key}>{key} ＋{value}</div>
+                                            value > 0 && <div key={key}>{key}＋{value}</div>
                                         ))}
                                     </div>
                                 </div>

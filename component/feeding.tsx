@@ -1,15 +1,48 @@
 "use client";
-import React, { useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { writePetParameter } from 'lib/WriteData';
 import { PetParameter, useParameter } from '@context/ParameterContext';
+import { useAuthContext } from '@context/AuthContext';
 
-const { petParameter, setPetParameter } = useParameter();
 
-export const handleFeeding = (petParameter : PetParameter, setPetParameter : React.Dispatch<React.SetStateAction<PetParameter>>) => {
-    
+export const Feeding = () => {
+    const {petParameter, setPetParameter } = useParameter();
+    const [highestAttribute,setHighestAttribute] = useState<string | null>("");
+    const [showFeedingFoodWindow, setShowFeedingFoodWindow] = useState<boolean>(false);
+    const {user} = useAuthContext();
+    const [backpackArray, setBackpackArray] = useState<BackpackItem[]>([]);
+
+    interface BackpackItem {
+        icon: string;
+        count: number;
+        effect : {[key:string]: number};
+    }
+
+    const toggleShowFeedingFoodWindow = () => {
+        setShowFeedingFoodWindow((preState) => !preState);
+        // findBackpackItems();
+    }
+
+    // useEffect(() => {
+    //     if (petParameter.round === 5){
+    //         // 使用屬性名稱聯合類型
+    //         type Attribute = 'brave' | 'perseverance' | 'cool' | 'dexterity' | 'dedication';
+
+    //         // 獲取屬性名稱陣列
+    //         const attributes: Attribute[] = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
+
+    //         const highestAttribute: Attribute = attributes.reduce((a, b) =>
+    //             petParameter[a] > petParameter[b] ? a : b
+    //         );
+            
+    //         setHighestAttribute(highestAttribute);
+    //         console.log(highestAttribute);
+    //     }
+    // }, [petParameter.round]);
+
     function getRandomParameter() {
         const attributes = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
         const randomIndex = Math.floor(Math.random() * attributes.length);
-
         // 返回隨機選擇的屬性
         return attributes[randomIndex];
     }
@@ -18,44 +51,97 @@ export const handleFeeding = (petParameter : PetParameter, setPetParameter : Rea
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    let count = getRandomInt(0,6);
-    let parameter = getRandomParameter()
+    const handleFeedingFood = () => {
+        let count = getRandomInt(1,6);
+        let parameter = getRandomParameter()
 
-    let newPetParameter = {
-        brave: petParameter.brave,
-        perseverance: petParameter.perseverance,
-        cool: petParameter.cool,
-        dexterity: petParameter.dexterity,
-        dedication: petParameter.dedication,
+        let newPetParameter = {...petParameter}
+
+        switch (parameter) {
+            case 'brave':
+                newPetParameter.brave += count;
+                break;
+            case 'perseverance':
+                newPetParameter.perseverance += count;
+                break;
+            case 'cool':
+                newPetParameter.cool += count;
+                break;
+            case 'dexterity':
+                newPetParameter.dexterity += count;
+                break;
+            case 'dedication':
+                newPetParameter.dedication += count;
+                break;
+            default:
+                break;
+        }
+        //寫入資料庫
+        writePetParameter(
+            petParameter.round -1,
+            newPetParameter.brave,
+            newPetParameter.perseverance,
+            newPetParameter.cool,
+            newPetParameter.dexterity,
+            newPetParameter.dedication,
+            user?.uid
+        )
+        //寫入context
+        setPetParameter({
+            ...newPetParameter,
+            round: petParameter.round -1,
+        })
     }
 
-    switch (parameter) {
-        case 'brave':
-            newPetParameter.brave += count;
-            break;
-        case 'perseverance':
-            newPetParameter.perseverance += count;
-            break;
-        case 'cool':
-            newPetParameter.cool += count;
-            break;
-        case 'dexterity':
-            newPetParameter.dexterity += count;
-            break;
-        case 'dedication':
-            newPetParameter.dedication += count;
-            break;
-        default:
-            break;
-    }
-
-    setPetParameter({
-        round: petParameter.round -1,
-        brave: newPetParameter.brave,
-        perseverance:  newPetParameter.perseverance,
-        cool:  newPetParameter.cool,
-        dexterity:  newPetParameter.dexterity,
-        dedication:  newPetParameter.dedication,
-    })
-    console.log(parameter,count);
+    return (
+        <>
+            { showFeedingFoodWindow ? (
+                    <>
+                        <div className = "button__action">
+                            <p 
+                                className = "button__word"
+                                onClick = {toggleShowFeedingFoodWindow}    
+                            >
+                                餵食
+                            </p>
+                            <hr className = "button__line"></hr>
+                        </div>
+                        <div className = "backpack">
+                            <div 
+                                className = "backpack__closebutton"
+                                onClick = {toggleShowFeedingFoodWindow}
+                            >
+                            </div>
+                            {backpackArray.map((record, index) => (
+                                <div key = {index} className = "backpack__list">
+                                    <img 
+                                        src = {backpackArray[index].icon}
+                                        className = "backpack__icon" 
+                                    />
+                                    <div className = "backpack__word">
+                                        數量：{backpackArray[index].count}
+                                    </div>
+                                    <div className = "backpack__word">
+                                        {Object.entries(record.effect).map(([key, value]) => (
+                                            value > 0 && <div key={key}>{key}＋{value}</div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                ):(
+                    <div className = "button__action">
+                        <p 
+                            className = "button__word"
+                            onClick = {toggleShowFeedingFoodWindow}    
+                        >
+                            餵食
+                        </p>
+                        <hr className = "button__line"></hr>
+                    </div>
+                )
+            }
+        </>
+    );
 }

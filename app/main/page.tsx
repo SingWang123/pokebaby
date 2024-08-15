@@ -5,11 +5,12 @@ import Parameter from 'component/parameter';
 import { Ending } from 'component/ending';
 import { GetRandomFood } from 'component/getfood';
 import { writePetParameter } from 'lib/WriteData';
-import { loadCooldownTime, getPetParameter } from 'lib/LoadData';
+import { getPetParameter } from 'lib/LoadData';
 import { PetParameter, useParameter } from '@context/ParameterContext';
 import { useAuthContext } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { Backpack } from 'component/backpack';
+import { Feeding } from 'component/feeding';
 
 
 export default function HomePage() {
@@ -154,15 +155,7 @@ export default function HomePage() {
                             </p>
                             <hr className = "button__line"></hr>
                         </div>
-                        <div className = "button__action">
-                            <p 
-                                className = "button__word"
-                                onClick = {handleFeeding}    
-                            >
-                                餵食
-                            </p>
-                            <hr className = "button__line"></hr>
-                        </div>
+                        <Feeding />
                         <GetRandomFood />
                     </div>
                     <Backpack />

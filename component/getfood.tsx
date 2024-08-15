@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react"
 import foodData from "public/items/food.json";
 import { writeBackpack, writeCooldownTime } from "lib/WriteData";
@@ -5,11 +6,11 @@ import { useAuthContext } from "@context/AuthContext";
 import { loadCooldownTime } from "lib/LoadData";
 
 interface FoodEffect {
-    brave: number;
-    perseverance: number;
-    cool: number;
-    dexterity: number;
-    dedication: number;
+  "勇敢": number,
+  "堅毅": number,
+  "冷靜": number,
+  "靈巧": number,
+  "奉獻": number
 }
 
 interface Food {
@@ -109,9 +110,6 @@ export const GetRandomFood = () => {
               //設定冷卻時間
               setIsCoolingDown(true);
               setCooldownTime(600);
-
-              //將冷卻時間寫入資料庫
-              // writeCooldownTime(true, cooldownTime, new Date, user?.uid)
 
               break;
           }
