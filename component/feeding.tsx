@@ -3,25 +3,43 @@ import React, { useState, useEffect } from 'react';
 import { writePetParameter } from 'lib/WriteData';
 import { PetParameter, useParameter } from '@context/ParameterContext';
 import { useAuthContext } from '@context/AuthContext';
+import { findBackpackItems} from "utils/backpackItemUtils";
+import { useBackpackContext } from '@context/BackpackContext';
+import { useDrag } from 'react-dnd';
 
+interface DraggableItemProps {
+    item: {
+      id: string;
+      effect: { [key: string]: number };
+      icon: string;
+      count: number;
+    };
+  }
 
 export const Feeding = () => {
     const {petParameter, setPetParameter } = useParameter();
     const [highestAttribute,setHighestAttribute] = useState<string | null>("");
     const [showFeedingFoodWindow, setShowFeedingFoodWindow] = useState<boolean>(false);
     const {user} = useAuthContext();
-    const [backpackArray, setBackpackArray] = useState<BackpackItem[]>([]);
-
-    interface BackpackItem {
-        icon: string;
-        count: number;
-        effect : {[key:string]: number};
-    }
+    const {backpackArray,setBackpackArray} = useBackpackContext();
+    const DraggableItemTypes = {Item : "item"};
 
     const toggleShowFeedingFoodWindow = () => {
         setShowFeedingFoodWindow((preState) => !preState);
-        // findBackpackItems();
+        if (!showFeedingFoodWindow){
+            findBackpackItems(user?.uid,setBackpackArray);
+        }
     }
+
+    // const DraggableItem: React.FC<DraggableItemProps> = ({ item }) => {
+    //     const [{ isDragging }, drag] = useDrag(() => ({
+    //       type: DraggableItemTypes.Item,
+    //       item: { id: item.id, effect: item.effect },
+    //       collect: (monitor) => ({
+    //         isDragging: monitor.isDragging(),
+    //       }),
+    //     }));
+    // }
 
     // useEffect(() => {
     //     if (petParameter.round === 5){
@@ -106,7 +124,7 @@ export const Feeding = () => {
                             </p>
                             <hr className = "button__line"></hr>
                         </div>
-                        <div className = "backpack">
+                        <div className = "feedinwindow">
                             <div 
                                 className = "backpack__closebutton"
                                 onClick = {toggleShowFeedingFoodWindow}

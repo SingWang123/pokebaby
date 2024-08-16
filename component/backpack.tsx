@@ -1,57 +1,21 @@
 "use client";
-import { getBackpackItems } from "lib/LoadData";
 import { useState } from "react";
-import foodData from "public/items/food.json";
 import { useAuthContext } from "@context/AuthContext";
+import { findBackpackItems} from "utils/backpackItemUtils";
+import { useBackpackContext } from "@context/BackpackContext";
 
 export const Backpack = () => {
     const {user} = useAuthContext();
     const [showBackpack, setShowBackpack] = useState(false);
-    const [backpackArray, setBackpackArray] = useState<BackpackItem[]>([]);
-
-    interface BackpackItem {
-        icon: string;
-        count: number;
-        effect : {[key:string]: number};
-    }
-
-    const findBackpackItems = () => {
-        if (user) {
-            getBackpackItems(user?.uid, (data) => {
-                if (data) {
-                    // 將撈出來的 食物資料存成一個array
-                    const backpackitmes = Object.keys(data)
-                        .filter(key => !isNaN(Number(key)))
-                        .map(key => data[key]);
-                    
-                    // 用新的array 對照 json檔案的資料，整理成背包顯示需要的資料
-                    const updateBackpackArray = backpackitmes.map (item => {
-                        const matchedID = foodData.find(jsonItem => jsonItem.id === item.foodid);
-
-                        if (matchedID){
-                            const backpackItemEffect = Object.fromEntries(
-                                Object.entries(matchedID.effect).filter(([key,value]) => value > 0) 
-                            )
-
-                            return {
-                                icon: matchedID.icon,
-                                count: item.count,
-                                effect: backpackItemEffect
-                            };
-                        };
-                        return null;
-                    }).filter(item => item !== null);
-
-                    setBackpackArray(updateBackpackArray)
-                }
-            });
-        }
-    };
+    const {backpackArray,setBackpackArray} = useBackpackContext();    
 
 
     const toggleShowBackpack = () => {
         setShowBackpack((preState) => !preState);
-        findBackpackItems();
+
+        if (!showBackpack){
+            findBackpackItems(user?.uid,setBackpackArray);
+        }
     }
 
     return (
