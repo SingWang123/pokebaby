@@ -174,7 +174,7 @@ body {
     position: fixed;
     z-index: 20;
     width: 600px;
-    height: 200px;
+    height: 160px;
     overflow-y: auto; /* 垂直方向可滾動 */
     transform: translate(-50%, -50%);
     top: 20%;

@@ -6,6 +6,7 @@ import { useAuthContext } from '@context/AuthContext';
 import { findBackpackItems} from "utils/backpackItemUtils";
 import { useBackpackContext } from '@context/BackpackContext';
 import { useDrag } from 'react-dnd';
+import DraggableItem from './draggaleitem';
 
 interface DraggableItemProps {
     item: {
@@ -26,6 +27,7 @@ export const Feeding = () => {
 
     const toggleShowFeedingFoodWindow = () => {
         setShowFeedingFoodWindow((preState) => !preState);
+        console.log(backpackArray);
         if (!showFeedingFoodWindow){
             findBackpackItems(user?.uid,setBackpackArray);
         }
@@ -130,7 +132,29 @@ export const Feeding = () => {
                                 onClick = {toggleShowFeedingFoodWindow}
                             >
                             </div>
-                            {backpackArray.map((record, index) => (
+                            <div>                            
+                                {backpackArray.map(item => (
+                                    <DraggableItem key={item.id} item={item} />
+                                ))}
+                            </div>
+                            {/* {backpackArray.map((record, index) => (
+                                <div key = {index} className = "backpack__list">
+                                    <div>                            
+                                        {backpackArray.map(item => (
+                                            <DraggableItem key={item.id} item={item} />
+                                        ))}
+                                    </div>
+                                    <div className = "backpack__word">
+                                        數量：{backpackArray[index].count}
+                                    </div>
+                                    <div className = "backpack__word">
+                                        {Object.entries(record.effect).map(([key, value]) => (
+                                            value > 0 && <div key={key}>{key}＋{value}</div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))} */}
+                            {/* {backpackArray.map((record, index) => (
                                 <div key = {index} className = "backpack__list">
                                     <img 
                                         src = {backpackArray[index].icon}
@@ -145,7 +169,7 @@ export const Feeding = () => {
                                         ))}
                                     </div>
                                 </div>
-                            ))}
+                            ))} */}
                         </div>
                     </>
                 ):(

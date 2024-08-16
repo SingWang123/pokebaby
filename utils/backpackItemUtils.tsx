@@ -23,6 +23,7 @@ export const findBackpackItems = (
                         );
 
                         return {
+                            id: matchedID.id,
                             icon: matchedID.icon,
                             count: item.count,
                             effect: backpackItemEffect

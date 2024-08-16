@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface BackpackItem {
+    id: number;
     icon: string;
     count: number;
     effect : {[key:string]: number};
