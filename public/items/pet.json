@@ -1,0 +1,302 @@
+{
+  "蛋蛋期" :[
+    {
+      "id": "0001",
+      "petname": "蛋蛋1號",
+      "path": "/lottie/Animation0001.json",
+      "pettype": "未知",
+      "description": "充滿潛力的蛋蛋，有可能成為任何強力寵物，也可能就是顆啞蛋...",
+      "priority": 1,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    }
+  ],
+  "幼年期" :[
+    {
+      "id": "1001",
+      "petname": "小南瓜",
+      "path": "/lottie/Animation1001.json",
+      "pettype": "南瓜系",
+      "description": "彈跳小南瓜，積極成長，目標巨無霸大南瓜，稱霸萬聖節。",
+      "priority": 20,
+      "requirement": {    
+        "勇敢": 10,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "1002",
+      "petname": "小白南瓜",
+      "path": "/lottie/Animation1002.json",
+      "pettype": "南瓜系",
+      "description": "點到了靈巧值的小南瓜，速度太快讓身體褪色了點。",
+      "priority": 15,
+      "requirement": {    
+        "勇敢": 10,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 5,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "1003",
+      "petname": "寶貝龍",
+      "path": "/lottie/Animation1003.json",
+      "pettype": "龍",
+      "description": "超可愛龍寶寶，還是小龍但毅力十足！",
+      "priority": 3,
+      "requirement": {    
+        "勇敢": 5,
+        "堅毅": 15,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "1004",
+      "petname": "彩虹魚",
+      "path": "/lottie/Animation1004.json",
+      "pettype": "水生系",
+      "description": "冷靜的用彩虹色尾鰭，迷惑敵人的心。",
+      "priority": 19,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 10,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "1005",
+      "petname": "嘿嘿喵",
+      "path": "/lottie/Animation1005.json",
+      "pettype": "貓系",
+      "description": "沒關係你在那邊嘿嘿的就夠了，黑貓就是正義！拜託別進化！",
+      "priority": 18,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 10,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "1006",
+      "petname": "橘橘喵",
+      "path": "/lottie/Animation1006.json",
+      "pettype": "貓系",
+      "description": "十隻橘貓九隻胖，還有一隻正在準備變胖。",
+      "priority": 14,
+      "requirement": {    
+        "勇敢": 5,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 10,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "1007",
+      "petname": "吊掛喵",
+      "path": "/lottie/Animation1007.json",
+      "pettype": "貓系",
+      "description": "其實不太確定這是喵還是老鼠...希望你是隻不會爬牆的傻喵。",
+      "priority": 21,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 5,
+        "冷靜": 0,
+        "靈巧": 5,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "1008",
+      "petname": "小精靈",
+      "path": "/lottie/Animation1008.json",
+      "pettype": "幽靈系",
+      "description": "搞不太清楚狀況但充滿奉獻精神的小精靈，準備好你的製鞋工具和皮!",
+      "priority": 16,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 10
+      }
+    },
+    {
+      "id": "1009",
+      "petname": "鏈鋸人",
+      "path": "/lottie/Animation1009.json",
+      "pettype": "特殊系",
+      "description": "這個有IP的，低調!",
+      "priority": 4,
+      "requirement": {    
+        "勇敢": 5,
+        "堅毅": 5,
+        "冷靜": 5,
+        "靈巧": 5,
+        "奉獻": 5
+      }
+    }
+  ],
+  "成年期" : [
+    {
+      "id": "2001",
+      "petname": "南瓜家族",
+      "path": "/lottie/Animation2001.json",
+      "pettype": "南瓜系",
+      "description": "小南瓜順利成長，現在還可以一帶二了。",
+      "priority": 10,
+      "requirement": {
+        "type": "南瓜系",    
+        "勇敢": 25,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "2002",
+      "petname": "小飛龍",
+      "path": "/lottie/Animation2002.json",
+      "pettype": "龍",
+      "description": "身體雖小仍是隻堂堂正正的好龍兒！毅力十足。",
+      "priority": 11,
+      "requirement": { 
+        "type": "未知",    
+        "勇敢": 0,
+        "堅毅": 25,
+        "冷靜": 0,
+        "靈巧": 5,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "2003",
+      "petname": "肌肉水母",
+      "path": "/lottie/Animation2003.json",
+      "pettype": "水生系",
+      "description": "誰說我們水生系不擅力量？看這身肌肉！（秀）",
+      "priority": 10,
+      "requirement": {
+        "type": "水生系",     
+        "勇敢": 0,
+        "堅毅": 10,
+        "冷靜": 20,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "2004",
+      "petname": "小海龜",
+      "path": "/lottie/Animation2004.json",
+      "pettype": "水生系",
+      "description": "水生系很多元的，小海龜不靈巧但充滿奉獻精神，當坦正好～",
+      "priority": 9,
+      "requirement": {
+        "type": "水生系",     
+        "勇敢": 5,
+        "堅毅": 5,
+        "冷靜": 20,
+        "靈巧": 0,
+        "奉獻": 10
+      }
+    },
+    {
+      "id": "2005",
+      "petname": "箱箱貓",
+      "path": "/lottie/Animation2005.json",
+      "pettype": "貓系",
+      "description": "...可以不要結局嗎？想在畫面上一值看著你。",
+      "priority": 10,
+      "requirement": {
+        "type": "貓系",     
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 25,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "2006",
+      "petname": "大眼怪",
+      "path": "/lottie/Animation2006.json",
+      "pettype": "幽靈系",
+      "description": "巨大的身體、穩重的個性、滿滿的奉獻精神，坦職首選。",
+      "priority": 10,
+      "requirement": {
+        "type": "幽靈系",     
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 25
+      }
+    },
+    {
+      "id": "2007",
+      "petname": "冷靜系大眼怪",
+      "path": "/lottie/Animation2007.json",
+      "pettype": "幽靈系",
+      "description": "除了巨大的身體外還有冷靜的頭腦，智將型坦職。",
+      "priority": 9,
+      "requirement": {
+        "type": "幽靈系",     
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 10,
+        "靈巧": 0,
+        "奉獻": 25
+      }
+    },
+    {
+      "id": "2008",
+      "petname": "無臉人",
+      "path": "/lottie/Animation2008.json",
+      "pettype": "特殊系",
+      "description": "這個有IP，低調",
+      "priority": 9,
+      "requirement": {
+        "type": "特殊系",     
+        "勇敢": 10,
+        "堅毅": 10,
+        "冷靜": 10,
+        "靈巧": 10,
+        "奉獻": 10
+      }
+    },
+    {
+      "id": "2009",
+      "petname": "喪屍",
+      "path": "/lottie/Animation2009.json",
+      "pettype": "特殊系",
+      "description": "...這我兒子選的，我也不知道為什麼他選了喪屍...",
+      "priority": 10,
+      "requirement": {
+        "type": "特殊系",     
+        "勇敢": 10,
+        "堅毅": 10,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 15
+      }
+    }
+  ]
+}

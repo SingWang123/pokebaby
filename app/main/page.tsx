@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { EggAnimation, BraveAAnimation, CoolAAnimation, DedicationAAnimation, DexterityAAnimation, PerseveranceAAnimation } from 'component/animation';
 import Parameter from 'component/parameter';
 import { Ending } from 'component/ending';
 import { GetRandomFood } from 'component/getfood';
@@ -11,13 +10,17 @@ import { useAuthContext } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { Backpack } from 'component/backpack';
 import { Feeding } from 'component/feeding';
+import PetAvatar from 'component/petavatar';
+import petData from 'public/items/pet.json';
+import { findPetNameById } from 'utils/findPetName';
+import Link from 'next/link';
 
 
-export default function HomePage() {
+export default function MainPage() {
     const {petParameter, setPetParameter } = useParameter();
-    const [highestAttribute,setHighestAttribute] = useState<string | null>("");
     const {user} = useAuthContext();
     const router = useRouter();
+    const [petName,setPetName] = useState<string>("蛋蛋1號")
 
     //檢查登入狀態，未登入踢回首頁
     useEffect(() => {
@@ -26,13 +29,13 @@ export default function HomePage() {
         }
       }, [user, router]);
 
-    // 從資料庫撈資料，存到Context中（一登入就撈取，登入時可以從之前紀錄）
+    // 從資料庫撈資料，存到Context中（一登入就撈取，登入時可以從之前離開的紀錄開始）
     useEffect(() => {
         if (user) {
             getPetParameter(user.uid, (data) => {
                 if (data) {
-                    // const petDataItem = data; 
                     const updatedPetParameter: PetParameter = {
+                        petid: data.petid,
                         round: data.round,
                         brave: data.brave,
                         perseverance: data.perseverance,
@@ -42,26 +45,17 @@ export default function HomePage() {
                     };
                     setPetParameter(updatedPetParameter);
                 }
-            });
+            });            
         }
     }, [user, setPetParameter]);
 
     useEffect(() => {
-        if (petParameter.round === 5){
-            // 使用屬性名稱聯合類型
-            type Attribute = 'brave' | 'perseverance' | 'cool' | 'dexterity' | 'dedication';
-
-            // 獲取屬性名稱陣列
-            const attributes: Attribute[] = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
-
-            const highestAttribute: Attribute = attributes.reduce((a, b) =>
-                petParameter[a] > petParameter[b] ? a : b
-            );
-            
-            setHighestAttribute(highestAttribute);
-            console.log(highestAttribute);
+        const findname = findPetNameById(petData, petParameter.petid);
+        if (findname){
+            setPetName(findname);
         }
-    }, [petParameter.round]);
+    },[petParameter]);
+  
 
     function getRandomParameter() {
         const attributes = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
@@ -101,6 +95,7 @@ export default function HomePage() {
         }
         //寫入資料庫
         writePetParameter(
+            petParameter.petid,
             petParameter.round -1,
             newPetParameter.brave,
             newPetParameter.perseverance,
@@ -113,6 +108,7 @@ export default function HomePage() {
         setPetParameter({
             ...newPetParameter,
             round: petParameter.round -1,
+            petid: petParameter.petid
         })
     }
 
@@ -120,31 +116,25 @@ export default function HomePage() {
         <div className = "home">
             {
                 petParameter.round <= 0 ?
-                <Ending />:
-                petParameter.round <= 5 ? 
-                (
-                    highestAttribute === "brave" ?  <BraveAAnimation /> :
-                        highestAttribute === "cool" ?  <CoolAAnimation /> :
-                            highestAttribute === "dedication" ?   <DedicationAAnimation /> :
-                                highestAttribute === "dexterity" ?   <DexterityAAnimation /> :
-                                    highestAttribute === "perseverance" ?   <PerseveranceAAnimation />:
-                                        <EggAnimation />
-                ) :
-                <EggAnimation />
+                <Ending petname = {petName}/>:
+                <PetAvatar /> 
             }
             {
                 petParameter.round <= 0 ?
                 <div></div>:
                 <>
                     <div className = 'home__petname'>
-                        <div className = 'petname__name'>寵物蛋1號</div>
+                        <div className = 'petname__name'>{petName}</div>
                     </div>
                     <Parameter />
-                    {/* <div className = 'home__actionpoint'>
-                        <div className = 'actionpoint__title'>還剩</div>
-                        <div className = 'actionpoint__point'>{petParameter.round}回合</div>
-                        <div className = 'actionpoint__bg'></div>    
-                    </div> */}
+                    <div className = "button__collection">
+                        <Link href="/collection" style={{ textDecoration: 'none' }}>
+                            <img 
+                                src = '/icon_collection.png' 
+                                style = {{width:"150px", height : "150px"}}
+                            />
+                        </Link>
+                    </div>
                     <div className = 'home__button'>
                         <div className = "button__action">
                             <p 

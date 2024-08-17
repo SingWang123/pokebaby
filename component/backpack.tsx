@@ -37,6 +37,7 @@ export const Backpack = () => {
                             >
                             </div>
                             {backpackArray.map((record, index) => (
+                                backpackArray[index].count <= 0 ? null :
                                 <div key = {index} className = "backpack__list">
                                     <img 
                                         src = {backpackArray[index].icon}

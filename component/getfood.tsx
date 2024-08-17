@@ -14,11 +14,11 @@ interface FoodEffect {
 }
 
 interface Food {
-    id: number;
-    icon: string;
-    name: string;
-    weight: number;
-    effect: FoodEffect;
+  id: number;
+  icon: string;
+  name: string;
+  weight: number;
+  effect: FoodEffect;
 }
 
 export const GetRandomFood = () => {
@@ -32,26 +32,26 @@ export const GetRandomFood = () => {
   // 從資料庫撈資料，存到setCooldownTime中（一登入就撈取）
   useEffect(() => {
     if (user) {
-        loadCooldownTime(user?.uid, (data) => {
-            if (data) {
-                if (data.isCoolingdown){
-                  const lastUpdateTimestamp = data.lastUpdateTime.seconds +  data.lastUpdateTime.nanoseconds / 1e9 ; 
-                  const currentTime = Math.floor(Date.now() / 1000);
+      loadCooldownTime(user?.uid, (data) => {
+          if (data) {
+              if (data.isCoolingdown){
+                const lastUpdateTimestamp = data.lastUpdateTime.seconds +  data.lastUpdateTime.nanoseconds / 1e9 ; 
+                const currentTime = Math.floor(Date.now() / 1000);
 
-                  //計算冷卻結束時間
-                  const cooldownEndTime = lastUpdateTimestamp + data.cooldownTime;
+                //計算冷卻結束時間
+                const cooldownEndTime = lastUpdateTimestamp + data.cooldownTime;
 
-                  if (currentTime >= cooldownEndTime) {
-                    setIsCoolingDown(false);
-                    setCooldownTime(0);
-                  } else {
-                    const remainingTime = Math.floor(cooldownEndTime - currentTime);
-                    setIsCoolingDown(true);
-                    setCooldownTime(remainingTime);
-                  }
+                if (currentTime >= cooldownEndTime) {
+                  setIsCoolingDown(false);
+                  setCooldownTime(0);
+                } else {
+                  const remainingTime = Math.floor(cooldownEndTime - currentTime);
+                  setIsCoolingDown(true);
+                  setCooldownTime(remainingTime);
                 }
-            }
-        });
+              }
+          }
+      });
     }
   }, [user]);
 
@@ -98,21 +98,20 @@ export const GetRandomFood = () => {
       
       //按權重選取物件
       for (const food of foodData) {
-          random -= food.weight;
-          if (random < 0) {
-              setSelectedFood(food);
-              console.log("已選擇食物:", food); // 應該能顯示正確的食物
+        random -= food.weight;
+        if (random < 0) {
+            setSelectedFood(food);
 
-              if(user){
-                writeBackpack(food.id, 1, user?.uid)
-              }
+            if(user){
+              writeBackpack(food.id, 1, user?.uid)
+            }
 
-              //設定冷卻時間
-              setIsCoolingDown(true);
-              setCooldownTime(600);
+            //設定冷卻時間
+            setIsCoolingDown(true);
+            setCooldownTime(600);
 
-              break;
-          }
+            break;
+        }
       }
     }
   }
@@ -136,7 +135,6 @@ export const GetRandomFood = () => {
         }
       </>
     ) : (
-      // 如果未冷却，显示按钮
       <div className="button__action" style={{ margin: "80px 0px" }}>
         <p className="button__word" onClick={handleGetFood}>
           領取食物
@@ -148,7 +146,7 @@ export const GetRandomFood = () => {
       {selectedFood && (
         <div className = "fade-out">
           <p>取得: {selectedFood.name}</p>
-          <img src = {selectedFood.icon} alt = {selectedFood.name} />
+          {/* <img src = {selectedFood.icon} alt = {selectedFood.name} /> */}
         </div>
       )}
     </>

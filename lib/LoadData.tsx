@@ -36,7 +36,7 @@ export const getPetParameter = async (uid : string | null | undefined, callback:
         if (docSnap.exists()){
             const data = {id:docSnap.id,...docSnap.data()};
             callback(data);
-            console.log(data);
+            // console.log(data);
         } else {
             console.error("No such document!");
             callback(null);
@@ -61,7 +61,7 @@ export const getBackpackItems = async (uid : string | null | undefined, callback
         if (docSnap.exists()){
             const data = {id:docSnap.id,...docSnap.data()};
             callback(data);
-            console.log(data);
+            // console.log(data);
         } else {
             console.error("No such document!");
             callback(null);
@@ -86,7 +86,33 @@ export const loadCooldownTime = async (uid : string | null | undefined, callback
         if (docSnap.exists()){
             const data = {id:docSnap.id,...docSnap.data()};
             callback(data);
-            console.log(data);
+            // console.log(data);
+        } else {
+            console.error("No such document!");
+            callback(null);
+        }
+    } catch (error) {
+        console.error("Error getting document:", error);
+        callback(null);
+    }
+}
+
+
+//讀取資料庫結局數據資料
+export const getPetEndings = async (uid : string | null | undefined, callback: (data: any) => void) =>{
+    if (!uid) {
+        console.error("Invalid UID");
+        return; // 或者拋出錯誤
+    }
+    
+    const docRef = doc(db, uid, "PetEndings"); //指定文檔路徑
+    try {
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()){
+            const data = {id:docSnap.id,...docSnap.data()};
+            callback(data);
+            // console.log(data);
         } else {
             console.error("No such document!");
             callback(null);

@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { collection, doc, getFirestore, setDoc, getDoc } from 'firebase/firestore';
+import { collection, doc, getFirestore, setDoc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -23,6 +23,7 @@ export { app };
 const db = getFirestore(app);
 
 export async function writePetParameter(
+    petid : string,
     round : number, 
     brave : number, 
     perseverance : number,
@@ -45,6 +46,7 @@ export async function writePetParameter(
         
         // 設定檔案資料
         await setDoc(docRef, {
+            petid: petid || "0001",
             round: round || 0,
             brave: brave || 0,
             perseverance: perseverance || 0,
@@ -52,11 +54,13 @@ export async function writePetParameter(
             dexterity: dexterity || 0,
             dedication: dedication || 0,
         });
-        console.log('寫入寵物數據成功');
+        // console.log('寫入寵物數據成功');
     } catch (error: any) {
         console.error('Error writing document: ', error);
     }
 }
+
+
 
 interface BackpackItem{
     foodid : number;
@@ -105,18 +109,11 @@ export async function writeBackpack(
         
         // 設定檔案資料
         await setDoc(docRef, backpackData);
-
-        console.log('寫入背包數據成功');
+        // console.log('寫入背包數據成功');
     } catch (error: any) {
         console.error('Error writing document: ', error);
     }
 }
-
-// interface CooldownTimeType{
-//     isCoolingdown: boolean,
-//     cooldownTime: number,
-//     lastUpdateTime: Date, 
-// }
 
 
 //將得到的道具寫進去背包資料庫
@@ -145,8 +142,83 @@ export async function writeCooldownTime(
             lastUpdateTime: lastUpdateTime, 
         });
 
-        console.log('寫入冷卻時間成功');
+        // console.log('寫入冷卻時間成功');
     } catch (error: any) {
         console.error('Error writing document: ', error);
     }
 }
+
+
+
+//將寵物最終結局數據，寫入資料庫
+
+export async function writePetEnding(
+    petname : string,
+    petid : string,
+    brave : number, 
+    perseverance : number,
+    cool : number,
+    dexterity : number,
+    dedication : number, 
+    uid : string | null | undefined 
+) {
+    if (!uid || typeof uid !== 'string') {
+        console.error('UID is missing');
+        return; // 或者拋出錯誤
+    }
+
+    try {
+        // 引用 collection
+        const collectionRef = collection(db, uid);
+
+        // 引用 PetEndings 文件
+        const docRef = doc(collectionRef, "PetEndings");
+
+        // 設定新的結局資料
+        const newEnding = {
+            petname: petname,
+            petid: petid || "0001",
+            brave: brave || 0,
+            perseverance: perseverance || 0,
+            cool: cool || 0,
+            dexterity: dexterity || 0,
+            dedication: dedication || 0,
+        };
+
+        // 使用 arrayUnion 把新的結局資料加入到結局清單裡
+        await setDoc(docRef, {
+            endings: arrayUnion(newEnding)
+        }, { merge: true }); // 使用 merge 以防覆蓋現有數據
+
+        // console.log('寫入寵物結局成功');
+    } catch (error: any) {
+        console.error('Error writing document: ', error);
+    }
+}
+
+//將寵物名稱，寫入資料庫
+// export async function writePetData(
+//     petname : string,
+//     uid : string | null | undefined 
+// ) {
+//     if (!uid || typeof uid !== 'string') {
+//         console.error('UID is missing');
+//         return; // 或者拋出錯誤
+//     }
+
+//     try {
+//         // 引用collection
+//         const collectionRef = collection(db, uid);
+        
+//         // 引用doc 檔案
+//         const docRef = doc(collectionRef, "PetData");
+        
+//         // 設定檔案資料
+//         await setDoc(docRef, {
+//             petname: petname,
+//         });
+//         console.log('寫入寵物資料成功');
+//     } catch (error: any) {
+//         console.error('Error writing document: ', error);
+//     }
+// }

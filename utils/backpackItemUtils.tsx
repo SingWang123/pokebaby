@@ -1,7 +1,6 @@
 import { getBackpackItems } from "lib/LoadData";
 import foodData from "public/items/food.json";
 import { BackpackItem } from "@context/BackpackContext";
-import { useBackpackContext } from "@context/BackpackContext";
 
 export const findBackpackItems = (
     uid: string | undefined, 

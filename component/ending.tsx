@@ -1,61 +1,84 @@
 "use client";
 import React, { useState,useEffect } from 'react';
 import { useParameter } from '@context/ParameterContext';
-import { EggAnimation, BraveAAnimation, CoolAAnimation, DedicationAAnimation, DexterityAAnimation, PerseveranceAAnimation } from '../component/animation';
-import { writePetParameter } from 'lib/WriteData';
+import animations from './animation';
 import { useAuthContext } from '@context/AuthContext';
+import { writePetEnding, writePetParameter } from 'lib/WriteData';
+import { findBestMatch } from 'utils/findBestMatch';
+import petData from 'public/items/pet.json';
+import { findPetNameById } from 'utils/findPetName';
 
 
-export const Ending = () => { 
+interface EndingProps {
+    petname: string;
+}
+
+
+export const Ending: React.FC<EndingProps> = ({ petname }) => { 
     const { petParameter, setPetParameter } = useParameter();  
-    const [endingHighestAttribute,setEndingHighestAttribute] = useState<string | null>("");
     const {user} = useAuthContext();
+    const AnimationComponent = animations[`Animation${petParameter.petid}`]
 
     useEffect(() => {
         if (petParameter.round === 0){
-            // 使用屬性名稱聯合類型
-            type Attribute = 'brave' | 'perseverance' | 'cool' | 'dexterity' | 'dedication';
+            const bestMatchId = findBestMatch(petParameter, petData);
 
-            // 獲取屬性名稱陣列
-            const attributes: Attribute[] = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
-
-            const endingHighestAttribute: Attribute = attributes.reduce((a, b) =>
-                petParameter[a] > petParameter[b] ? a : b
-            );
-            
-            setEndingHighestAttribute(endingHighestAttribute);
-            console.log(endingHighestAttribute);
+            if(bestMatchId){
+                setPetParameter({
+                    petid: bestMatchId,
+                    round: petParameter.round,
+                    brave : petParameter.brave,
+                    perseverance : petParameter.perseverance,
+                    cool : petParameter.cool,
+                    dexterity : petParameter.dexterity,
+                    dedication : petParameter.dedication,
+                })
+            }
         }
     }, [petParameter.round]);
 
+
     const handleNewGame = () => {
+        writePetEnding(
+            petname,
+            petParameter.petid,
+            petParameter.brave,
+            petParameter.perseverance,
+            petParameter.cool,
+            petParameter.dexterity,
+            petParameter.dedication,
+            user?.uid 
+        )
 
         writePetParameter(
-            10, 0, 0, 0, 0, 0, user?.uid
+            "0001",10, 0, 0, 0, 0, 0, user?.uid
         )
 
         setPetParameter({
+            petid: "0001",
             round: 10,
             brave: 0,
             perseverance: 0,
             cool: 0,
             dexterity: 0,
-            dedication: 0,
-            
+            dedication: 0,  
         })
     }
 
     return (
         <div className = "home">
             <div className = "ending__title">結局</div>
-            {
-                endingHighestAttribute === "brave" ?  <BraveAAnimation  /> :
-                    endingHighestAttribute === "cool" ?  <CoolAAnimation /> :
-                        endingHighestAttribute === "dedication" ?   <DedicationAAnimation /> :
-                            endingHighestAttribute === "dexterity" ?   <DexterityAAnimation /> :
-                                endingHighestAttribute === "perseverance" ?   <PerseveranceAAnimation />:
-                                    <EggAnimation />
-            }
+            <div className = "ending__petname">{petname}</div>
+            <div className = "ending__petparameter">        
+                勇敢：{petParameter.brave}　
+                堅毅：{petParameter.perseverance}　
+                冷靜：{petParameter.cool}　
+                靈巧：{petParameter.dexterity}　
+                奉獻：{petParameter.dedication}　
+            </div>
+            <div className = 'ending__petavatar'>
+                <AnimationComponent /> : 
+            </div>
             <div className = 'ending__button'>    
                 <div className = "button__newgame">
                     <p 

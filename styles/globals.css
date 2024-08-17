@@ -120,6 +120,13 @@ body {
     top: 75%;
   }
 
+  .button__collection{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 15%;
+    top: 75%;
+  }
+
   .backpack__background{
     position: fixed;
     width: 100vw;
@@ -154,7 +161,7 @@ body {
     right: 3%;
     width: 30px;
     height: 30px;
-    background-image: url("../public/button_close.png"); ;
+    background-image: url("../public/button_close.png"); 
     background-size: cover;
   }
 
@@ -168,7 +175,7 @@ body {
     font-weight: 600;
   }
 
-  .feedinwindow{
+  .feedingwindow{
     display: flex;
     align-items: center;
     position: fixed;
@@ -182,18 +189,47 @@ body {
     border: 3px solid black;
     border-radius: 5px;
     background-color: white;
-    /* background-image: url("../public/bg.png"); */
+  }
+
+  .feedingwindow__icon{
+    width: 100px;
+    height: 100px;
+  }
+
+  .feedingwindow__count{
+    font-size: 26px;
+    font-weight: 600;
   }
 
 
+
+  .petavatar__position{
+    position: absolute;
+    bottom: 100px;
+    left: 50%; /* 將 left 設置為 50% */
+    transform: translateX(-50%); /* 使用 transform 來水平居中 */
+    width: 500px;
+    height: 500px;
+  }
+
   .ending__title{
-    padding :100px 0px;
+    padding :50px 0px;
     font-size : 90px; 
     font-weight: 900;
   }
 
+  .ending__petname{
+    font-size: 40px;
+    font-weight: 900;
+  }
 
-  .animation-container{
+  .ending__petparameter{
+    margin: 20px;
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .ending__petavatar{
     position: absolute;
     bottom: 100px;
     left: 50%; /* 將 left 設置為 50% */
@@ -214,6 +250,58 @@ body {
     left: 90%; /* 將 left 設置為 50% */
     transform: translateX(-50%); /* 使用 transform 來水平居中 */
     bottom:10%;
+  }
+
+  .collection{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 20px;
+    /* column-gap: 10px; */
+    max-width: 1100px;
+    margin: auto;
+    padding: 50px 0px 30px 0px;
+  }
+
+  .collection__background{
+    width: 255px;
+    height: 380px;
+    background-image: url("../public/bg_collectionitem.png");
+    background-size: cover;
+  }
+
+  .collection__petavatar{
+    width: 250px;
+    height: 250px;
+  }
+
+  .collection__description{
+    text-align: justify;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px;
+  }
+
+  .collection__incomplete{
+    font-size : 120px; 
+    font-weight: 900;
+    width: 250px;
+    height: 250px;
+    -webkit-text-stroke: 1px black;
+    color: white;
+    line-height: 250px;
+  }
+
+  .pagination-button{
+    width: 120px;
+    height: 40px;
+    margin: 0px 20px 0px 20px;
+    border: 3px black solid;
+    border-radius: 30px;
+    font-size: 20px;
+    font-weight: 600;
+    -webkit-text-stroke: 1px black;
+    color: white;
+    background-color: rgba(190, 239, 240, 1);
   }
 
   /* .fade-out{
