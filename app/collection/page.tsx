@@ -80,15 +80,30 @@ export default function CollectionPage() {
                     return (
                         <div key={index} className='collection__background'>
                             {endingrecord ? (
-                            <>
-                                <div className = 'collection__petavatar'>
-                                    {AnimationComponent && <AnimationComponent />}
-                                </div>
-                                <div className = 'backpack__word'>{record.petname}</div>
-                                <div className = 'collection__description'>{record.description}</div>
-                            </>
+                                <>
+                                    <div className = 'collection__petavatar'>
+                                        {AnimationComponent && <AnimationComponent />}
+                                    </div>
+                                    <div className = 'backpack__word'>{record.petname}</div>
+                                    <div className = 'collection__description'>{record.description}</div>
+                                </>
                             ) : (
-                                <div className = 'collection__incomplete'>？</div>
+                                <>
+                                    <div className = 'collection__incomplete'>？</div>
+                                    <div className = 'backpack__word'>需求條件</div>
+                                    { 'type' in record.requirement ? 
+                                        <div className = 'collection__description'> 
+                                        幼年期型態: {(record.requirement as { type: string }).type}
+                                        </div>: null
+                                    }
+                                    <div className = 'collection__description'>
+                                        勇敢: {record.requirement.勇敢}、
+                                        堅毅: {record.requirement.堅毅}、
+                                        冷靜: {record.requirement.冷靜}、
+                                        靈巧: {record.requirement.靈巧}、
+                                        奉獻: {record.requirement.奉獻}。
+                                    </div>
+                                </>
                             )}
                         </div>
                     );
