@@ -33,9 +33,11 @@ export const findBestMatch = (petParameter: PetParameter, petData: PetData): str
     // 先找出當前寵物的類型
     const currentPet = Object.values(petData).flat().find(pet => pet.id === petid);
     if (!currentPet) return null;
-    const currentPetType = currentPet.pettype;
 
-    if (petParameter.petid === "0001") {
+    const currentPetType = currentPet.pettype;
+    const validPetIds = ["0001", "0002", "0003", "0004", "0005"];
+
+    if (validPetIds.includes(petParameter.petid)) {
         const candidates = petData.幼年期.filter(pet => {
             const { requirement } = pet;
             return (
@@ -48,7 +50,7 @@ export const findBestMatch = (petParameter: PetParameter, petData: PetData): str
         });
 
         candidates.sort((a, b) => a.priority - b.priority);
-        return candidates.length > 0 ? candidates[0].id : "0001";
+        return candidates.length > 0 ? candidates[0].id : petParameter.petid;
 
     } else {
         const candidates = petData.成年期.filter(pet => {

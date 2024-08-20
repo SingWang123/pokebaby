@@ -123,7 +123,7 @@ export const GetRandomFood = () => {
     <>
     {isCoolingDown ? (
       <>
-        <div className="button__action" style={{ margin: "80px 0px 0px 0px", backgroundColor: "gray" }}>
+        <div className="button__action" style={{ margin: "60px 0px 0px 0px", backgroundColor: "gray" }}>
           <p className="button__word" onClick={handleGetFood}>
             領取食物
           </p>
@@ -135,7 +135,7 @@ export const GetRandomFood = () => {
         }
       </>
     ) : (
-      <div className="button__action" style={{ margin: "80px 0px" }}>
+      <div className="button__action" style={{ margin: "60px 0px" }}>
         <p className="button__word" onClick={handleGetFood}>
           領取食物
         </p>

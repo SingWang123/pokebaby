@@ -55,7 +55,6 @@ export default function MainPage() {
             setPetName(findname);
         }
     },[petParameter]);
-  
 
     function getRandomParameter() {
         const attributes = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];

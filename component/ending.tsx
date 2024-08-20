@@ -37,8 +37,16 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
         }
     }, [petParameter.round]);
 
+    function getRandomID() {
+        const attributes = ['0001', '0002', '0003', '0004', '0005'];
+        const randomID = Math.floor(Math.random() * attributes.length);
+        // 返回隨機選擇的屬性
+        return attributes[randomID];
+    }
 
     const handleNewGame = () => {
+        const randomInitialID = getRandomID();
+
         writePetEnding(
             petname,
             petParameter.petid,
@@ -51,11 +59,11 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
         )
 
         writePetParameter(
-            "0001",10, 0, 0, 0, 0, 0, user?.uid
+            randomInitialID,10, 0, 0, 0, 0, 0, user?.uid
         )
 
         setPetParameter({
-            petid: "0001",
+            petid: randomInitialID,
             round: 10,
             brave: 0,
             perseverance: 0,
@@ -92,5 +100,4 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
             </div>
         </div>
     )
-
 }

@@ -41,7 +41,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ item }) => {
       <>
         <img 
           ref = {ref} // 正確使用 drag 作為 ref
-          style = {{ opacity: isDragging ? 0.5 : 1 }} // 設置透明度以反映拖拽狀態
+          style = {{ opacity: isDragging ? 0.5 : 1,  border : 0 }} // 設置透明度以反映拖拽狀態
           src = {item.icon}
           className = "feedingwindow__icon" 
           alt = {`item-${item.id}`} // 添加 alt 屬性以提高可訪問性
