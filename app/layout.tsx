@@ -20,6 +20,7 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <title>Project Pokebaby</title>
+                <link rel="icon" href = "/favicon.ico" />
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.0/lottie.min.js" type="text/javascript"></script>
             </head>
             <body>

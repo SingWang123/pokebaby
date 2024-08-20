@@ -53,7 +53,6 @@ export const Backpack = () => {
                                     </div>
                                 </div>
                             ))}
-
                         </div>
                     </div>
                 </>

@@ -14,6 +14,66 @@
         "靈巧": 0,
         "奉獻": 0
       }
+    },
+    {
+      "id": "0002",
+      "petname": "蛋蛋2號",
+      "path": "/lottie/Animation0002.json",
+      "pettype": "未知",
+      "description": "充滿潛力的蛋蛋，有可能成為任何強力寵物，也可能就是顆啞蛋...",
+      "priority": 1,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "0003",
+      "petname": "蛋蛋3號",
+      "path": "/lottie/Animation0003.json",
+      "pettype": "未知",
+      "description": "充滿潛力的蛋蛋，有可能成為任何強力寵物，也可能就是顆啞蛋...",
+      "priority": 1,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "0004",
+      "petname": "蛋蛋4號",
+      "path": "/lottie/Animation0004.json",
+      "pettype": "未知",
+      "description": "充滿潛力的蛋蛋，有可能成為任何強力寵物，也可能就是顆啞蛋...",
+      "priority": 1,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
+      }
+    },
+    {
+      "id": "0005",
+      "petname": "蛋蛋5號",
+      "path": "/lottie/Animation0005.json",
+      "pettype": "未知",
+      "description": "充滿潛力的蛋蛋，有可能成為任何強力寵物，也可能就是顆啞蛋...",
+      "priority": 1,
+      "requirement": {    
+        "勇敢": 0,
+        "堅毅": 0,
+        "冷靜": 0,
+        "靈巧": 0,
+        "奉獻": 0
+      }
     }
   ],
   "幼年期" :[
