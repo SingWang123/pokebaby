@@ -144,7 +144,7 @@ export const GetRandomFood = () => {
     )}
 
       {selectedFood && (
-        <div className = "fade-out">
+        <div>
           <p>取得: {selectedFood.name}</p>
           {/* <img src = {selectedFood.icon} alt = {selectedFood.name} /> */}
         </div>

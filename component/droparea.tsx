@@ -41,7 +41,7 @@ const DropArea: React.FC<DropAreaProps> = ({ onDropItem, children }) => {
   return (
     <div 
       ref = {ref} 
-      style={{ backgroundColor: isOver ? 'lightgreen' : 'lightgray'}}
+      // style={{ backgroundColor: isOver ? 'lightgreen' : 'lightgray'}}
     >
       {children}
     </div>

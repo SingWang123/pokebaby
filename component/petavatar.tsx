@@ -6,9 +6,8 @@ import { useAuthContext } from '@context/AuthContext';
 import petData from 'public/items/pet.json';
 import animations from './animation';
 import DropArea from './droparea';
-import { useHandleDropItem } from 'utils/handleDropItem';
 import { findBestMatch } from 'utils/findBestMatch';
-
+import { useHandleDropItem } from 'hooks/handleDropItem';
 
 export default function PetAvatar() {
     const {petParameter, setPetParameter } = useParameter();
@@ -51,7 +50,7 @@ export default function PetAvatar() {
     return (
         <DropArea onDropItem = {handleDropItem}>
             <div className = 'petavatar__position'>
-                <AnimationComponent /> : 
+                <AnimationComponent />  
             </div>
         </DropArea>
     );

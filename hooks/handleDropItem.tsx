@@ -13,7 +13,6 @@ export const useHandleDropItem = () => {
 
     const handleDropItem = useCallback((item: BackpackItem) => {
         if (item.count <= 0) {
-            console.warn(`Item ${item.id} has no remaining count.`);
             return; // 如果物品數量不夠，則返回不做任何操作
         }
 
@@ -36,7 +35,6 @@ export const useHandleDropItem = () => {
             dedication: petParameter.dedication + (item.effect['奉獻'] || 0),
         };
         setPetParameter(newPetParameter);
-        console.log(newPetParameter);
 
         // 寫入資料庫
         writePetParameter(

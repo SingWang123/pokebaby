@@ -12,6 +12,7 @@ export const Feeding = () => {
     const {user} = useAuthContext();
     const {backpackArray,setBackpackArray} = useBackpackContext();
 
+    //左右拖拉餵食彈窗
     const scrollRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
@@ -59,7 +60,7 @@ export const Feeding = () => {
                 <hr className = "button__line"></hr>
             </div>
             { showFeedingFoodWindow ? (
-                <>
+                <div className = "feedingwindow__container">
                     <div 
                         className = "feedingwindow__closebutton"
                         onClick = {toggleShowFeedingFoodWindow}
@@ -79,7 +80,7 @@ export const Feeding = () => {
                             ))}
                         </div>
                     </div>
-                </>
+                </div>
             ): null
             }
         </>
