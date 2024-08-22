@@ -14,6 +14,7 @@ import PetAvatar from 'component/petavatar';
 import petData from 'public/items/pet.json';
 import { findPetNameById } from 'utils/findPetName';
 import Link from 'next/link';
+import { Training } from 'component/training';
 
 
 export default function MainPage() {
@@ -56,60 +57,60 @@ export default function MainPage() {
         }
     },[petParameter]);
 
-    function getRandomParameter() {
-        const attributes = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
-        const randomIndex = Math.floor(Math.random() * attributes.length);
-        // 返回隨機選擇的屬性
-        return attributes[randomIndex];
-    }
+    // function getRandomParameter() {
+    //     const attributes = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
+    //     const randomIndex = Math.floor(Math.random() * attributes.length);
+    //     // 返回隨機選擇的屬性
+    //     return attributes[randomIndex];
+    // }
 
-    function getRandomInt(min : number, max : number) {
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
+    // function getRandomInt(min : number, max : number) {
+    //     return Math.floor(Math.random() * (max - min)) + min;
+    // }
 
-    const handleFeeding = () => {
-        let count = getRandomInt(1,6);
-        let parameter = getRandomParameter()
+    // const handleFeeding = () => {
+    //     let count = getRandomInt(1,6);
+    //     let parameter = getRandomParameter()
 
-        let newPetParameter = {...petParameter}
+    //     let newPetParameter = {...petParameter}
 
-        switch (parameter) {
-            case 'brave':
-                newPetParameter.brave += count;
-                break;
-            case 'perseverance':
-                newPetParameter.perseverance += count;
-                break;
-            case 'cool':
-                newPetParameter.cool += count;
-                break;
-            case 'dexterity':
-                newPetParameter.dexterity += count;
-                break;
-            case 'dedication':
-                newPetParameter.dedication += count;
-                break;
-            default:
-                break;
-        }
-        //寫入資料庫
-        writePetParameter(
-            petParameter.petid,
-            petParameter.round -1,
-            newPetParameter.brave,
-            newPetParameter.perseverance,
-            newPetParameter.cool,
-            newPetParameter.dexterity,
-            newPetParameter.dedication,
-            user?.uid
-        )
-        //寫入context
-        setPetParameter({
-            ...newPetParameter,
-            round: petParameter.round -1,
-            petid: petParameter.petid
-        })
-    }
+    //     switch (parameter) {
+    //         case 'brave':
+    //             newPetParameter.brave += count;
+    //             break;
+    //         case 'perseverance':
+    //             newPetParameter.perseverance += count;
+    //             break;
+    //         case 'cool':
+    //             newPetParameter.cool += count;
+    //             break;
+    //         case 'dexterity':
+    //             newPetParameter.dexterity += count;
+    //             break;
+    //         case 'dedication':
+    //             newPetParameter.dedication += count;
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    //     //寫入資料庫
+    //     writePetParameter(
+    //         petParameter.petid,
+    //         petParameter.round -1,
+    //         newPetParameter.brave,
+    //         newPetParameter.perseverance,
+    //         newPetParameter.cool,
+    //         newPetParameter.dexterity,
+    //         newPetParameter.dedication,
+    //         user?.uid
+    //     )
+    //     //寫入context
+    //     setPetParameter({
+    //         ...newPetParameter,
+    //         round: petParameter.round -1,
+    //         petid: petParameter.petid
+    //     })
+    // }
 
     return (
         <div className = "home">
@@ -135,15 +136,7 @@ export default function MainPage() {
                         </Link>
                     </div>
                     <div className = 'home__button'>
-                        <div className = "button__action">
-                            <p 
-                                className = "button__word"
-                                onClick = {handleFeeding}
-                            >
-                                互動
-                            </p>
-                            <hr className = "button__line"></hr>
-                        </div>
+                        <Training />
                         <Feeding />
                         <GetRandomFood />
                     </div>

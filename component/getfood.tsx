@@ -26,8 +26,8 @@ export const GetRandomFood = () => {
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
   const [isCoolingDown, setIsCoolingDown] = useState<boolean>(false);
   const [cooldownTime, setCooldownTime] = useState<number>(600);
-  const minutes = Math.floor(cooldownTime / 60); // 计算分钟数
-  const seconds = cooldownTime % 60; // 计算剩余的秒数
+  const minutes = Math.floor(cooldownTime / 60);  //計算剩餘時間分鐘數
+  const seconds = cooldownTime % 60;  //計算剩餘時間的秒數
 
   // 從資料庫撈資料，存到setCooldownTime中（一登入就撈取）
   useEffect(() => {
@@ -79,18 +79,28 @@ export const GetRandomFood = () => {
     };
   }, [isCoolingDown]);
 
+  // 這裡可以處理冷卻時間和寫入資料庫
   useEffect(() => {
-    // 這裡可以處理冷卻時間和寫入資料庫
     if (isCoolingDown && cooldownTime > 0 && user) {
         writeCooldownTime(true, cooldownTime, new Date(), user.uid);
     }
   }, [isCoolingDown, user]);
 
+  //得到食物提示圖出現3秒後消失
+  useEffect (() => {
+    const timer =  window.setTimeout(() => {
+      setSelectedFood(null);
+    }, 3000)
+
+    return () => window.clearTimeout(timer);  
+  },[selectedFood])
+
+
   const handleGetFood = () =>{
     if (!isCoolingDown){
       let totalWeight:number = 0;
       for (let i=0; i < foodData.length; i++){
-          totalWeight =  totalWeight+= foodData[i]["weight"];
+          totalWeight =  totalWeight += foodData[i]["weight"];
       }
 
       //生成1~totalWeight 之間的隨機數
@@ -115,9 +125,6 @@ export const GetRandomFood = () => {
       }
     }
   }
-
-
-
 
   return (
     <>
@@ -144,11 +151,11 @@ export const GetRandomFood = () => {
     )}
 
       {selectedFood && (
-        <div>
-          <p>取得: {selectedFood.name}</p>
-          {/* <img src = {selectedFood.icon} alt = {selectedFood.name} /> */}
+        <div className = "getfood__window">
+          <img src = {selectedFood.icon} alt = {selectedFood.name} />
+          <p className = "getfood__word">取得: {selectedFood.name}</p>
         </div>
-      )}
+      )} 
     </>
   );
 }
