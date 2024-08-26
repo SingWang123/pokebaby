@@ -98,10 +98,30 @@ export const Training = () => {
                     > 勇氣訓練
                     </div>
                     <div> 勇敢↑ 冷靜↓</div>
-                    <div className = 'training__button'>韌性訓練</div>
-                    <div className = 'training__button'>冷靜訓練</div>
-                    <div className = 'training__button'>速度訓練</div>
-                    <div className = 'training__button'>防禦訓練</div>
+                    <div 
+                        className = 'training__button' 
+                        onClick = {() => handleTraining("perseverance","dexterity")}
+                    > 韌性訓練
+                    </div>
+                    <div> 堅韌↑ 靈巧↓</div>
+                    <div 
+                        className = 'training__button' 
+                        onClick = {() => handleTraining("cool","dedication")}
+                    > 冷靜訓練
+                    </div>
+                    <div> 冷靜↑ 奉獻↓</div>
+                    <div 
+                        className = 'training__button' 
+                        onClick = {() => handleTraining("dexterity","brave")}
+                    > 速度訓練
+                    </div>
+                    <div> 靈巧↑ 勇敢↓</div>
+                    <div 
+                        className = 'training__button' 
+                        onClick = {() => handleTraining("dedication","perseverance")}
+                    > 犧牲訓練
+                    </div>
+                    <div> 奉獻↑ 堅韌↓</div>
                 </div>
             ): null
             }

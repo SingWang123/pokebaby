@@ -373,8 +373,8 @@ body {
     border-radius: 30px;
     font-size: 20px;
     font-weight: 600;
-    -webkit-text-stroke: 1px black;
-    color: white;
+    /* -webkit-text-stroke: 1px black; */
+    color: black;
     background-color: rgba(190, 239, 240, 1);
   }
 
