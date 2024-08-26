@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { doc, getFirestore, getDoc } from 'firebase/firestore';
+import { doc, getFirestore, getDoc, query, where } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -112,7 +112,49 @@ export const getPetEndings = async (uid : string | null | undefined, callback: (
         if (docSnap.exists()){
             const data = {id:docSnap.id,...docSnap.data()};
             callback(data);
-            // console.log(data);
+            console.log(data);
+        } else {
+            console.error("No such document!");
+            callback(null);
+        }
+    } catch (error) {
+        console.error("Error getting document:", error);
+        callback(null);
+    }
+}
+
+
+//讀取資料庫結局資料，ID=OOOXX
+export const getPetEndingByID = async (uid : string | null | undefined, petid :string, callback: (data: any) => void) =>{
+    if (!uid) {
+        console.error("Invalid UID");
+        return; // 或者拋出錯誤
+    }
+    
+    const docRef = doc(db, uid, "PetEndings"); //指定文檔路徑
+
+    try {
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()){
+            const data = docSnap.data();
+            const endings = data?.endings;
+            console.log(endings)
+
+            if (endings && Array.isArray(endings)){
+                const matchedEndings = endings.filter((item: any) => item.petid === petid);
+                console.log(matchedEndings);
+                if(matchedEndings.length > 0){
+                    callback(matchedEndings);
+                    console.log(matchedEndings);
+                } else {
+                    console.error ("未找到對應的petid資料")
+                    callback(null);
+                }
+                
+            } else {
+                console.error ("`endings` 資料不是陣列或不存在！")
+                callback(null);
+            }
         } else {
             console.error("No such document!");
             callback(null);

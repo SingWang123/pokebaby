@@ -13,7 +13,6 @@ interface EndingProps {
     petname: string;
 }
 
-
 export const Ending: React.FC<EndingProps> = ({ petname }) => { 
     const { petParameter, setPetParameter } = useParameter();  
     const {user} = useAuthContext();
@@ -46,31 +45,41 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
 
     const handleNewGame = () => {
         const randomInitialID = getRandomID();
-
-        writePetEnding(
-            petname,
-            petParameter.petid,
-            petParameter.brave,
-            petParameter.perseverance,
-            petParameter.cool,
-            petParameter.dexterity,
-            petParameter.dedication,
-            user?.uid 
-        )
-
-        writePetParameter(
-            randomInitialID,10, 0, 0, 0, 0, 0, user?.uid
-        )
-
-        setPetParameter({
-            petid: randomInitialID,
-            round: 10,
-            brave: 0,
-            perseverance: 0,
-            cool: 0,
-            dexterity: 0,
-            dedication: 0,  
-        })
+    
+        // 查找隨機選擇的寵物
+        const selectedPet = petData["蛋蛋期"].find(pet => pet.id === randomInitialID);
+        
+        // 如果找到該寵物，將其預設參數應用到新遊戲中
+        if (selectedPet) {
+            const { 勇敢, 堅毅, 冷靜, 靈巧, 奉獻 } = selectedPet.requirement;
+    
+            writePetEnding(
+                petname,
+                petParameter.petid,
+                petParameter.brave,
+                petParameter.perseverance,
+                petParameter.cool,
+                petParameter.dexterity,
+                petParameter.dedication,
+                user?.uid 
+            )
+    
+            writePetParameter(
+                randomInitialID, 10, 勇敢, 堅毅, 冷靜, 靈巧, 奉獻, user?.uid
+            )
+    
+            setPetParameter({
+                petid: randomInitialID,
+                round: 10,
+                brave: 勇敢,
+                perseverance: 堅毅,
+                cool: 冷靜,
+                dexterity: 靈巧,
+                dedication: 奉獻
+            });
+        } else {
+            console.error("未找到對應的寵物");
+        }
     }
 
     return (

@@ -7,6 +7,7 @@ import petData from 'public/items/pet.json';
 import Link from 'next/link';
 import animations from 'component/animation';
 import { getPetEndings } from 'lib/LoadData';
+import CollectionDetail from 'component/collection_detail';
 
 interface EndingRecord {
     petname: string;
@@ -21,6 +22,7 @@ interface EndingRecord {
 export default function CollectionPage() {
     const { user } = useAuthContext();
     const router = useRouter();
+    const [selectedPetId, setSelectedPetId] = useState<string | null>(null);
 
     // 分頁狀態
     const [currentPage, setCurrentPage] = useState(0);
@@ -55,6 +57,10 @@ export default function CollectionPage() {
         }
     }, [user, router]);
 
+    useEffect(() => {
+        console.log(selectedPetId);
+    },[selectedPetId]);
+
     // 分頁控制
     const goToNextPage = () => {
         setCurrentPage(prevPage => (prevPage < totalPages - 1 ? prevPage + 1 : prevPage));
@@ -80,13 +86,13 @@ export default function CollectionPage() {
                     return (
                         <div key={index} className='collection__background'>
                             {endingrecord ? (
-                                <>
+                                <div onClick={() => setSelectedPetId(record.id)}>
                                     <div className = 'collection__petavatar'>
                                         {AnimationComponent && <AnimationComponent />}
                                     </div>
                                     <div className = 'backpack__word'>{record.petname}</div>
                                     <div className = 'collection__description'>{record.description}</div>
-                                </>
+                                </div>
                             ) : (
                                 <>
                                     <div className = 'collection__incomplete'>？</div>
@@ -121,6 +127,9 @@ export default function CollectionPage() {
                     </button>
                 )}
             </div>
+
+            {/* 根據 selectedPetId 顯示寵物的詳細資料 */}
+            {selectedPetId && <CollectionDetail petid={selectedPetId} />}
         </div>
     );
 }
