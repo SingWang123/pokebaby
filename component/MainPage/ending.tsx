@@ -1,7 +1,7 @@
 "use client";
 import React, { useState,useEffect } from 'react';
 import { useParameter } from '@context/ParameterContext';
-import animations from './animation';
+import animations from '../animation';
 import { useAuthContext } from '@context/AuthContext';
 import { writePetEnding, writePetParameter } from 'lib/WriteData';
 import { findBestMatch } from 'utils/findBestMatch';

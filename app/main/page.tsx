@@ -1,19 +1,19 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import Parameter from 'component/parameter';
-import { Ending } from 'component/ending';
-import { GetRandomFood } from 'component/getfood';
+import Parameter from 'component/MainPage/parameter';
+import { Ending } from 'component/MainPage/ending';
+import { GetRandomFood } from 'component/MainPage/getfood';
 import { getPetParameter } from 'lib/LoadData';
 import { PetParameter, useParameter } from '@context/ParameterContext';
 import { useAuthContext } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
-import { Backpack } from 'component/backpack';
-import { Feeding } from 'component/feeding';
-import PetAvatar from 'component/petavatar';
+import { Backpack } from 'component/MainPage/backpack';
+import { Feeding } from 'component/MainPage/feeding';
+import PetAvatar from 'component/MainPage/petavatar';
 import petData from 'public/items/pet.json';
 import { findPetNameById } from 'utils/findPetName';
 import Link from 'next/link';
-import { Training } from 'component/training';
+import { Training } from 'component/MainPage/training';
 
 
 export default function MainPage() {

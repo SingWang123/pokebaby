@@ -4,7 +4,7 @@ import { writePetParameter } from 'lib/WriteData';
 import { PetParameter, useParameter } from '@context/ParameterContext';
 import { useAuthContext } from '@context/AuthContext';
 import petData from 'public/items/pet.json';
-import animations from './animation';
+import animations from '../animation';
 import DropArea from './droparea';
 import { findBestMatch } from 'utils/findBestMatch';
 import { useHandleDropItem } from 'hooks/handleDropItem';
