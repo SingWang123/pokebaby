@@ -112,7 +112,7 @@ export const getPetEndings = async (uid : string | null | undefined, callback: (
         if (docSnap.exists()){
             const data = {id:docSnap.id,...docSnap.data()};
             callback(data);
-            console.log(data);
+            // console.log(data);
         } else {
             console.error("No such document!");
             callback(null);
@@ -138,14 +138,12 @@ export const getPetEndingByID = async (uid : string | null | undefined, petid :s
         if (docSnap.exists()){
             const data = docSnap.data();
             const endings = data?.endings;
-            console.log(endings)
 
             if (endings && Array.isArray(endings)){
                 const matchedEndings = endings.filter((item: any) => item.petid === petid);
-                console.log(matchedEndings);
                 if(matchedEndings.length > 0){
                     callback(matchedEndings);
-                    console.log(matchedEndings);
+                    // console.log(matchedEndings);
                 } else {
                     console.error ("未找到對應的petid資料")
                     callback(null);

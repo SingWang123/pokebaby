@@ -1,5 +1,6 @@
 "use client";
 import React from 'react';
+import "../styles/signin.css" ;
 import { Signup } from 'component/signup';
 import { Signin } from 'component/signin';
 import { useState } from 'react';

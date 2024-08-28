@@ -326,57 +326,7 @@ body {
     bottom:10%;
   }
 
-  .collection{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 20px;
-    /* column-gap: 10px; */
-    max-width: 1100px;
-    margin: auto;
-    padding: 50px 0px 30px 0px;
-  }
 
-  .collection__background{
-    width: 255px;
-    height: 380px;
-    background-image: url("../public/bg_collectionitem.png");
-    background-size: cover;
-  }
-
-  .collection__petavatar{
-    width: 250px;
-    height: 250px;
-  }
-
-  .collection__description{
-    text-align: justify;
-    font-size: 18px;
-    font-weight: 400;
-    padding: 5px 10px;
-  }
-
-  .collection__incomplete{
-    font-size : 120px; 
-    font-weight: 900;
-    width: 250px;
-    height: 250px;
-    -webkit-text-stroke: 1px black;
-    color: white;
-    line-height: 250px;
-  }
-
-  .pagination-button{
-    width: 120px;
-    height: 40px;
-    margin: 0px 20px 0px 20px;
-    border: 3px black solid;
-    border-radius: 30px;
-    font-size: 20px;
-    font-weight: 600;
-    /* -webkit-text-stroke: 1px black; */
-    color: black;
-    background-color: rgba(190, 239, 240, 1);
-  }
 
   .fade-out{
     animation: fade 1s forwards;

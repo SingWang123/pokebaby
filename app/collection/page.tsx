@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import "/styles/collection.css" ;
 import { useEffect } from 'react';
 import { useAuthContext } from '@context/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -56,10 +57,6 @@ export default function CollectionPage() {
             });  
         }
     }, [user, router]);
-
-    useEffect(() => {
-        console.log(selectedPetId);
-    },[selectedPetId]);
 
     // 分頁控制
     const goToNextPage = () => {
@@ -129,7 +126,7 @@ export default function CollectionPage() {
             </div>
 
             {/* 根據 selectedPetId 顯示寵物的詳細資料 */}
-            {selectedPetId && <CollectionDetail petid={selectedPetId} />}
+            {selectedPetId && <CollectionDetail petid = {selectedPetId} setSelectedPetId = {setSelectedPetId} />}
         </div>
     );
 }

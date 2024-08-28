@@ -97,31 +97,36 @@ export const Training = () => {
                         onClick = {() => handleTraining("brave","cool")}
                     > 勇氣訓練
                     </div>
-                    <div> 勇敢↑ 冷靜↓</div>
+                    <span style = {{color:"red"}}>勇敢↑</span>
+                    <span style = {{color:"green"}}>  冷靜↓</span>
                     <div 
                         className = 'training__button' 
                         onClick = {() => handleTraining("perseverance","dexterity")}
                     > 韌性訓練
                     </div>
-                    <div> 堅韌↑ 靈巧↓</div>
+                    <span style = {{color:"red"}}>堅韌↑</span>
+                    <span style = {{color:"green"}}>  靈巧↓</span>
                     <div 
                         className = 'training__button' 
                         onClick = {() => handleTraining("cool","dedication")}
                     > 冷靜訓練
                     </div>
-                    <div> 冷靜↑ 奉獻↓</div>
+                    <span style = {{color:"red"}}>冷靜↑</span>
+                    <span style = {{color:"green"}}>  奉獻↓</span>
                     <div 
                         className = 'training__button' 
                         onClick = {() => handleTraining("dexterity","brave")}
                     > 速度訓練
                     </div>
-                    <div> 靈巧↑ 勇敢↓</div>
+                    <span style = {{color:"red"}}>靈巧↑</span>
+                    <span style = {{color:"green"}}>  勇敢↓</span>
                     <div 
                         className = 'training__button' 
                         onClick = {() => handleTraining("dedication","perseverance")}
                     > 犧牲訓練
                     </div>
-                    <div> 奉獻↑ 堅韌↓</div>
+                    <span style = {{color:"red"}}>奉獻↑</span>
+                    <span style = {{color:"green"}}>  堅韌↓</span>
                 </div>
             ): null
             }

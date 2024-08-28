@@ -5,6 +5,7 @@ import { useAuthContext } from '@context/AuthContext';
 import petData from 'public/items/pet.json';
 import animations from 'component/animation';
 import { getPetEndingByID } from 'lib/LoadData';
+import { findPetNameById } from 'utils/findPetName';
 
 interface EndingRecordById {
     petname: string;
@@ -16,12 +17,17 @@ interface EndingRecordById {
     dedication: number;
 } 
 
-export default function CollectionDetail({ petid }: { petid: string }) {
+interface CollectionDetailProps {
+    petid: string;
+    setSelectedPetId: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
+export default function CollectionDetail({ petid, setSelectedPetId }: CollectionDetailProps) {
     const { user } = useAuthContext();
 
     const [endingRecordById, setEndingRecordById] = useState<EndingRecordById[]>([]);
-
-    console.log(petid);
+    const AnimationComponent = animations[`Animation${petid}`]
+    const PetName = findPetNameById(petData, petid);
 
     useEffect(() => {
         if (user?.uid && petid) {
@@ -37,8 +43,6 @@ export default function CollectionDetail({ petid }: { petid: string }) {
                         dedication: item.dedication,
                     }));
                     setEndingRecordById(updatedEndingRecordById);
-                    console.log(data);
-                    console.log(endingRecordById);
                 }
             });
         }
@@ -47,17 +51,32 @@ export default function CollectionDetail({ petid }: { petid: string }) {
 
     return (
         <div>
-            <div className = "backpack__background">
-                {endingRecordById.map((record, index) => (
-                    <div key={index}>
-                        <h3>{record.petname}</h3>
-                        <p>勇敢: {record.brave}</p>
-                        <p>堅毅: {record.perseverance}</p>
-                        <p>冷靜: {record.cool}</p>
-                        <p>靈巧: {record.dexterity}</p>
-                        <p>奉獻: {record.dedication}</p>
+            <div className = "detail__background">
+                <div className = "collection__detail">
+                    <div 
+                        className = "detail__closebutton"
+                        onClick={() => setSelectedPetId(null)}
+                    >
                     </div>
-                ))}
+                    <div className = 'detail__petavatar'>
+                        <AnimationComponent />  
+                    </div>
+                    <div className = 'detail__title'>{PetName}</div>
+                    <div className = 'detail__list_bg'>
+                    {endingRecordById.map((record, index) => (
+                        <div key={index}  className = 'detail__list'>
+                            <div className = 'detail__ending_petname'>{record.petname}</div>
+                            <div className = 'detail__list_parameter'>
+                                <p className = 'detail__ending_parameter'>勇敢: {record.brave}</p>
+                                <p className = 'detail__ending_parameter'>堅毅: {record.perseverance}</p>
+                                <p className = 'detail__ending_parameter'>冷靜: {record.cool}</p>
+                                <p className = 'detail__ending_parameter'>靈巧: {record.dexterity}</p>
+                                <p className = 'detail__ending_parameter'>奉獻: {record.dedication}</p>
+                            </div>
+                        </div>
+                    ))}
+                    </div>
+                </div>
             </div>
         </div>
     );

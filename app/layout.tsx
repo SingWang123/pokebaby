@@ -1,7 +1,6 @@
 "use client";
 import React, { PropsWithChildren } from 'react';
 import '../styles/globals.css';
-import "../styles/signin.css" ;
 import { ParameterProvider } from '@context/ParameterContext'; // 確保路徑正確
 import { AuthProvider } from '@context/AuthContext';
 import { BackpackProvider } from '@context/BackpackContext';
