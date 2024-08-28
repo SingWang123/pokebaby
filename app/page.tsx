@@ -1,8 +1,8 @@
 "use client";
 import React from 'react';
 import "../styles/signin.css" ;
-import { Signup } from 'component/signup';
-import { Signin } from 'component/signin';
+import { Signup } from 'component/LoginPage/signup';
+import { Signin } from 'component/LoginPage/signin';
 import { useState } from 'react';
 import animations from 'component/animation';
 
@@ -14,7 +14,7 @@ export default function HomePage() {
     }
 
     return (
-        <div className="home">
+        <div className="home__signin">
             <div>
                 <div className="gametitle">
                     <img src = '/logo.png' />

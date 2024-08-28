@@ -51,7 +51,7 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
         
         // 如果找到該寵物，將其預設參數應用到新遊戲中
         if (selectedPet) {
-            const { 勇敢, 堅毅, 冷靜, 靈巧, 奉獻 } = selectedPet.requirement;
+            const { 勇敢, 堅毅, 冷靜, 靈巧, 奉獻 } = selectedPet.initial;
     
             writePetEnding(
                 petname,
