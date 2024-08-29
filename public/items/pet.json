@@ -318,7 +318,7 @@
       "petname": "箱箱貓",
       "path": "/lottie/Animation2005.json",
       "pettype": "貓系",
-      "description": "...可以不要結局嗎？想在畫面上一值看著你。",
+      "description": "...可以不要結局嗎？想在畫面上一直看著你。",
       "priority": 10,
       "requirement": {
         "type": "貓系",     
@@ -382,7 +382,7 @@
       "petname": "喪屍",
       "path": "/lottie/Animation2009.json",
       "pettype": "特殊系",
-      "description": "...這我兒子選的，我也不知道為什麼他選了喪屍...",
+      "description": "...我兒子選的，我也不知道為什麼他選了喪屍...",
       "priority": 10,
       "requirement": {
         "type": "特殊系",     
