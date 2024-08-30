@@ -6,14 +6,9 @@ import { useAuthContext } from '@context/AuthContext';
 import { writePetEnding, writePetParameter } from 'lib/WriteData';
 import { findBestMatch } from 'utils/findBestMatch';
 import petData from 'public/items/pet.json';
-import { findPetNameById } from 'utils/findPetName';
 
 
-interface EndingProps {
-    petname: string;
-}
-
-export const Ending: React.FC<EndingProps> = ({ petname }) => { 
+export const Ending = () => { 
     const { petParameter, setPetParameter } = useParameter();  
     const {user} = useAuthContext();
     const AnimationComponent = animations[`Animation${petParameter.petid}`]
@@ -24,6 +19,7 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
 
             if(bestMatchId){
                 setPetParameter({
+                    petname: petParameter.petname,
                     petid: bestMatchId,
                     round: petParameter.round,
                     brave : petParameter.brave,
@@ -52,9 +48,10 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
         // 如果找到該寵物，將其預設參數應用到新遊戲中
         if (selectedPet) {
             const { 勇敢, 堅毅, 冷靜, 靈巧, 奉獻 } = selectedPet.initial;
+            const petname = selectedPet.petname;
     
             writePetEnding(
-                petname,
+                petParameter.petname,
                 petParameter.petid,
                 petParameter.brave,
                 petParameter.perseverance,
@@ -65,10 +62,11 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
             )
     
             writePetParameter(
-                randomInitialID, 10, 勇敢, 堅毅, 冷靜, 靈巧, 奉獻, user?.uid
+                petname, randomInitialID, 10, 勇敢, 堅毅, 冷靜, 靈巧, 奉獻, user?.uid
             )
     
             setPetParameter({
+                petname: petname,
                 petid: randomInitialID,
                 round: 10,
                 brave: 勇敢,
@@ -85,7 +83,7 @@ export const Ending: React.FC<EndingProps> = ({ petname }) => {
     return (
         <div className = "home">
             <div className = "ending__title">結局</div>
-            <div className = "ending__petname">{petname}</div>
+            <div className = "ending__petname">{petParameter.petname}</div>
             <div className = "ending__petparameter">        
                 勇敢：{petParameter.brave}　
                 堅毅：{petParameter.perseverance}　

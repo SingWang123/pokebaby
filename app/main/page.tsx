@@ -10,17 +10,16 @@ import { useRouter } from 'next/navigation';
 import { Backpack } from 'component/MainPage/backpack';
 import { Feeding } from 'component/MainPage/feeding';
 import PetAvatar from 'component/MainPage/petavatar';
-import petData from 'public/items/pet.json';
-import { findPetNameById } from 'utils/findPetName';
 import Link from 'next/link';
 import { Training } from 'component/MainPage/training';
+import { PetName } from 'component/MainPage/petname';
 
 
 export default function MainPage() {
     const {petParameter, setPetParameter } = useParameter();
     const {user} = useAuthContext();
     const router = useRouter();
-    const [petName,setPetName] = useState<string>("蛋蛋1號")
+    // const [petName,setPetName] = useState<string>("蛋蛋1號")
 
     //檢查登入狀態，未登入踢回首頁
     useEffect(() => {
@@ -35,6 +34,7 @@ export default function MainPage() {
             getPetParameter(user.uid, (data) => {
                 if (data) {
                     const updatedPetParameter: PetParameter = {
+                        petname: data.petname,
                         petid: data.petid,
                         round: data.round,
                         brave: data.brave,
@@ -44,32 +44,24 @@ export default function MainPage() {
                         dedication: data.dedication,
                     };
                     setPetParameter(updatedPetParameter);
+                    console.log(petParameter);
                 }
             });            
         }
     }, [user, setPetParameter]);
 
-    useEffect(() => {
-        const findname = findPetNameById(petData, petParameter.petid);
-        if (findname){
-            setPetName(findname);
-        }
-    },[petParameter]);
-
     return (
         <div className = "home">
             {
                 petParameter.round <= 0 ?
-                <Ending petname = {petName}/>:
+                <Ending />:
                 <PetAvatar /> 
             }
             {
                 petParameter.round <= 0 ?
                 <div></div>:
                 <>
-                    <div className = 'home__petname'>
-                        <div className = 'petname__name'>{petName}</div>
-                    </div>
+                    <PetName />
                     <Parameter />
                     <div className = "button__collection">
                         <Link href="/collection" style={{ textDecoration: 'none' }}>

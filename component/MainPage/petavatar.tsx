@@ -24,6 +24,7 @@ export default function PetAvatar() {
             if (bestMatchId){
                 //寫入資料庫
                 writePetParameter(
+                    petParameter.petname,
                     bestMatchId,
                     petParameter.round,
                     petParameter.brave,
@@ -35,6 +36,7 @@ export default function PetAvatar() {
                 )
                 //寫入context
                 setPetParameter({
+                    petname: petParameter.petname,
                     petid: bestMatchId,
                     round: petParameter.round,
                     brave : petParameter.brave,

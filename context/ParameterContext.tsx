@@ -3,6 +3,7 @@ import React, { createContext, useState, useContext, ReactNode } from "react";
 
 //定義紀錄型別
 export interface PetParameter{
+    petname: string;
     petid: string;
     round: number;
     brave : number;
@@ -20,6 +21,7 @@ interface PetParameterType{
 
 //設定初始值
 export const defaultPetParameter: PetParameter = {
+    petname: "蛋蛋",
     petid: "0001",
     round: 10,
     brave: 0,

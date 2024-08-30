@@ -23,6 +23,7 @@ export { app };
 const db = getFirestore(app);
 
 export async function writePetParameter(
+    petname : string,
     petid : string,
     round : number, 
     brave : number, 
@@ -46,6 +47,7 @@ export async function writePetParameter(
         
         // 設定檔案資料
         await setDoc(docRef, {
+            petname: petname || "寵物名稱",
             petid: petid || "0001",
             round: round || 0,
             brave: brave || 0,

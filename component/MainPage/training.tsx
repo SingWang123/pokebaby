@@ -62,6 +62,7 @@ export const Training = () => {
 
         //寫入資料庫
         writePetParameter(
+            petParameter.petname,
             petParameter.petid,
             petParameter.round -1,
             newPetParameter.brave,
@@ -75,6 +76,7 @@ export const Training = () => {
         setPetParameter({
             ...newPetParameter,
             round: petParameter.round -1,
+            petname: petParameter.petname,
             petid: petParameter.petid
         })
     }

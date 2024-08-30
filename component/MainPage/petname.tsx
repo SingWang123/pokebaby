@@ -1,28 +1,96 @@
 "use client";
 import { useState } from "react";
 import { useAuthContext } from "@context/AuthContext";
-import { findBackpackItems} from "utils/backpackItemUtils";
-import { useBackpackContext } from "@context/BackpackContext";
+import { PetParameter, useParameter } from '@context/ParameterContext';
+import { writePetParameter } from "lib/WriteData";
 
-export const Backpack = () => {
+export const PetName = () => {
     const {user} = useAuthContext();
-    const [showBackpack, setShowBackpack] = useState(false);
-    const {backpackArray,setBackpackArray} = useBackpackContext();    
+    const {petParameter,setPetParameter} = useParameter();
+    const [newPetName, setNewPetName] = useState("");
+    const [showEditPetname, setShowEditPetname] = useState(false);    
 
-
-    const toggleShowBackpack = () => {
-        setShowBackpack((preState) => !preState);
-
-        if (!showBackpack){
-            findBackpackItems(user?.uid,setBackpackArray);
-        }
+    const toggleShowEdit = () => {
+        setShowEditPetname((preState) => !preState);
     }
+
+    const handleSetNewPetname = () => {
+        if (newPetName.trim() === "") {
+            alert("請輸入寵物名稱");
+            return;
+        }
+
+        if (newPetName.length > 8) {
+            alert("寵物名稱請小於8個字");
+            return;
+        } else {
+            //寫入資料庫
+            writePetParameter(
+                newPetName,
+                petParameter.petid,
+                petParameter.round,
+                petParameter.brave,
+                petParameter.perseverance,
+                petParameter.cool,
+                petParameter.dexterity,
+                petParameter.dedication,
+                user?.uid
+            )
+            //寫入context
+            setPetParameter({
+                petname: newPetName,
+                petid: petParameter.petid,
+                round: petParameter.round,
+                brave : petParameter.brave,
+                perseverance : petParameter.perseverance,
+                cool : petParameter.cool,
+                dexterity : petParameter.dexterity,
+                dedication : petParameter.dedication,
+            })
+            //關閉視窗
+            setShowEditPetname(false);
+        }
+    };
 
     return (
         <>
+            { showEditPetname ? (
+                <div className = "petname__background">
+                    <div className = "petname__edit_background">
+                        <div 
+                            className = "backpack__closebutton"
+                            onClick = {toggleShowEdit}
+                        >
+                        </div>
+                        <div className = "petname__edit_title">
+                            設定寵物名稱
+                        </div>
+                        <input 
+                            className = "petname__edit_input"
+                            placeholder = {petParameter.petname}
+                            onChange = {(e) => setNewPetName(e.target.value)}
+                        >    
+                        </input>
+                        <div 
+                            className = "petname__edit_button"
+                            onClick = {handleSetNewPetname}
+                        >
+                            確定
+                        </div>
+                    </div>
+                </div>
+            ):(null)
+            }
             <div className = 'home__petname'>
-                <div className = 'petname__name'>{petName}</div>
+                <div className = 'petname__name'>
+                    {petParameter.petname}
+                </div>
+                <div   
+                    className = "petname__editbutton"
+                    onClick = {toggleShowEdit}
+                >
+                </div>
             </div>
-        </>   
+        </>
     );
 }

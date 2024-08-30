@@ -26,6 +26,7 @@ export const useHandleDropItem = () => {
         writeBackpack(item.id, -1, user?.uid);
 
         const newPetParameter: PetParameter = {
+            petname: petParameter.petname,
             petid: petParameter.petid,
             round: petParameter.round - 1,
             brave: petParameter.brave + (item.effect['勇敢'] || 0),
@@ -38,6 +39,7 @@ export const useHandleDropItem = () => {
 
         // 寫入資料庫
         writePetParameter(
+            petParameter.petname,
             newPetParameter.petid,
             petParameter.round - 1,
             newPetParameter.brave,
