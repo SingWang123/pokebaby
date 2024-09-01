@@ -456,36 +456,39 @@ body {
       /*螢幕寬度小於880px,套用這組CSS*/
       .home__button{
         display: flex;
+        justify-content: center;
         position: fixed;
-        top: 90%;
+        /* width: auto; */
+        top: 90vh;
+        left: 0%;
+        /* transform: translateX(-50%); */
       }
 
-      .button__action{
-        width: 120px; /* 平行四邊形的寬度 */
-        height: 60px; /* 平行四邊形的高度 */
-        margin: 0px 5px 0px 5px;
-      }
-
+      .button__action,
       .button__getfood{
-        width: 120px; /* 平行四邊形的寬度 */
+        width: 25%; /* 平行四邊形的寬度 */
         height: 60px; /* 平行四邊形的高度 */
         margin: 0px 5px 0px 5px;
+      }
+
+      .button__mobile{
+        width: 25%;
       }
       
       .button__word{
         transform: skew(20deg); /* 傾斜度 */
         color: white;
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 500;
         margin: 0px 0px 10px 0px;
       }
       
       .button__line{
         position: relative;
-        top: -10px;
+        top: -5px;
         right: -10px;
         z-index: 2;
-        width: 120px;
+        width: 100%;
         color: white;
         border: 1px white solid;
       }

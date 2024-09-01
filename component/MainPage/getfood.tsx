@@ -21,7 +21,7 @@ interface Food {
   effect: FoodEffect;
 }
 
-export const GetRandomFood = () => {
+export const GetFood = () => {
   const {user} = useAuthContext();
   const [selectedFood, setSelectedFood] = useState<Food | null>(null);
   const [isCoolingDown, setIsCoolingDown] = useState<boolean>(false);
@@ -129,18 +129,18 @@ export const GetRandomFood = () => {
   return (
     <>
     {isCoolingDown ? (
-      <>
-        <div className="button__getfood" style={{ backgroundColor: "gray" }}>
+      <div className = "button__mobile">
+        <div className="button__getfood" style={{ backgroundColor: "gray", width:"100%"}}>
           <p className="button__word" onClick={handleGetFood}>
             領取食物
           </p>
           <hr className="button__line"></hr>
         </div>
         {minutes === 0 ? 
-          (<p>冷卻中 {seconds}秒</p>):
-          (<p>冷卻中 {minutes}分 {seconds}秒</p>)
+          (<span>冷卻中 {seconds}秒</span>):
+          (<span>冷卻中 {minutes}分 {seconds}秒</span>)
         }
-      </>
+      </div>
     ) : (
       <div className="button__getfood">
         <p className="button__word" onClick={handleGetFood}>

@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Parameter from 'component/MainPage/parameter';
 import { Ending } from 'component/MainPage/ending';
-import { GetRandomFood } from 'component/MainPage/getfood';
+import { GetFood } from 'component/MainPage/getfood';
 import { getPetParameter } from 'lib/LoadData';
 import { PetParameter, useParameter } from '@context/ParameterContext';
 import { useAuthContext } from '@context/AuthContext';
@@ -74,7 +74,7 @@ export default function MainPage() {
                     <div className = 'home__button'>
                         <Training />
                         <Feeding />
-                        <GetRandomFood />
+                        <GetFood />
                     </div>
                     <Backpack />
                 </>
