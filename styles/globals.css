@@ -587,7 +587,7 @@ body {
 
       .petavatar__position{
         position: absolute;
-        top: 45vh;
+        top: 40vh;
         left: 50%; 
         transform: translateX(-50%); 
         width: 320px;
@@ -628,8 +628,88 @@ body {
         font-weight: 600;
       }
 
+      /*寵物訓練按鈕*/
+      .training__container{
+        position: fixed;
+        top: 38%;
+        left: 5%;
+      }
+      
+      .training__button{
+        width: 120px;
+        height: 32px;
+        margin: 10px auto 0px auto;
+        font-size: 20px;
+      }
 
-
+      /*寵物餵食*/
+      .feedingwindow__container{
+        position: fixed;
+        width: 80%;
+        height: 100px;
+        transform: translate(-50%, -50%);
+        top: 72%;
+      }
+      
+      .feedingwindow{
+        position: fixed;
+        width: 100%;
+        height: 80px;
+        transform: translate(-50%, 0%);
+        top: 0%;
+        left: 50%;
+        padding: 0px 0px 10px 0px;
+      }
+      
+      .feedingwindow__closebutton{
+        position: absolute;
+        top : -30px;
+        right: -30px;
+      }
+      
+      .feedingwindow__icon{
+        width: 80px;
+        height: 80px;
+      }
+      
+      .feedingwindow__count{
+        font-size: 18px;
+        font-weight: 600;
+      }
+      
+      /* 結局 */
+      .ending__petname{
+        font-size: 32px;
+        font-weight: 900;
+      }
+      
+      .ending__petparameter{
+        margin: 20px;
+        font-size: 22px;
+        font-weight: 700;
+      }
+      
+      .ending__petavatar{
+        position: absolute;
+        bottom: 100px;
+        left: 50%; /* 將 left 設置為 50% */
+        transform: translateX(-50%); /* 使用 transform 來水平居中 */
+        width: 80%;
+      }
+      
+      .button__newgame{
+        width: 120px; 
+        height: 60px; 
+        background-color: black; /* 平行四邊形的背景色 */
+        transform: skew(-20deg); /* 傾斜度 */
+      }
+      
+      .ending__button{
+        position: absolute;
+        left: 80%; /* 將 left 設置為 50% */
+        transform: translateX(-50%); /* 使用 transform 來水平居中 */
+        top: 80vh;
+      }
 
     }
 }
