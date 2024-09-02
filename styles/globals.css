@@ -460,7 +460,7 @@ body {
         display: flex;
         justify-content: center;
         position: fixed;
-        top: 85vh;
+        top: 80vh;
         left: 0%;
       }
 
@@ -572,7 +572,7 @@ body {
 
       .imgbutton{
         display: block;
-        margin: 25vh 0px 0px 65vw;
+        padding: 25vh 0px 0px 65vw;
       }
       
       .button__backpack,
@@ -590,7 +590,7 @@ body {
 
       .petavatar__position{
         position: absolute;
-        top: 50vh;
+        top: 30vh;
         left: 50%; 
         transform: translateX(-50%); 
         width: 350px;
