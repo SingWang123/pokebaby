@@ -63,20 +63,23 @@ export default function MainPage() {
                 <>
                     <PetName />
                     <Parameter />
-                    <div className = "button__collection">
-                        <Link href="/collection" style={{ textDecoration: 'none' }}>
-                            <img 
-                                src = '/icon_collection.png' 
-                                style = {{width:"150px", height : "150px"}}
-                            />
-                        </Link>
-                    </div>
+
                     <div className = 'home__button'>
                         <Training />
                         <Feeding />
                         <GetFood />
                     </div>
-                    <Backpack />
+                    <div className = 'imgbutton'>
+                        <div className = "button__collection">
+                            <Link href="/collection" style={{ textDecoration: 'none' }}>
+                                <img 
+                                    src = '/icon_collection.png' 
+                                    className = "button__image"
+                                />
+                            </Link>
+                        </div>
+                        <Backpack />
+                    </div>
                 </>
             }
         </div>

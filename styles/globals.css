@@ -20,8 +20,8 @@ body {
   
 
 .home {
-  width: 100vw;
-  min-height: 100vh;
+  max-width: 100vw;
+  min-height: 100vh; 
   text-align: center;
   background-image: url("../public/bg.png");
 }
@@ -180,18 +180,19 @@ body {
   border: 1px white solid;
 }
 
-.button__backpack{
-  position: absolute;
-  transform: translate(-50%, -50%);
-  right: 8%;
-  top: 75%;
+.imgbutton{
+  display: flex;
+  justify-content: space-between;
 }
 
+.button__backpack,
 .button__collection{
-  position: absolute;
-  transform: translate(-50%, -50%);
-  left: 15%;
-  top: 75%;
+ margin: 60vh 120px 0px 120px;
+}
+
+.button__image{
+  width: 150px;
+  height: 150px;
 }
 
 .getfood__window{
@@ -436,24 +437,25 @@ body {
     right: 5%;
     top: 18%;
   }
-
-  .button__backpack{
-    position: absolute;
-    transform: translate(-50%, -50%);
-    right: -5%;
-    top: 75%;
-  }
-
+  
+  .button__backpack,
   .button__collection{
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 15%;
-    top: 75%;
+   margin: 60vh 80px 0px 80px;
   }
+
 
     /* screen width < 880px */
     @media(max-width:880px){
       /*螢幕寬度小於880px,套用這組CSS*/
+      /*右邊功能列移至下方，字體變小*/
+      
+      /* .home {
+        width: 100vw;
+        height: 100vh;
+        background-image: url("../public/bg.png");
+      } */
+
+
       .home__button{
         display: flex;
         justify-content: center;
@@ -474,10 +476,7 @@ body {
       }
       
       .button__word{
-        transform: skew(20deg); /* 傾斜度 */
-        color: white;
         font-size: 22px;
-        font-weight: 500;
         margin: 0px 0px 10px 0px;
       }
       
@@ -487,9 +486,118 @@ body {
         right: -10px;
         z-index: 2;
         width: 100%;
-        color: white;
-        border: 1px white solid;
       }
-    
+
+      
+      
+
+      /* 寵物名稱 */
+      .home__petname{
+        position: absolute;
+        left: 5%;
+        top: 0%;
+        display: flex;
+      }
+      
+      .petname__name{
+        font-size: 40px;
+        font-weight: 700;
+        margin: 30px 0px;
+      }
+      
+      .petname__editbutton{
+        position: relative;
+        top : 10%;
+        right: 5%;
+        width: 30px;
+        height: 30px;
+        margin: 50px 10px 40px 15px;
+      }
+      
+      .petname__edit_background{
+        width: 300px;
+        height: 300px;
+      }
+      
+      .petname__edit_title{
+        font-size: 28px;
+        font-weight: 700;
+        margin: 30px 0px;
+      }
+      
+      .petname__edit_input{
+        width: 220px;
+        height: 35px;
+        font-size: 22px;
+      }
+      
+      .petname__edit_button{
+        width: 180px;
+        height: 36px;
+        margin: 40px auto 30px auto;
+        font-size: 28px;
+        padding: 0px 0px 5px 0px;
+      }
+
+      /*參數、回合列*/
+      .home__information{
+        position: absolute;
+        left: 5%;
+        top: 10%;
+      }
+      
+      .information__stat{
+        display: flex;
+        font-size: 26px;
+        font-weight: 600;
+        margin: 10px 0px;
+        text-align: left;
+      }
+      
+      .home__actionpoint{
+        position: absolute;
+        right: 5%;
+        top: 10%;
+      }
+      
+      .actionpoint__title{
+        font-size: 28px;
+        font-weight: 500;
+      }
+      
+      .actionpoint__point{
+        font-size: 40px;
+        font-weight: 700;
+      }
+
+      /*背包，圖鑑按鈕*/
+
+      .imgbutton{
+        display: block;
+        margin: 25vh 0px 0px 65vw;
+      }
+      
+      .button__backpack,
+      .button__collection{
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+      }
+
+      .button__image{
+        width: 100px;
+        height: 100px;
+      }
+      
+      /*寵物圖片*/
+
+      .petavatar__position{
+        position: absolute;
+        bottom: 100px;
+        left: 50%; /* 將 left 設置為 50% */
+        transform: translateX(-50%); /* 使用 transform 來水平居中 */
+        width: 350px;
+        height: 350px;
+      }
+
     }
 }

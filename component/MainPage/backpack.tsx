@@ -26,7 +26,7 @@ export const Backpack = () => {
                         <div className = "button__backpack">
                             <img 
                                 src = '/icon_backpack.png' 
-                                style = {{width:"150px", height : "150px"}}
+                                className = "button__image"
                                 onClick = {toggleShowBackpack}
                             />
                         </div>
@@ -57,13 +57,13 @@ export const Backpack = () => {
                     </div>
                 </>
             ):(
-                    <div className = "button__backpack">
-                        <img 
-                            src = '/icon_backpack.png' 
-                            style = {{width:"150px", height : "150px"}}
-                            onClick = {toggleShowBackpack}
-                        />
-                    </div>
+                <div className = "button__backpack">
+                    <img 
+                        src = '/icon_backpack.png' 
+                        className = "button__image"
+                        onClick = {toggleShowBackpack}
+                    />
+                </div>
             )}
         </>   
     );
