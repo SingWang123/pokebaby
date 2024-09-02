@@ -22,14 +22,14 @@ export const Backpack = () => {
         <>
             { showBackpack ? (
                 <>  
+                    <div className = "button__backpack">
+                        <img 
+                            src = '/icon_backpack.png' 
+                            className = "button__image"
+                            onClick = {toggleShowBackpack}
+                        />
+                    </div>
                     <div className = "backpack__background">
-                        <div className = "button__backpack">
-                            <img 
-                                src = '/icon_backpack.png' 
-                                className = "button__image"
-                                onClick = {toggleShowBackpack}
-                            />
-                        </div>
                         <div className = "backpack">
                             <div 
                                 className = "backpack__closebutton"
