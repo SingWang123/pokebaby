@@ -458,10 +458,8 @@ body {
         display: flex;
         justify-content: center;
         position: fixed;
-        /* width: auto; */
-        top: 90vh;
+        top: 85vh;
         left: 0%;
-        /* transform: translateX(-50%); */
       }
 
       .button__action,

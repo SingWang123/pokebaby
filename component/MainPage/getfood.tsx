@@ -137,8 +137,8 @@ export const GetFood = () => {
           <hr className="button__line"></hr>
         </div>
         {minutes === 0 ? 
-          (<span>冷卻中 {seconds}秒</span>):
-          (<span>冷卻中 {minutes}分 {seconds}秒</span>)
+          (<span>等待 {seconds}秒</span>):
+          (<span>等待 {minutes}分 {seconds}秒</span>)
         }
       </div>
     ) : (
