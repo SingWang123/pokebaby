@@ -491,7 +491,7 @@ body {
       }
       
       .petname__name{
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 700;
         margin: 20px 0px;
       }
@@ -536,13 +536,13 @@ body {
         flex-wrap: wrap;
         position: absolute;
         left: 5%;
-        top: 10%;
+        top: 15%;
       }
       
       .information__stat{
         display: flex;
         width: 35%;
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 600;
         margin: 0px 0px;
         text-align: left;
@@ -555,13 +555,13 @@ body {
       }
       
       .actionpoint__title{
-        font-size: 26px;
+        font-size: 22px;
         font-weight: 500;
         text-align: right;
       }
       
       .actionpoint__point{
-        font-size: 36px;
+        font-size: 32px;
         font-weight: 700;
       }
 
@@ -569,7 +569,7 @@ body {
 
       .imgbutton{
         display: block;
-        padding: 15vh 0px 0px 70vw;
+        padding: 12vh 0px 0px 75vw;
       }
       
       .button__backpack,
@@ -579,8 +579,8 @@ body {
       }
 
       .button__image{
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
       }
       
       /*寵物圖片*/
