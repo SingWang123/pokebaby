@@ -21,7 +21,7 @@ body {
 
 .home {
   max-width: 100vw;
-  min-height: 100vh; 
+  height: 100vh;
   text-align: center;
   background-image: url("../public/bg.png");
 }
@@ -488,8 +488,6 @@ body {
         width: 100%;
       }
 
-      
-      
 
       /* 寵物名稱 */
       .home__petname{
@@ -592,9 +590,9 @@ body {
 
       .petavatar__position{
         position: absolute;
-        bottom: 100px;
-        left: 50%; /* 將 left 設置為 50% */
-        transform: translateX(-50%); /* 使用 transform 來水平居中 */
+        top: 50vh;
+        left: 50%; 
+        transform: translateX(-50%); 
         width: 350px;
         height: 350px;
       }
