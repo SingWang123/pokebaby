@@ -449,13 +449,6 @@ body {
       /*螢幕寬度小於880px,套用這組CSS*/
       /*右邊功能列移至下方，字體變小*/
       
-      /* .home {
-        width: 100vw;
-        height: 100vh;
-        background-image: url("../public/bg.png");
-      } */
-
-
       .home__button{
         display: flex;
         justify-content: center;
@@ -498,18 +491,18 @@ body {
       }
       
       .petname__name{
-        font-size: 40px;
+        font-size: 36px;
         font-weight: 700;
-        margin: 30px 0px;
+        margin: 20px 0px;
       }
       
       .petname__editbutton{
         position: relative;
-        top : 10%;
+        top : 0;
         right: 5%;
-        width: 30px;
-        height: 30px;
-        margin: 50px 10px 40px 15px;
+        width: 25px;
+        height: 25px;
+        margin: 40px 10px 40px 15px;
       }
       
       .petname__edit_background{
@@ -539,6 +532,8 @@ body {
 
       /*參數、回合列*/
       .home__information{
+        display: flex;
+        flex-wrap: wrap;
         position: absolute;
         left: 5%;
         top: 10%;
@@ -546,25 +541,27 @@ body {
       
       .information__stat{
         display: flex;
+        width: 35%;
         font-size: 26px;
         font-weight: 600;
-        margin: 10px 0px;
+        margin: 0px 0px;
         text-align: left;
       }
       
       .home__actionpoint{
         position: absolute;
         right: 5%;
-        top: 10%;
+        top: 2%;
       }
       
       .actionpoint__title{
-        font-size: 28px;
+        font-size: 26px;
         font-weight: 500;
+        text-align: right;
       }
       
       .actionpoint__point{
-        font-size: 40px;
+        font-size: 36px;
         font-weight: 700;
       }
 
@@ -572,18 +569,18 @@ body {
 
       .imgbutton{
         display: block;
-        padding: 25vh 0px 0px 65vw;
+        padding: 15vh 0px 0px 70vw;
       }
       
       .button__backpack,
       .button__collection{
         width: 100%;
-        margin: 0px 0px 0px 0px;
+        margin: 20px 0px 0px 0px;
       }
 
       .button__image{
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
       }
       
       /*寵物圖片*/
