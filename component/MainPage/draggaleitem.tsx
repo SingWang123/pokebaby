@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDrag } from 'react-dnd';
+import React from 'react';
+import { DragPreviewImage, useDrag } from 'react-dnd';
 import { useRef } from 'react';
 
 // 定義拖拽類型
@@ -7,7 +7,6 @@ const DragableItemTypes = {
   ITEM: "item",
 };
 
-// 定義 DraggableItemProps 類型
 interface DraggableItemProps {
   item: {
     id: number;
@@ -18,35 +17,32 @@ interface DraggableItemProps {
 }
 
 const DraggableItem: React.FC<DraggableItemProps> = ({ item }) => {
+  const ref = useRef<HTMLImageElement>(null);
+
   // 使用 useDrag hook 來設置拖拽邏輯
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const [{ isDragging }, drag, preview] = useDrag({
     type: DragableItemTypes.ITEM,
     item: { id: item.id, effect: item.effect },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
-  }), [item]);
+  }, [item]);
 
-  const ref = useRef<HTMLImageElement>(null);
+  // 將 ref 直接傳遞給 drag 和預覽
+  drag(ref);
 
-  useEffect(() => {
-    if (ref.current) {
-      drag(ref.current);
-    }
-  }, [drag]);
-
-  // 確保 drag 函數被用作 ref 屬性
   return (
-    item.count <= 0 ? null:(
+    item.count <= 0 ? null : (
       <>
-        <img 
-          ref = {ref} // 正確使用 drag 作為 ref
-          style = {{ opacity: isDragging ? 0.5 : 1,  border : 0 }} // 設置透明度以反映拖拽狀態
-          src = {item.icon}
-          className = "feedingwindow__icon" 
-          alt = {`item-${item.id}`} // 添加 alt 屬性以提高可訪問性
+        <DragPreviewImage connect={preview} src={item.icon} />
+        <img
+          ref={ref} 
+          style={{ opacity: isDragging ? 0.5 : 1, border: 0 }} 
+          src={item.icon}
+          className="feedingwindow__icon" 
+          alt={`item-${item.id}`} 
         />
-        <span className = 'feedingwindow__count'>
+        <span className='feedingwindow__count'>
           {item.count}
         </span>
       </>
