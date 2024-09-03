@@ -92,7 +92,7 @@ export const Ending = () => {
                 奉獻：{petParameter.dedication}　
             </div>
             <div className = 'ending__petavatar'>
-                <AnimationComponent /> : 
+                <AnimationComponent />
             </div>
             <div className = 'ending__button'>    
                 <div className = "button__newgame">

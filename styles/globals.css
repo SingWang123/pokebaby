@@ -187,7 +187,7 @@ body {
 
 .button__backpack,
 .button__collection{
- margin: 60vh 120px 0px 120px;
+ margin: 70vh 120px 0px 120px;
 }
 
 .button__image{
@@ -440,7 +440,7 @@ body {
   
   .button__backpack,
   .button__collection{
-   margin: 60vh 80px 0px 80px;
+   margin: 70vh 60px 0px 60px;
   }
 
 
@@ -535,6 +535,7 @@ body {
         display: flex;
         flex-wrap: wrap;
         position: absolute;
+        width: 70%;
         left: 5%;
         top: 15%;
       }
@@ -545,7 +546,6 @@ body {
         font-size: 22px;
         font-weight: 600;
         margin: 0px 0px;
-        text-align: left;
       }
       
       .home__actionpoint{
@@ -631,7 +631,7 @@ body {
       /*寵物訓練按鈕*/
       .training__container{
         position: fixed;
-        top: 38%;
+        top: 35%;
         left: 5%;
       }
       
@@ -654,7 +654,7 @@ body {
       .feedingwindow{
         position: fixed;
         width: 100%;
-        height: 80px;
+        height: 90px;
         transform: translate(-50%, 0%);
         top: 0%;
         left: 50%;
@@ -691,7 +691,7 @@ body {
       
       .ending__petavatar{
         position: absolute;
-        bottom: 100px;
+        top: 40vh;
         left: 50%; /* 將 left 設置為 50% */
         transform: translateX(-50%); /* 使用 transform 來水平居中 */
         width: 80%;

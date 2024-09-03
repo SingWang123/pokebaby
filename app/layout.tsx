@@ -5,12 +5,12 @@ import { ParameterProvider } from '@context/ParameterContext'; // 確保路徑�
 import { AuthProvider } from '@context/AuthContext';
 import { BackpackProvider } from '@context/BackpackContext';
 import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 
   return (
-    <DndProvider backend = {HTML5Backend}>
+    <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
       <ParameterProvider>
         <AuthProvider>
           <BackpackProvider>

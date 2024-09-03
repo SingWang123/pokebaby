@@ -72,7 +72,7 @@ export default function CollectionPage() {
             <Link href="/main" style={{ textDecoration: 'none' }}>
                 <img
                     src='/button_back.png'
-                    style={{ position: "absolute", top: "10%", left: "10%", width: "125px", height: "50px" }}
+                    style={{ position: "absolute", top: "10%", left: "10%", width: "125px", height: "50px", zIndex: "20px" }}
                 />
             </Link>
             <div className='collection'>
