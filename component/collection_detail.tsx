@@ -29,8 +29,6 @@ export default function CollectionDetail({ petid, setSelectedPetId }: Collection
     const AnimationComponent = animations[`Animation${petid}`]
     const PetName = findPetNameById(petData, petid);
     const PetRequirement = findPetRequirementById(petData, petid);
-    
-    console.log(PetRequirement);
 
     useEffect(() => {
         if (user?.uid && petid) {

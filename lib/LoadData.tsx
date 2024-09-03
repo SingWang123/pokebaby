@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { doc, getFirestore, getDoc, query, where } from 'firebase/firestore';
+import { doc, getFirestore, getDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -12,10 +12,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-// // 初始化 Firestore 並強制使用 Long Polling
-// const firestore = initializeFirestore(app, {
-//     experimentalForceLongPolling: true,
-//   });
 
 export { app };
 
@@ -152,6 +148,38 @@ export const getPetEndingByID = async (uid : string | null | undefined, petid :s
             } else {
                 console.error ("`endings` 資料不是陣列或不存在！")
                 callback(null);
+            }
+        } else {
+            console.error("No such document!");
+            callback(null);
+        }
+    } catch (error) {
+        console.error("Error getting document:", error);
+        callback(null);
+    }
+}
+
+
+//讀取資料庫結局數據資料，結局總數
+export const getEndingsCount = async (uid : string | null | undefined, callback: (data: any) => void) =>{
+    if (!uid) {
+        console.error("Invalid UID");
+        return; // 或者拋出錯誤
+    }
+    
+    const docRef = doc(db, uid, "PetEndings"); //指定文檔路徑
+    try {
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()){
+            const data = docSnap.data();
+            const endings = data?.endings;
+            
+            if (endings.length > 0 ){
+                callback(endings.length);
+                // console.log(endings.length);
+            } else {
+                callback(0);
             }
         } else {
             console.error("No such document!");

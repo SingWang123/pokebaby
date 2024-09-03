@@ -44,7 +44,6 @@ export default function MainPage() {
                         dedication: data.dedication,
                     };
                     setPetParameter(updatedPetParameter);
-                    console.log(petParameter);
                 }
             });            
         }
