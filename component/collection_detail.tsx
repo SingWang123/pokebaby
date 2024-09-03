@@ -84,6 +84,7 @@ export default function CollectionDetail({ petid, setSelectedPetId }: Collection
                                 <div className="collection__requirement_line"></div>
                             </>
                         ) : null}
+                        <div className = 'detail__ending_petname'>養成寵物紀錄：</div>
                     {endingRecordById.map((record, index) => (
                         <div key={index}  className = 'detail__list'>
                             <div className = 'detail__ending_petname'>{record.petname}</div>

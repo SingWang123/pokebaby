@@ -112,20 +112,20 @@
 .detail__petavatar{
   width: 70%;
   margin: auto;
-  height: 300px;
-  padding: 20px 0px;
+  height: 280px;
+  padding: 10px 0px;
 }
 
 .detail__title{
-  font-size: 32px;
+  font-size: 30px;
   font-weight: 800;
-  margin: -20px 0px 0px 0px;
+  margin: -30px 0px 0px 0px;
 }
 
 .detail__scrollbar{
-  height: 50%;
+  height: 40vh;
   overflow-y: auto; /* 垂直方向可滾動 */
-  margin: 0px 0px;
+  margin: 0px 0px 20px 0;
 }
 
 /* 捲軸寬度及高度 */
@@ -150,7 +150,7 @@
 }
 
 .detail__list{
-  padding: 10px 50px;
+  padding: 0px 50px 10px 50px;
 }
 
 .detail__list_parameter{
@@ -272,7 +272,7 @@
     .detail__petavatar{
       width: 70%;
       margin: auto;
-      height: 250px;
+      height: 220px;
       padding: 20px 0px;
     }
     
@@ -283,19 +283,20 @@
     }
     
     .detail__list{
-      padding: 10px 15px;
+      padding: 10px 10px;
+    }
+
+    .detail__scrollbar{
+      height: 44vh;
     }
     
     .detail__ending_petname{
       font-size: 20px;
-      font-weight: 600;
-      text-align: left;
       padding: 10px 20px;
     }
     
     .detail__ending_parameter{
       font-size: 16px;
-      font-weight: 500;
       margin: 0px 5px;
     }
     
@@ -304,7 +305,7 @@
     }
     
     .collection__requirement_line{
-      width: 90%; 
+      width: 100%; 
       margin: 10px 0px;
     }
 
