@@ -269,12 +269,12 @@ body {
 }
 
 svg {
-  width: 150%;
+  width: 400%;
   height: auto;
 }
 
 .parameter__container{
-  margin: 20px 0px 0px 0px;
+  margin: -20px 0px 0px -50px;
 }
 
 .parameter__outerpolygon{
@@ -464,9 +464,9 @@ svg {
   }
 
 
-    /* screen width < 880px */
-    @media(max-width:880px){
-      /*螢幕寬度小於880px,套用這組CSS*/
+    /* screen width < 700px */
+    @media(max-width:700px){
+      /*螢幕寬度小於700px,套用這組CSS*/
       /*右邊功能列移至下方，字體變小*/
       
       .home__button{
@@ -552,12 +552,12 @@ svg {
 
       /*參數、回合列*/
       svg {
-        width: 100%;
+        width: 250%;
         height: auto;
       }
 
       .parameter__container{
-        margin: -20px 0px 0px 0px;
+        margin: -50px 0px 0px -30px;
       }
       
       .home__actionpoint{
@@ -724,5 +724,37 @@ svg {
         top: 80vh;
       }
 
+       /* screen width < 720px */
+      @media(max-height:720px){
+        /*螢幕寬度小於880px,套用這組CSS*/
+        /*右邊功能列移至下方，字體變小*/
+        .home__button{
+          top: 90vh;
+          left: 0%;
+        }
+  
+        .button__action,
+        .button__getfood{
+          width: 30%; /* 平行四邊形的寬度 */
+          height: 45px; /* 平行四邊形的高度 */
+          margin: 0px 5px 0px 5px;
+        }
+        
+        .button__word{
+          font-size: 20px;
+          margin: 0px 0px 15px 0px;
+          line-height: 20px;
+        }
+        
+        .button__line{
+          position: relative;
+          top: -10px;
+          right: -10px;
+        }
+
+        .parameter__container{
+          margin: -20px 0px 0px -30px;
+        }
+      }
     }
 }

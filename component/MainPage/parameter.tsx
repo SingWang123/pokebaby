@@ -38,26 +38,6 @@ const Parameter = () => {
     return (
     <>
         <div className = 'home__parameter'>
-            {/* <div className = 'information__stat'>
-                <span>勇敢：{petParameter.brave}</span>
-                {braveChange !== 0 && <span className = 'fade-out'>{braveChange > 0 ? `+${braveChange}` : braveChange}</span>}
-            </div>
-            <div className = 'information__stat'>
-                <span >堅毅：{petParameter.perseverance}</span>
-                {perseveranceChange !== 0 && <span className = 'fade-out'>{perseveranceChange > 0 ? `+${perseveranceChange}` : perseveranceChange}</span>}
-            </div>
-            <div className = 'information__stat'>
-                <span>冷靜：{petParameter.cool}</span>
-                {coolChange !== 0 && <span className = 'fade-out'>{coolChange > 0 ? `+${coolChange}` : coolChange}</span>}
-            </div>
-            <div className = 'information__stat'>
-                <span>靈巧：{petParameter.dexterity}</span>
-                {dexterityChange !== 0 && <span className = 'fade-out'>{dexterityChange > 0 ? `+${dexterityChange}` : dexterityChange}</span>}
-            </div>
-            <div className = 'information__stat'>
-                <span>奉獻：{petParameter.dedication}</span>
-                {dedicationChange !== 0 && <span className = 'fade-out'>{dedicationChange > 0 ? `+${dedicationChange}` : dedicationChange}</span>}
-            </div> */}
             <PentagonChart parameters = {parameters} changes = {changes}/>
         </div>
         <div className = 'home__actionpoint'>

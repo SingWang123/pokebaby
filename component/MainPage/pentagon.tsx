@@ -29,7 +29,7 @@ const PentagonChart: React.FC<PentagonChartProps> = ({ parameters, changes }) =>
 
     return (
         <div className = 'parameter__container'>
-            <svg width="400" height="500" viewBox="-30 90 300 160">
+            <svg width="100" height="100" viewBox="-20 -20 150 200">
                 {/* 外層五角形 */}
                 <polygon 
                     className = 'parameter__outerpolygon'
