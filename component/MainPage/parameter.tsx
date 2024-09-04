@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { defaultPetParameter, PetParameter, useParameter } from '@context/ParameterContext';
+import PentagonChart from './pentagon';
 
 const Parameter = () => {
     const { petParameter, setPetParameter} = useParameter();
@@ -11,7 +12,10 @@ const Parameter = () => {
     const [coolChange, setCoolChange] = useState<number>(0);
     const [dexterityChange, setDexterityChange] = useState<number>(0);
     const [dedicationChange, setDedicationChange] = useState<number>(0);
-    
+
+    const parameters = [petParameter.brave,petParameter.perseverance,petParameter.cool,petParameter.dexterity,petParameter.dedication]
+    const changes = [braveChange, perseveranceChange, coolChange, dexterityChange, dedicationChange];
+
     useEffect(() => {
         setBraveChange(petParameter.brave - prevPetParameter.brave);
         setPerseveranceChange(petParameter.perseverance - prevPetParameter.perseverance);
@@ -33,8 +37,8 @@ const Parameter = () => {
   
     return (
     <>
-        <div className = 'home__information'>
-            <div className = 'information__stat'>
+        <div className = 'home__parameter'>
+            {/* <div className = 'information__stat'>
                 <span>勇敢：{petParameter.brave}</span>
                 {braveChange !== 0 && <span className = 'fade-out'>{braveChange > 0 ? `+${braveChange}` : braveChange}</span>}
             </div>
@@ -53,7 +57,8 @@ const Parameter = () => {
             <div className = 'information__stat'>
                 <span>奉獻：{petParameter.dedication}</span>
                 {dedicationChange !== 0 && <span className = 'fade-out'>{dedicationChange > 0 ? `+${dedicationChange}` : dedicationChange}</span>}
-            </div>
+            </div> */}
+            <PentagonChart parameters = {parameters} changes = {changes}/>
         </div>
         <div className = 'home__actionpoint'>
             <div className = 'actionpoint__title'>還剩</div>

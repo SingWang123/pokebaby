@@ -100,17 +100,10 @@ body {
 }
 
 
-.home__information{
+.home__parameter{
   position: absolute;
   left: 10%;
   top: 15%;
-}
-
-.information__stat{
-  font-size: 36px;
-  font-weight: 600;
-  margin: 10px 0px;
-  text-align: left;
 }
 
 .home__actionpoint{
@@ -275,6 +268,32 @@ body {
   font-weight: 600;
 }
 
+svg {
+  width: 100%;
+  height: auto;
+}
+
+.parameter__container{
+  margin: 20px 0px 0px 0px;
+}
+
+.parameter__outerpolygon{
+  fill: none; 
+  stroke: black; 
+}
+
+.parameter__innerpolygon{
+  fill: rgba(255, 163, 218, 0.5); 
+  stroke: #ffa3da; 
+}
+
+.parameter__title{
+  fill: black;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
 .training__container{
   position: absolute;
   top: 5%;
@@ -286,6 +305,7 @@ body {
   width: 150px;
   height: 36px;
   margin: 10px auto 0px auto;
+  line-height: 32px;
   border: 3px black solid;
   border-radius: 30px;
   font-size: 26px;
@@ -420,7 +440,7 @@ body {
     left: 5%;
   }
 
-  .home__information{
+  .home__parameter{
     position: absolute;
     left: 5%;
     top: 15%;
@@ -440,7 +460,7 @@ body {
   
   .button__backpack,
   .button__collection{
-   margin: 70vh 60px 0px 60px;
+   margin: 70vh 60px 0px 0px;
   }
 
 
@@ -531,13 +551,8 @@ body {
       }
 
       /*參數、回合列*/
-      .home__information{
-        display: flex;
-        flex-wrap: wrap;
-        position: absolute;
-        width: 70%;
-        left: 5%;
-        top: 15%;
+      .parameter__container{
+        margin: -20px 0px 0px 0px;
       }
       
       .information__stat{
@@ -636,10 +651,10 @@ body {
       }
       
       .training__button{
-        width: 120px;
-        height: 32px;
+        width: 100px;
+        height: 28px;
         margin: 10px auto 0px auto;
-        font-size: 20px;
+        font-size: 18px;
       }
 
       /*寵物餵食*/
