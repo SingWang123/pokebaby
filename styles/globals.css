@@ -155,7 +155,8 @@ body {
   margin: 60px 0px 0px 0px;
 }
 
-.button__word{
+.button__word,
+.button__newgame_word{
   transform: skew(20deg); /* 傾斜度 */
   color: white;
   font-size: 36px;
@@ -690,6 +691,11 @@ svg {
       }
       
       /* 結局 */
+      .ending__title{
+        padding :30px 0px;
+        font-size : 60px; 
+      }
+
       .ending__petname{
         font-size: 32px;
         font-weight: 900;
@@ -703,7 +709,7 @@ svg {
       
       .ending__petavatar{
         position: absolute;
-        top: 40vh;
+        top: 30vh;
         left: 50%; /* 將 left 設置為 50% */
         transform: translateX(-50%); /* 使用 transform 來水平居中 */
         width: 80%;
@@ -714,6 +720,13 @@ svg {
         height: 60px; 
         background-color: black; /* 平行四邊形的背景色 */
         transform: skew(-20deg); /* 傾斜度 */
+      }
+
+      .button__newgame_word{
+        font-size: 22px;
+        font-weight: 500;
+        padding: 15px 0px 0px 0px;
+        line-height: 24px;
       }
       
       .ending__button{
