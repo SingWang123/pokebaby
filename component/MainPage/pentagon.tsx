@@ -6,7 +6,7 @@ interface PentagonChartProps {
 }
 
 const PentagonChart: React.FC<PentagonChartProps> = ({ parameters, changes }) => {
-    const maxParam = 20;
+    const maxParam = 50;
     const points = [
     { x: 50, y: 10 },
     { x: 90, y: 40 },
@@ -51,10 +51,10 @@ const PentagonChart: React.FC<PentagonChartProps> = ({ parameters, changes }) =>
                     y={points[index].y} // 向上移動文字
                     textAnchor="middle"
                     dx={index === 0 ? '0' : // 上方
-                        index === 1 ? '15' :  // 右上
+                        index === 1 ? '20' :  // 右上
                         index === 2 ? '18' :  // 右下
                         index === 3 ? '-18' :  // 左下
-                        '-15'} // 左上
+                        '-20'} // 左上
                     dy={index === 0 ? '-15' : // 上方
                         index === 1 ? '-5' :  // 右上
                         index === 2 ? '5' :  // 右下
@@ -76,10 +76,10 @@ const PentagonChart: React.FC<PentagonChartProps> = ({ parameters, changes }) =>
                     fontSize = "12" 
                     textAnchor = "middle"
                     dx={index === 0 ? '0' : // 上方
-                        index === 1 ? '15' :  // 右上
+                        index === 1 ? '20' :  // 右上
                         index === 2 ? '15' :  // 右下
                         index === 3 ? '-15' :  // 左下
-                        '-15'} // 左上
+                        '-20'} // 左上
                     dy={index === 0 ? '-2' : // 上方
                         index === 1 ? '8' :  // 右上
                         index === 2 ? '18' :  // 右下
@@ -89,7 +89,8 @@ const PentagonChart: React.FC<PentagonChartProps> = ({ parameters, changes }) =>
                     {param}
                     {changes[index] !== 0 && (
                         <tspan
-                            dx="5"
+                            className = 'parameter__change_word' 
+                            dx="3"
                             dy="0"
                             fill={changes[index] > 0 ? 'red' : 'green'}
                         >
