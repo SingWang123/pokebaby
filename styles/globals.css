@@ -269,7 +269,7 @@ body {
 }
 
 svg {
-  width: 100%;
+  width: 150%;
   height: auto;
 }
 
@@ -551,16 +551,13 @@ svg {
       }
 
       /*參數、回合列*/
+      svg {
+        width: 100%;
+        height: auto;
+      }
+
       .parameter__container{
         margin: -20px 0px 0px 0px;
-      }
-      
-      .information__stat{
-        display: flex;
-        width: 35%;
-        font-size: 22px;
-        font-weight: 600;
-        margin: 0px 0px;
       }
       
       .home__actionpoint{
@@ -645,8 +642,8 @@ svg {
 
       /*寵物訓練按鈕*/
       .training__container{
-        position: fixed;
-        top: 35%;
+        position: absolute;
+        top: -350px;
         left: 5%;
       }
       
@@ -654,6 +651,7 @@ svg {
         width: 100px;
         height: 28px;
         margin: 10px auto 0px auto;
+        line-height: 26px;
         font-size: 18px;
       }
 
