@@ -12,6 +12,9 @@ export const Feeding = () => {
     const {user} = useAuthContext();
     const {backpackArray,setBackpackArray} = useBackpackContext();
 
+    // 檢查是否至少有一個物品的 count 大於 0
+    const hasItems = backpackArray.some(item => item.count > 0);  
+
     //左右拖拉餵食彈窗
     const scrollRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -26,26 +29,43 @@ export const Feeding = () => {
         }
     }
 
-    const handleMouseDown = (e:React.MouseEvent<HTMLDivElement>) => {
+    // 共用的拖動邏輯
+    const handleDragStart = (xPosition: number) => {
         if (scrollRef.current !== null) {
             setIsDragging(true);
-            setStartX(e.pageX - scrollRef.current.offsetLeft);
+            setStartX(xPosition - scrollRef.current.offsetLeft);
             setScrollLeft(scrollRef.current.scrollLeft);
         }
     };
-    
-    const handleMouseLeaveOrUp = () => {
+
+    const handleDragMove = (xPosition: number) => {
+        if (!isDragging || scrollRef.current === null) return;
+        const x = xPosition - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 3; // 3 是拖動速度調節係數
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const handleDragEnd = () => {
         setIsDragging(false);
     };
-    
-    const handleMouseMove = (e:React.MouseEvent<HTMLDivElement>) => {
-        if (!isDragging) return;
+
+    // Mouse events
+    const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+        handleDragStart(e.pageX);
+    };
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
-        if (scrollRef.current !== null) {
-            const x = e.pageX - scrollRef.current.offsetLeft;
-            const walk = (x - startX) * 3; // 3 是拖動速度調節係數
-            scrollRef.current.scrollLeft = scrollLeft - walk;
-        }
+        handleDragMove(e.pageX);
+    };
+
+    // Touch events
+    const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+        handleDragStart(e.touches[0].pageX);
+    };
+
+    const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+        handleDragMove(e.touches[0].pageX);
     };
 
     return (
@@ -59,7 +79,7 @@ export const Feeding = () => {
                 </p>
                 <hr className = "button__line"></hr>
             </div>
-            { showFeedingFoodWindow ? (
+            { showFeedingFoodWindow ? 
                 <div className = "feedingwindow__container">
                     <div 
                         className = "feedingwindow__closebutton"
@@ -69,19 +89,27 @@ export const Feeding = () => {
                     <div 
                         className = "feedingwindow"
                         ref = {scrollRef}
-                        onMouseDown = {handleMouseDown}
-                        onMouseLeave = {handleMouseLeaveOrUp}
-                        onMouseUp = {handleMouseLeaveOrUp}
-                        onMouseMove = {handleMouseMove}
-                        >
-                        <div>                            
-                            {backpackArray.map(item => (
-                                <DraggableItem key={item.id} item={item} />
-                            ))}
-                        </div>
+                        onMouseDown={handleMouseDown}
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleDragEnd}
+                        onMouseUp={handleDragEnd}
+                        onTouchStart={handleTouchStart}
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={handleDragEnd}
+                    >
+                        {!hasItems ? (
+                            <div className = "feedingwindow__noitem">
+                                點選「領取食物」按鈕取得食物  
+                            </div>
+                            ): (    
+                            <div>                            
+                                {backpackArray.map(item => (
+                                    <DraggableItem key={item.id} item={item} />
+                                ))}
+                            </div>
+                        )}
                     </div>
-                </div>
-            ): null
+                </div> : null
             }
         </>
     );

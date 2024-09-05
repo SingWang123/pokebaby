@@ -355,7 +355,7 @@ svg {
   left: 50%;
   border: 3px solid black;
   border-radius: 5px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .feedingwindow::-webkit-scrollbar{
@@ -370,6 +370,12 @@ svg {
   height: 30px;
   background-image: url("../public/button_close.png"); 
   background-size: cover;
+}
+
+.feedingwindow__noitem{
+  margin: 44px auto 44px auto;
+  font-size: 22px;
+  color: rgb(22, 120, 231);
 }
 
 .feedingwindow__icon{
@@ -417,6 +423,13 @@ svg {
   height: 500px;
 }
 
+.ending__button{
+  position: absolute;
+  left: 80%; /* 將 left 設置為 50% */
+  transform: translateX(-50%); /* 使用 transform 來水平居中 */
+  bottom:10%;
+}
+
 .button__newgame{
   width: 210px; 
   height: 75px; 
@@ -424,12 +437,7 @@ svg {
   transform: skew(-20deg); /* 傾斜度 */
 }
 
-.ending__button{
-  position: absolute;
-  left: 90%; /* 將 left 設置為 50% */
-  transform: translateX(-50%); /* 使用 transform 來水平居中 */
-  bottom:10%;
-}
+
 
   /* screen width < 1100px */
 @media(max-width:1100px){
@@ -462,7 +470,6 @@ svg {
   .button__collection{
    margin: 70vh 60px 0px 60px;
   }
-
 
     /* screen width < 700px */
     @media(max-width:700px){
@@ -657,27 +664,32 @@ svg {
 
       /*寵物餵食*/
       .feedingwindow__container{
-        position: fixed;
+        position: absolute;
         width: 80%;
         height: 100px;
         transform: translate(-50%, -50%);
-        top: 72%;
+        top: -80px;
       }
       
       .feedingwindow{
         position: fixed;
         width: 100%;
-        height: 90px;
+        height: 100px;
         transform: translate(-50%, 0%);
         top: 0%;
         left: 50%;
-        padding: 0px 0px 10px 0px;
+        background-color: rgba(255, 255, 255, 0.5);
       }
       
       .feedingwindow__closebutton{
         position: absolute;
         top : -30px;
         right: -30px;
+      }
+
+      .feedingwindow__noitem{
+        margin: 37px auto 37px auto;
+        font-size: 18px;
       }
       
       .feedingwindow__icon{
@@ -718,23 +730,9 @@ svg {
       .button__newgame{
         width: 120px; 
         height: 60px; 
-        background-color: black; /* 平行四邊形的背景色 */
-        transform: skew(-20deg); /* 傾斜度 */
       }
 
-      .button__newgame_word{
-        font-size: 22px;
-        font-weight: 500;
-        padding: 15px 0px 0px 0px;
-        line-height: 24px;
-      }
-      
-      .ending__button{
-        position: absolute;
-        left: 80%; /* 將 left 設置為 50% */
-        transform: translateX(-50%); /* 使用 transform 來水平居中 */
-        top: 80vh;
-      }
+
 
        /* screen width < 720px */
       @media(max-height:720px){
@@ -771,6 +769,11 @@ svg {
         svg {
           width: 220%;
           height: auto;
+        }
+  
+        .backpack{
+          top: 50%;
+          height: 90vh;
         }
       }
     }

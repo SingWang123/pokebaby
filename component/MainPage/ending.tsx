@@ -110,7 +110,7 @@ export const Ending = () => {
             <div className = 'ending__button'>    
                 <div className = "button__newgame">
                     <p 
-                        className = "button__newgame_word"
+                        className = "button__word"
                         onClick = {handleNewGame}   
                     >
                         重新開始

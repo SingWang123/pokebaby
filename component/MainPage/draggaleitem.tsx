@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { DragPreviewImage, useDrag } from 'react-dnd';
 import { useRef } from 'react';
+import { useBackpackContext } from '@context/BackpackContext';
 
 // 定義拖拽類型
 const DragableItemTypes = {
@@ -32,7 +33,9 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ item }) => {
   drag(ref);
 
   return (
-    item.count <= 0 ? null : (
+    item.count <= 0 ? ( 
+      null
+    ) : (
       <>
         <DragPreviewImage connect={preview} src={item.icon} />
         <img
@@ -46,7 +49,7 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ item }) => {
           {item.count}
         </span>
       </>
-    )
+    )  
   );
 };
 
