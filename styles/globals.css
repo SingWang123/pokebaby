@@ -739,7 +739,7 @@ svg {
         /*螢幕寬度小於880px,套用這組CSS*/
         /*右邊功能列移至下方，字體變小*/
         .home__button{
-          top: 85vh;
+          top: 82vh;
           left: 0%;
         }
   
@@ -773,8 +773,14 @@ svg {
   
         .backpack{
           top: 50%;
-          height: 90vh;
+          height: 80vh;
         }
+
+        .button__newgame{
+          width: 120px; 
+          height: 45px; 
+        }
+
       }
     }
 }
