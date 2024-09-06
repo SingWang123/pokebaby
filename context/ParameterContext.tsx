@@ -11,6 +11,8 @@ export interface PetParameter{
     cool : number;
     dexterity : number;
     dedication : number;
+    happy : number;
+    full : number;
 }
 
 //定義context的型別
@@ -29,6 +31,8 @@ export const defaultPetParameter: PetParameter = {
     cool: 0,
     dexterity: 0,
     dedication: 0,
+    happy : 0,
+    full : 0
 };
 
 const defaultContext : PetParameterType = {

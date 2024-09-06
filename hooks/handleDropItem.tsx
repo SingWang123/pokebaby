@@ -3,17 +3,25 @@ import { writeBackpack, writePetParameter } from 'lib/WriteData';
 import { useParameter } from '@context/ParameterContext';
 import { useAuthContext } from '@context/AuthContext';
 import { BackpackItem, useBackpackContext } from '@context/BackpackContext';
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { PetParameter } from '@context/ParameterContext';
+import { useMessageContext } from '@context/MessageContext';
 
 export const useHandleDropItem = () => {
     const { user } = useAuthContext();
     const { petParameter, setPetParameter } = useParameter();
     const { backpackArray, setBackpackArray } = useBackpackContext();
+    const { message, setMessage} = useMessageContext();
+    // const [ errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleDropItem = useCallback((item: BackpackItem) => {
         if (item.count <= 0) {
             return; // 如果物品數量不夠，則返回不做任何操作
+        }
+
+        if (petParameter.full > 100){
+            setMessage(petParameter.petname + " 已經吃不下了！")
+            return;
         }
 
         const updatedItems = backpackArray.map(i =>
@@ -34,6 +42,8 @@ export const useHandleDropItem = () => {
             cool: petParameter.cool + (item.effect['冷靜'] || 0),
             dexterity: petParameter.dexterity + (item.effect['靈巧'] || 0),
             dedication: petParameter.dedication + (item.effect['奉獻'] || 0),
+            happy: petParameter.happy,
+            full: petParameter.full + 20
         };
         setPetParameter(newPetParameter);
 
@@ -47,9 +57,21 @@ export const useHandleDropItem = () => {
             newPetParameter.cool,
             newPetParameter.dexterity,
             newPetParameter.dedication,
+            petParameter.happy,
+            petParameter.full + 20,
             user?.uid
         );
     }, [backpackArray, petParameter, setBackpackArray, setPetParameter, user?.uid]);
 
-    return handleDropItem;
+        // 每次 errorMessage 更新後，3 秒後清除錯誤訊息
+        // useEffect(() => {
+        //     if (message) {
+        //         const timer = setTimeout(() => {
+        //             setMessage(null);
+        //         }, 2000); // 2 秒後清除錯誤訊息
+        //         return () => clearTimeout(timer);
+        //     }
+        // }, [message]);
+
+    return { handleDropItem};
 };

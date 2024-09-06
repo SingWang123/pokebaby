@@ -41,6 +41,8 @@ export const Ending = () => {
                     cool : petParameter.cool,
                     dexterity : petParameter.dexterity,
                     dedication : petParameter.dedication,
+                    happy: petParameter.happy,
+                    full: petParameter.full
                 })
             }
         }
@@ -75,7 +77,7 @@ export const Ending = () => {
             )
     
             writePetParameter(
-                newPetname, randomInitialID, 10, 勇敢, 堅毅, 冷靜, 靈巧, 奉獻, user?.uid
+                newPetname, randomInitialID, 10, 勇敢, 堅毅, 冷靜, 靈巧, 奉獻, 0, 0, user?.uid
             )
     
             setPetParameter({
@@ -86,7 +88,9 @@ export const Ending = () => {
                 perseverance: 堅毅,
                 cool: 冷靜,
                 dexterity: 靈巧,
-                dedication: 奉獻
+                dedication: 奉獻,
+                happy: 0,
+                full: 0
             });
         } else {
             console.error("未找到對應的寵物");

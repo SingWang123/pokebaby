@@ -13,6 +13,7 @@ import PetAvatar from 'component/MainPage/petavatar';
 import Link from 'next/link';
 import { Training } from 'component/MainPage/training';
 import { PetName } from 'component/MainPage/petname';
+import PetMood from 'component/MainPage/petmood';
 
 
 export default function MainPage() {
@@ -42,6 +43,8 @@ export default function MainPage() {
                         cool: data.cool,
                         dexterity: data.dexterity,
                         dedication: data.dedication,
+                        happy: data.happy,
+                        full: data.full
                     };
                     setPetParameter(updatedPetParameter);
                 }
@@ -62,6 +65,7 @@ export default function MainPage() {
                 <>
                     <PetName />
                     <Parameter />
+                    <PetMood />
 
                     <div className = 'home__button'>
                         <Training />

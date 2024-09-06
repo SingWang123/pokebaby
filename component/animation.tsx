@@ -43,3 +43,12 @@ const animations = Object.entries(petData).reduce<AnimationComponents>((acc, [ph
 
 // 一次性匯出所有動態生成的動畫組件
 export default animations;
+
+
+// export const animation_heart = lottie.loadAnimation({
+//   container: animContainer.current,
+//   renderer: "svg", //
+//   loop: false, //重複動畫
+//   autoplay: true, //自動播放
+//   path: "/lottie/heart.json" //要讀取的json檔案位置
+// });

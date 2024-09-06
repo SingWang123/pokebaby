@@ -3,30 +3,37 @@ import React, { useRef, useState} from 'react';
 import { useAuthContext } from '@context/AuthContext';
 import { useParameter } from '@context/ParameterContext';
 import { writePetParameter } from 'lib/WriteData';
+import { useMessageContext } from '@context/MessageContext';
 
 
 export const Training = () => {
     const {user} = useAuthContext();
     const {petParameter, setPetParameter} = useParameter();
+    const {message, setMessage} = useMessageContext();
     const [showTrainingWindow, setShowTrainingWindow] = useState<boolean>(false);
+    
 
-    function getRandomParameter() {
-        const attributes = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
-        const randomIndex = Math.floor(Math.random() * attributes.length);
-        // 返回隨機選擇的屬性
-        return attributes[randomIndex];
-    }
+    // function getRandomParameter() {
+    //     const attributes = ['brave', 'perseverance', 'cool', 'dexterity', 'dedication'];
+    //     const randomIndex = Math.floor(Math.random() * attributes.length);
+    //     // 返回隨機選擇的屬性
+    //     return attributes[randomIndex];
+    // }
 
     function getRandomInt(min : number, max : number) {
         return Math.floor(Math.random() * (max - min)) + min;
     }
-    
 
     const toggleShowTrainingWindow = () => {
         setShowTrainingWindow((preState) => !preState);
     }
 
     const handleTraining = (plusParameter:string, minusParameter:string) => {
+        if (petParameter.happy < 0) {
+            setMessage(petParameter.petname + " 心情很差，不想訓練")
+            return;
+        }
+
         let count_plus = getRandomInt(1,4);
         let count_minus = getRandomInt(0,2);
 
@@ -70,12 +77,16 @@ export const Training = () => {
             newPetParameter.cool,
             newPetParameter.dexterity,
             newPetParameter.dedication,
+            petParameter.happy -20,
+            petParameter.full,
             user?.uid
         )
         //寫入context
         setPetParameter({
             ...newPetParameter,
             round: petParameter.round -1,
+            happy: petParameter.happy -20,
+            full: petParameter.full,
             petname: petParameter.petname,
             petid: petParameter.petid
         })

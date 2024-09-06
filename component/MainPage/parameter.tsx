@@ -30,7 +30,7 @@ const Parameter = () => {
             setDexterityChange(0);
             setDedicationChange(0);
             setPrevPetParameter(petParameter);
-        }, 1000);
+        }, 1500);
         
         return () => window.clearTimeout(timer);  
     },[petParameter]);

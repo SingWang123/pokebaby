@@ -285,8 +285,8 @@ svg {
 }
 
 .parameter__innerpolygon{
-  fill: rgba(255, 163, 218, 0.5); 
-  stroke: #ffa3da; 
+  fill: rgba(255, 163, 218, 0.8); 
+  stroke: #f868bf; 
   stroke-width: 1;
 }
 
@@ -297,7 +297,7 @@ svg {
 }
 
 .parameter__change_word{
-  animation: fade 1s forwards;
+  animation: fade 1.5s forwards;
 }
 
 @keyframes fade {
@@ -310,6 +310,12 @@ svg {
   100% {
     opacity: 0; 
   }
+}
+
+.home__mood{
+  position: absolute;
+  top: 0%;
+  left: 50%;
 }
 
 .training__container{
@@ -389,12 +395,46 @@ svg {
 }
 
 .petavatar__position{
-  position: absolute;
+  position: fixed;
   bottom: 100px;
   left: 50%; /* 將 left 設置為 50% */
   transform: translateX(-50%); /* 使用 transform 來水平居中 */
   width: 500px;
   height: 500px;
+}
+
+.petavatar__errorword,
+.error-display{
+  position: absolute;
+  right: 50%;
+  font-size: 26px;
+  text-align: left;
+  font-weight: 500;
+  animation: floatUp 2s ease-out forwards; 
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px); /* 向上移動50像素 */
+    opacity: 0; /* 完全透明 */
+  }
+}
+
+.heart-animation__container {
+  position: absolute;
+  z-index: 20;
+  top: -100px;
+  right: -50px;
+  width: 250px;
+  height: 250px;
+  pointer-events: none; /* 確保點擊事件不會影響動畫容器 */
 }
 
 .ending__title{
@@ -611,6 +651,15 @@ svg {
         transform: translateX(-50%); 
         width: 320px;
         height: 320px;
+      }
+
+      .heart-animation__container {
+        position: absolute;
+        z-index: 20;
+        top: -50px;
+        right: -30px;
+        width: 150px;
+        height: 150px;
       }
 
       /*背包*/

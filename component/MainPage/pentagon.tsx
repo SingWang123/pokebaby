@@ -36,6 +36,18 @@ const PentagonChart: React.FC<PentagonChartProps> = ({ parameters, changes }) =>
                     points = {points.map(p => `${p.x},${p.y}`).join(' ')} 
                 />
                 
+                {/* 中心到五個頂點的虛線 */}
+                {points.map((point, index) => (
+                    <line
+                        key={index}
+                        x1="50" y1="50" // 中心點
+                        x2={point.x} y2={point.y} // 對應頂點
+                        stroke="black"
+                        strokeDasharray="2, 2" // 設定虛線
+                        className="parameter__lines"
+                    />
+                ))}
+
                 {/* 內層依照參數出現的多邊形 */}
                 <polygon
                     className = 'parameter__innerpolygon' 

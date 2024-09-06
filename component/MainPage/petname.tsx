@@ -34,18 +34,14 @@ export const PetName = () => {
                 petParameter.cool,
                 petParameter.dexterity,
                 petParameter.dedication,
+                petParameter.happy,
+                petParameter.full,
                 user?.uid
             )
             //寫入context
             setPetParameter({
-                petname: newPetName,
-                petid: petParameter.petid,
-                round: petParameter.round,
-                brave : petParameter.brave,
-                perseverance : petParameter.perseverance,
-                cool : petParameter.cool,
-                dexterity : petParameter.dexterity,
-                dedication : petParameter.dedication,
+                ...petParameter,
+                petname: newPetName
             })
             //關閉視窗
             setShowEditPetname(false);
