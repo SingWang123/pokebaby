@@ -14,10 +14,12 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 const HTML5toTouch = {
   backends: [
     {
+      id: 'html5',
       backend: HTML5Backend,
       transition: MouseTransition, // PC上使用滑鼠的過渡條件
     },
     {
+      id: 'touch',
       backend: TouchBackend,
       options: {
         enableMouseEvents: true,  // 支援滑鼠事件作為後備方案
@@ -48,7 +50,7 @@ const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
                   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.10.0/lottie.min.js" type="text/javascript"></script>
               </head>
               <body>
-                  <main>{children}</main>
+                <main>{children}</main>
               </body>
               </html>
             </MessageProvider>

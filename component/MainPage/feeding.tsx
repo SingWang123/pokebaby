@@ -68,6 +68,18 @@ export const Feeding = () => {
         handleDragMove(e.touches[0].pageX);
     };
 
+    const scrollLeftHandler = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollLeft -= 300; // 向左滑動的距離
+        }
+    };
+    
+    const scrollRightHandler = () => {
+        if (scrollRef.current) {
+            scrollRef.current.scrollLeft += 300; // 向右滑動的距離
+        }
+    };
+
     return (
         <>
             <div className = "button__action">
@@ -86,6 +98,10 @@ export const Feeding = () => {
                         onClick = {toggleShowFeedingFoodWindow}
                     >
                     </div>
+                    <span 
+                        className="feedingwindow__triangle-right"
+                        onClick={scrollRightHandler}    
+                    ></span>
                     <div 
                         className = "feedingwindow"
                         ref = {scrollRef}
@@ -109,6 +125,10 @@ export const Feeding = () => {
                             </div>
                         )}
                     </div>
+                    <span 
+                        className="feedingwindow__triangle-left"
+                        onClick={scrollLeftHandler}
+                    ></span>
                 </div> : null
             }
         </>

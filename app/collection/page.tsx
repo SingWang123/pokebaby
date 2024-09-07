@@ -1,5 +1,5 @@
     "use client";
-    import React, { useState } from 'react';
+    import React, { useRef, useState } from 'react';
     import "/styles/collection.css" ;
     import { useEffect } from 'react';
     import { useAuthContext } from '@context/AuthContext';
@@ -23,6 +23,7 @@
     export default function CollectionPage() {
         const { user } = useAuthContext();
         const router = useRouter();
+        const audioRef = useRef<HTMLAudioElement | null>(null);
         const [selectedPetId, setSelectedPetId] = useState<string | null>(null);
 
         // 分頁狀態
@@ -75,7 +76,11 @@
                         }));
                         setEndingRecord(updatedEndingRecords);
                     }
-                });  
+                }); 
+                if (audioRef.current) {
+                    audioRef.current.volume = 0.1;
+                    audioRef.current.play(); // 播放音樂
+                } 
             }
         }, [user, router]);
 
@@ -101,6 +106,14 @@
 
         return (
             <div className="home">
+                <audio
+                    ref={audioRef}
+                    src="/audio/Pond.mp3" // 替換為音樂文件的實際路徑
+                    loop // 使音樂循環播放
+                    autoPlay // 自動播放
+                    controls={false} // 隱藏音樂控件
+                    style={{ display: 'none' }} // 隱藏 <audio> 元素
+                />
                 <div className = 'collection__completion_container'>
                     <Link href="/main" style={{ textDecoration: 'none' }}>
                         <img

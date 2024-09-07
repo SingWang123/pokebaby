@@ -422,6 +422,30 @@ svg {
   background-size: cover;
 }
 
+.feedingwindow__triangle-right{
+  position: absolute;
+  top : 0px;
+  right: 30px;
+  z-index: 30;
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-left: 30px solid black; /* 顏色可以改成你需要的 */
+}
+
+.feedingwindow__triangle-left{
+  position: absolute;
+  top : 0px;
+  left: 30px;
+  z-index: 30;
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-right: 30px solid black; /* 顏色可以改成你需要的 */
+}
+
 .feedingwindow__noitem{
   margin: 44px auto 44px auto;
   font-size: 22px;
@@ -787,16 +811,16 @@ svg {
       /*寵物餵食*/
       .feedingwindow__container{
         position: absolute;
+        top: -60px;
         width: 80%;
-        height: 100px;
+        height: 70px;
         transform: translate(-50%, -50%);
-        top: -80px;
       }
       
       .feedingwindow{
         position: fixed;
         width: 100%;
-        height: 100px;
+        height: 70px;
         transform: translate(-50%, 0%);
         top: 0%;
         left: 50%;
@@ -805,8 +829,28 @@ svg {
       
       .feedingwindow__closebutton{
         position: absolute;
-        top : -30px;
-        right: -30px;
+        width: 25px;
+        height: 25px;
+        top : -20px;
+        right: -25px;
+      }
+
+      .feedingwindow__triangle-right{
+        position: absolute;
+        top : 18px;
+        right: -15px;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-left: 25px solid black; /* 顏色可以改成你需要的 */
+      }
+      
+      .feedingwindow__triangle-left{
+        position: absolute;
+        top : 18px;
+        left: -15px;
+        border-top: 20px solid transparent;
+        border-bottom: 20px solid transparent;
+        border-right: 25px solid black; /* 顏色可以改成你需要的 */
       }
 
       .feedingwindow__noitem{
@@ -815,8 +859,8 @@ svg {
       }
       
       .feedingwindow__icon{
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
       }
       
       .feedingwindow__count{

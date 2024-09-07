@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Parameter from 'component/MainPage/parameter';
 import { Ending } from 'component/MainPage/ending';
 import { GetFood } from 'component/MainPage/getfood';
@@ -20,6 +20,8 @@ export default function MainPage() {
     const {petParameter, setPetParameter } = useParameter();
     const {user} = useAuthContext();
     const router = useRouter();
+
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
     //檢查登入狀態，未登入踢回首頁
     useEffect(() => {
@@ -59,12 +61,24 @@ export default function MainPage() {
                     };
                     setPetParameter(updatedPetParameter);
                 }
+                if (audioRef.current) {
+                    audioRef.current.volume = 0.1;
+                    audioRef.current.play(); // 播放音樂
+                }
             });            
         }
     }, [user, setPetParameter]);
 
     return (
         <div className = "home">
+            <audio
+                ref={audioRef}
+                src="/audio/Ukulele_Song.mp3" // 替換為音樂文件的實際路徑
+                loop // 使音樂循環播放
+                autoPlay // 自動播放
+                controls={false} // 隱藏音樂控件
+                style={{ display: 'none' }} // 隱藏 <audio> 元素
+            />
             {
                 petParameter.round <= 0 ?
                 <Ending />:
