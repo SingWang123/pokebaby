@@ -69,7 +69,7 @@ export const Ending = () => {
             )
     
             writePetParameter(
-                newPetname, randomInitialID, 10, 勇敢, 堅毅, 冷靜, 靈巧, 奉獻, 0, 0, new Date(), user?.uid
+                newPetname, randomInitialID, 10, 勇敢, 堅毅, 冷靜, 靈巧, 奉獻, 30, 30, new Date(), user?.uid
             )
     
             setPetParameter({

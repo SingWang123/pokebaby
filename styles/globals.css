@@ -474,6 +474,7 @@ svg {
 .petavatar__errorword{
   position: absolute;
   right: 50%;
+  z-index: 30;
   font-size: 26px;
   text-align: left;
   font-weight: 500;
@@ -854,7 +855,7 @@ svg {
       }
 
       .feedingwindow__noitem{
-        margin: 37px auto 37px auto;
+        margin: 22px auto 22px auto;
         font-size: 18px;
       }
       
