@@ -41,7 +41,9 @@ const Parameter = () => {
             <PentagonChart parameters = {parameters} changes = {changes}/>
         </div>
         <div className = 'home__actionpoint'>
-            <div className = 'actionpoint__title'>還剩</div>
+            <div className = 'actionpoint__title'>
+                {petParameter.round > 5 ? "離幼年期還剩" : "離成年還剩"}
+            </div>
             <div className = 'actionpoint__point'>{petParameter.round}回合</div>
             {/* <div className = 'actionpoint__bg'></div>     */}
         </div>

@@ -74,6 +74,13 @@ export default function PetAvatar() {
     useEffect(() => {
         if (petParameter.round === 5){
             const bestMatchId = findBestMatch(petParameter, petData);
+            const egg = ["0001","0002","0003","0004","0005"];
+
+            if (bestMatchId !== null &&  egg.includes(bestMatchId)) {
+                setMessage("咦，蛋蛋沒有孵化，還有時間再加加油！")
+            } else {
+                setMessage("進化成功，向成年型態邁進!")
+            }
 
             if (bestMatchId){
                 //寫入資料庫
