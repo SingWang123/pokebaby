@@ -896,8 +896,8 @@ svg {
         /* 快樂值、飽食度*/
         .home__mood{
           position: absolute;
-          top: 53vh;
-          left: 80px;
+          top: 360px;
+          left: 90px;
           width: 140px;
         }
         

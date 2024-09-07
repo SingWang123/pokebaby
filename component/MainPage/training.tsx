@@ -30,7 +30,7 @@ export const Training = () => {
 
     const handleTraining = (plusParameter:string, minusParameter:string) => {
         if (petParameter.happy < 20) {
-            setMessage(petParameter.petname + " 不開心，不配合訓練，多摸摸他吧!")
+            setMessage(petParameter.petname + " 很累，不想訓練，多摸摸他吧!")
             return;
         }
 

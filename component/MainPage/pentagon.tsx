@@ -93,10 +93,10 @@ const PentagonChart: React.FC<PentagonChartProps> = ({ parameters, changes }) =>
                         index === 3 ? '-15' :  // 左下
                         '-20'} // 左上
                     dy={index === 0 ? '-2' : // 上方
-                        index === 1 ? '8' :  // 右上
+                        index === 1 ? '10' :  // 右上
                         index === 2 ? '18' :  // 右下
                         index === 3 ? '18' :  // 左下
-                        '8'} // 左上
+                        '10'} // 左上
                 >
                     {param}
                     {changes[index] !== 0 && (
