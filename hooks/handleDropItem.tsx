@@ -12,7 +12,6 @@ export const useHandleDropItem = () => {
     const { petParameter, setPetParameter } = useParameter();
     const { backpackArray, setBackpackArray } = useBackpackContext();
     const { message, setMessage} = useMessageContext();
-    // const [ errorMessage, setErrorMessage] = useState<string | null>(null);
 
     const handleDropItem = useCallback((item: BackpackItem) => {
         if (item.count <= 0) {
@@ -20,7 +19,7 @@ export const useHandleDropItem = () => {
         }
 
         if (petParameter.full > 100){
-            setMessage(petParameter.petname + " 已經吃不下了！")
+            setMessage(petParameter.petname + " 已經吃不下了！請等他消化一下。")
             return;
         }
 
@@ -43,7 +42,8 @@ export const useHandleDropItem = () => {
             dexterity: petParameter.dexterity + (item.effect['靈巧'] || 0),
             dedication: petParameter.dedication + (item.effect['奉獻'] || 0),
             happy: petParameter.happy,
-            full: petParameter.full + 20
+            full: petParameter.full + 20,
+            fullUpdateTime: petParameter.fullUpdateTime,
         };
         setPetParameter(newPetParameter);
 
@@ -59,19 +59,10 @@ export const useHandleDropItem = () => {
             newPetParameter.dedication,
             petParameter.happy,
             petParameter.full + 20,
+            petParameter.fullUpdateTime,
             user?.uid
         );
     }, [backpackArray, petParameter, setBackpackArray, setPetParameter, user?.uid]);
-
-        // 每次 errorMessage 更新後，3 秒後清除錯誤訊息
-        // useEffect(() => {
-        //     if (message) {
-        //         const timer = setTimeout(() => {
-        //             setMessage(null);
-        //         }, 2000); // 2 秒後清除錯誤訊息
-        //         return () => clearTimeout(timer);
-        //     }
-        // }, [message]);
 
     return { handleDropItem};
 };

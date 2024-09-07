@@ -36,6 +36,7 @@ export const PetName = () => {
                 petParameter.dedication,
                 petParameter.happy,
                 petParameter.full,
+                petParameter.fullUpdateTime,
                 user?.uid
             )
             //寫入context

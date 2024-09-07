@@ -39,9 +39,10 @@ const DropArea: React.FC<DropAreaProps> = ({ onDropItem, children }) => {
 
 
   return (
-    <div 
+    <div ref = {ref}  className={`drop-area ${isOver ? 'highlight' : ''}`}>
+    {/* <div 
       ref = {ref} 
-    >
+    > */}
       {children}
     </div>
   );

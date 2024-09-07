@@ -13,6 +13,7 @@ export interface PetParameter{
     dedication : number;
     happy : number;
     full : number;
+    fullUpdateTime : Date;
 }
 
 //定義context的型別
@@ -32,7 +33,8 @@ export const defaultPetParameter: PetParameter = {
     dexterity: 0,
     dedication: 0,
     happy : 0,
-    full : 0
+    full : 0,
+    fullUpdateTime: new Date()
 };
 
 const defaultContext : PetParameterType = {

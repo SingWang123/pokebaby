@@ -314,8 +314,52 @@ svg {
 
 .home__mood{
   position: absolute;
-  top: 0%;
+  bottom: 10%;
   left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+}
+
+.mood__progress-bar {
+  display: flex;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.mood__progress-bar__label {
+  width: 80px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 2px;
+}
+
+.mood__progress-bar__outer {
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 20px;
+  position: relative;
+  margin: 5px 0px 0px 4px;
+  outline: solid 3px black;
+}
+
+.mood__progress-bar__inner {
+  height: 20px;
+  border-radius: 10px 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #fff;
+  transition: width 0.3s ease-in-out;
+}
+
+.mood__progress-bar__value {
+  position: absolute;
+  right: 10px;
+  color: black;
+  font-weight: 700;
 }
 
 .training__container{
@@ -403,8 +447,7 @@ svg {
   height: 500px;
 }
 
-.petavatar__errorword,
-.error-display{
+.petavatar__errorword{
   position: absolute;
   right: 50%;
   font-size: 26px;
@@ -623,6 +666,28 @@ svg {
         font-size: 32px;
         font-weight: 700;
       }
+      
+      /* 快樂值、飽食度*/
+      .home__mood{
+        position: absolute;
+        top: 50%;
+        left: 100px;
+        width: 160px;
+      }
+      
+      .mood__progress-bar__label {
+        width: 60px;
+        font-size: 14px;
+      }
+      
+      .mood__progress-bar__outer {
+        height: 14px;
+      }
+      
+      .mood__progress-bar__inner {
+        height: 14px;
+      }
+      
 
       /*背包，圖鑑按鈕*/
 
@@ -660,6 +725,14 @@ svg {
         right: -30px;
         width: 150px;
         height: 150px;
+      }
+
+      .petavatar__errorword{
+        position: absolute;
+        width: 35%;
+        right: 25%;
+        font-size: 14px;
+        text-align: left;
       }
 
       /*背包*/
@@ -820,6 +893,51 @@ svg {
           height: auto;
         }
   
+        /* 快樂值、飽食度*/
+        .home__mood{
+          position: absolute;
+          top: 53vh;
+          left: 80px;
+          width: 140px;
+        }
+        
+        .mood__progress-bar__label {
+          width: 55px;
+          font-size: 12px;
+        }
+        
+        .mood__progress-bar__outer {
+          height: 12px;
+          outline: solid 2px black;
+        }
+        
+        .mood__progress-bar__inner {
+          height: 12px;
+        }
+
+        /*寵物訓練按鈕*/
+        .training__container{
+          position: absolute;
+          display: flex;
+          flex-wrap: wrap;
+          width: 80px;
+          top: -240px;
+          left: 5%;
+        }
+        
+        .training__button{
+          width: 100%;
+          height: 20px;
+          margin: 2px auto 0px auto;
+          line-height: 18px;
+          font-size: 14px;
+        }
+
+        .training__word{
+          font-size: 12px;
+          margin: 0px auto 2px auto;
+        }
+
         .backpack{
           top: 50%;
           height: 80vh;
@@ -829,7 +947,6 @@ svg {
           width: 120px; 
           height: 45px; 
         }
-
       }
     }
 }

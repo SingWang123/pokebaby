@@ -20,7 +20,6 @@ export default function MainPage() {
     const {petParameter, setPetParameter } = useParameter();
     const {user} = useAuthContext();
     const router = useRouter();
-    // const [petName,setPetName] = useState<string>("蛋蛋1號")
 
     //檢查登入狀態，未登入踢回首頁
     useEffect(() => {
@@ -34,6 +33,17 @@ export default function MainPage() {
         if (user) {
             getPetParameter(user.uid, (data) => {
                 if (data) {
+                    const currentTimeInSeconds = Math.floor(Date.now() / 1000); //目前時間，單位秒
+                    const lastUpdateTimeInSeconds = data.fullUpdateTime.seconds + data.fullUpdateTime.nanoseconds / 1e9; // 最後的飽食度更新時間，單位秒
+                    const timeDifferenceInSeconds = currentTimeInSeconds - lastUpdateTimeInSeconds; // 取得時間差（毫秒）
+                    const timeDifferenceInMinutes = timeDifferenceInSeconds / 60 ; // 將時間差轉換為分鐘
+
+                    // 计算每5分钟减少5点飽食度
+                    const fullnessReduction = Math.floor(timeDifferenceInMinutes / 5) * 5; 
+
+                    // 计算当前的飽食度
+                    const currentFullness = Math.max(data.full - fullnessReduction, 0); // 确保飽食度不低于0
+
                     const updatedPetParameter: PetParameter = {
                         petname: data.petname,
                         petid: data.petid,
@@ -44,7 +54,8 @@ export default function MainPage() {
                         dexterity: data.dexterity,
                         dedication: data.dedication,
                         happy: data.happy,
-                        full: data.full
+                        full: currentFullness,
+                        fullUpdateTime: new Date()
                     };
                     setPetParameter(updatedPetParameter);
                 }

@@ -29,8 +29,8 @@ export const Training = () => {
     }
 
     const handleTraining = (plusParameter:string, minusParameter:string) => {
-        if (petParameter.happy < 0) {
-            setMessage(petParameter.petname + " 心情很差，不想訓練")
+        if (petParameter.happy < 20) {
+            setMessage(petParameter.petname + " 不開心，不配合訓練，多摸摸他吧!")
             return;
         }
 
@@ -79,6 +79,7 @@ export const Training = () => {
             newPetParameter.dedication,
             petParameter.happy -20,
             petParameter.full,
+            petParameter.fullUpdateTime,
             user?.uid
         )
         //寫入context
@@ -87,6 +88,7 @@ export const Training = () => {
             round: petParameter.round -1,
             happy: petParameter.happy -20,
             full: petParameter.full,
+            fullUpdateTime: petParameter.fullUpdateTime,
             petname: petParameter.petname,
             petid: petParameter.petid
         })
@@ -110,36 +112,36 @@ export const Training = () => {
                         onClick = {() => handleTraining("brave","cool")}
                     > 勇氣訓練
                     </div>
-                    <span style = {{color:"red"}}>勇敢↑</span>
-                    <span style = {{color:"green"}}>  冷靜↓</span>
+                    <span className = 'training__word' style = {{color:"red"}}>勇敢↑</span>
+                    <span className = 'training__word' style = {{color:"green"}}>  冷靜↓</span>
                     <div 
                         className = 'training__button' 
                         onClick = {() => handleTraining("perseverance","dexterity")}
                     > 韌性訓練
                     </div>
-                    <span style = {{color:"red"}}>堅韌↑</span>
-                    <span style = {{color:"green"}}>  靈巧↓</span>
+                    <span className = 'training__word' style = {{color:"red"}}>堅韌↑</span>
+                    <span className = 'training__word' style = {{color:"green"}}>  靈巧↓</span>
                     <div 
                         className = 'training__button' 
                         onClick = {() => handleTraining("cool","dedication")}
                     > 冷靜訓練
                     </div>
-                    <span style = {{color:"red"}}>冷靜↑</span>
-                    <span style = {{color:"green"}}>  奉獻↓</span>
+                    <span className = 'training__word' style = {{color:"red"}}>冷靜↑</span>
+                    <span className = 'training__word' style = {{color:"green"}}>  奉獻↓</span>
                     <div 
                         className = 'training__button' 
                         onClick = {() => handleTraining("dexterity","brave")}
                     > 速度訓練
                     </div>
-                    <span style = {{color:"red"}}>靈巧↑</span>
-                    <span style = {{color:"green"}}>  勇敢↓</span>
+                    <span className = 'training__word' style = {{color:"red"}}>靈巧↑</span>
+                    <span className = 'training__word' style = {{color:"green"}}>  勇敢↓</span>
                     <div 
                         className = 'training__button' 
                         onClick = {() => handleTraining("dedication","perseverance")}
                     > 犧牲訓練
                     </div>
-                    <span style = {{color:"red"}}>奉獻↑</span>
-                    <span style = {{color:"green"}}>  堅韌↓</span>
+                    <span className = 'training__word' style = {{color:"red"}}>奉獻↑</span>
+                    <span className = 'training__word' style = {{color:"green"}}>  堅韌↓</span>
                 </div>
             ): null
             }

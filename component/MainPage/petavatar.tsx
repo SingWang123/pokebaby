@@ -21,8 +21,6 @@ export default function PetAvatar() {
     const {message, setMessage, counter} = useMessageContext();
     const [showMessage, setShowMessage] = useState<boolean>(false);
 
-    console.log(message,counter,showMessage);
-
     // 用來播放愛心動畫的容器引用
     const heartAnimContainer = useRef<HTMLDivElement | null>(null);
 
@@ -31,7 +29,7 @@ export default function PetAvatar() {
 
     //點擊寵物，快樂值加1
     const handleClickPet = () => {
-        if (petParameter.happy < 101) {
+        if (petParameter.happy < 98) {
             // 撥放愛心動畫
             if (heartAnimContainer.current) {
                 // 銷毀之前的動畫
@@ -61,6 +59,7 @@ export default function PetAvatar() {
                 petParameter.dedication,
                 petParameter.happy +3,
                 petParameter.full,
+                petParameter.fullUpdateTime,
                 user?.uid
             )
             //寫入context
@@ -89,6 +88,7 @@ export default function PetAvatar() {
                     petParameter.dedication,
                     petParameter.happy,
                     petParameter.full,
+                    petParameter.fullUpdateTime,
                     user?.uid
                 )
                 //寫入context
@@ -108,6 +108,7 @@ export default function PetAvatar() {
         }, 2000); // 2 秒後清除錯誤訊息
         return () => clearTimeout(timer);
     }, [counter]);
+
     
     return (
         <DropArea onDropItem = {handleDropItem}>
@@ -117,7 +118,7 @@ export default function PetAvatar() {
             >
                 {/* 錯誤訊息 */}
                 <>
-                    { showMessage && <div className="petavatar__errorword">123{message}</div>}
+                    { showMessage && <div className="petavatar__errorword">{message}</div>}
                 </> 
                 <AnimationComponent /> 
                 {/* 愛心動畫的容器 */}

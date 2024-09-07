@@ -33,6 +33,7 @@ export async function writePetParameter(
     dedication : number,
     happy : number,
     full : number, 
+    fullUpdateTime: Date,
     uid : string | null | undefined 
 ) {
     if (!uid || typeof uid !== 'string') {
@@ -58,7 +59,8 @@ export async function writePetParameter(
             dexterity: dexterity || 0,
             dedication: dedication || 0,
             happy: happy || 0,
-            full: full || 0
+            full: full || 0,
+            fullUpdateTime: fullUpdateTime
         });
         // console.log('寫入寵物數據成功');
     } catch (error: any) {
