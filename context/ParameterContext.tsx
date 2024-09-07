@@ -27,13 +27,13 @@ export const defaultPetParameter: PetParameter = {
     petname: "蛋蛋",
     petid: "0001",
     round: 10,
-    brave: 0,
-    perseverance: 0,
-    cool: 0,
-    dexterity: 0,
-    dedication: 0,
-    happy : 0,
-    full : 0,
+    brave: 10,
+    perseverance: 5,
+    cool: 5,
+    dexterity: 5,
+    dedication: 5,
+    happy : 30,
+    full : 30,
     fullUpdateTime: new Date()
 };
 

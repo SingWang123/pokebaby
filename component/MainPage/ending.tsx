@@ -81,8 +81,8 @@ export const Ending = () => {
                 cool: 冷靜,
                 dexterity: 靈巧,
                 dedication: 奉獻,
-                happy: 0,
-                full: 0,
+                happy: 30,
+                full: 30,
                 fullUpdateTime: new Date()
             });
         } else {
