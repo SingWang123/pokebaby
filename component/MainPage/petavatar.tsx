@@ -43,7 +43,7 @@ export default function PetAvatar() {
                     renderer: 'svg',
                     loop: false,
                     autoplay: true,
-                    path: '/lottie/heart.json', // 愛心動畫的 JSON 路徑
+                    path: '/lottie/Heart.json', // 愛心動畫的 JSON 路徑
                 });
             }
 
