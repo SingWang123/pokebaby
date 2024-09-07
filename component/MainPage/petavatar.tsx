@@ -29,7 +29,7 @@ export default function PetAvatar() {
 
     //點擊寵物，快樂值加1
     const handleClickPet = () => {
-        if (petParameter.happy < 98) {
+        if (petParameter.happy < 101) {
             // 撥放愛心動畫
             if (heartAnimContainer.current) {
                 // 銷毀之前的動畫
@@ -112,7 +112,7 @@ export default function PetAvatar() {
     
     return (
         <DropArea onDropItem = {handleDropItem}>
-            <div 
+            <div
                 className = 'petavatar__position'
                 onClick = {handleClickPet}
             >
@@ -122,10 +122,12 @@ export default function PetAvatar() {
                 </> 
                 <AnimationComponent /> 
                 {/* 愛心動畫的容器 */}
+               
                 <div 
                     ref={heartAnimContainer} 
                     className="heart-animation__container"
                 ></div>
+            
             </div>
         </DropArea>
     );

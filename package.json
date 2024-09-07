@@ -11,12 +11,14 @@
   },
   "dependencies": {
     "@types/node": "^16.0.1",
+    "dnd-multi-backend": "^8.0.3",
     "firebase": "^10.12.5",
     "lottie-web": "^5.12.2",
     "next": "latest",
     "react": "^18.3.1",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
+    "react-dnd-multi-backend": "^8.0.3",
     "react-dnd-touch-backend": "^16.0.1",
     "react-dom": "^18.3.1"
   },

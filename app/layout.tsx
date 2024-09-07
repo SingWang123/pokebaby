@@ -7,11 +7,31 @@ import { BackpackProvider } from '@context/BackpackContext';
 import { DndProvider } from 'react-dnd';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { MessageProvider } from '@context/MessageContext';
+import { MouseTransition, MultiBackend, TouchTransition } from 'dnd-multi-backend';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
+// 定義拖放行為的過渡條件
+const HTML5toTouch = {
+  backends: [
+    {
+      backend: HTML5Backend,
+      transition: MouseTransition, // PC上使用滑鼠的過渡條件
+    },
+    {
+      backend: TouchBackend,
+      options: {
+        enableMouseEvents: true,  // 支援滑鼠事件作為後備方案
+        preview: true,            // 確保啟用預覽
+      },
+      transition: TouchTransition, // 手持設備上使用觸控的過渡條件
+    },
+  ],
+};
 
 const Layout: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 
   return (
-    <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
+    <DndProvider backend={MultiBackend} options={HTML5toTouch}>
       <ParameterProvider>
         <AuthProvider>
           <BackpackProvider>

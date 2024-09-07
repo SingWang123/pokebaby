@@ -29,6 +29,14 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ item }) => {
     }),
   }, [item]);
 
+
+  // 使用預設圖片作為拖動圖標
+  const previewImg = new Image();
+  previewImg.src = item.icon; // 假設 item.icon 是圖標的 URL
+
+  // 將預覽圖標與 draggable 元素關聯
+  preview(previewImg);
+  
   // 將 ref 直接傳遞給 drag 和預覽
   drag(ref);
 
@@ -40,10 +48,11 @@ const DraggableItem: React.FC<DraggableItemProps> = ({ item }) => {
         <DragPreviewImage connect={preview} src={item.icon} />
         <img
           ref={ref} 
-          style={{ opacity: isDragging ? 0.5 : 1, border: 0 }} 
+          style={{ opacity: isDragging ? 0.5 : 1, border: 0}} 
           src={item.icon}
           className="feedingwindow__icon" 
           alt={`item-${item.id}`} 
+          
         />
         <span className='feedingwindow__count'>
           {item.count}

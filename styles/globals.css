@@ -472,7 +472,7 @@ svg {
 
 .heart-animation__container {
   position: absolute;
-  z-index: 20;
+  /* z-index: 20; */
   top: -100px;
   right: -50px;
   width: 250px;
