@@ -44,7 +44,10 @@ const Parameter = () => {
             <div className = 'actionpoint__title'>
                 {petParameter.round > 5 ? "離幼年期還剩" : "離成年還剩"}
             </div>
-            <div className = 'actionpoint__point'>{petParameter.round}回合</div>
+            {petParameter.round > 5 ?
+                <div className = 'actionpoint__point'>{petParameter.round-5}回合</div> :
+                <div className = 'actionpoint__point'>{petParameter.round}回合</div>
+            }
             {/* <div className = 'actionpoint__bg'></div>     */}
         </div>
     </>

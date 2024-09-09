@@ -3,7 +3,7 @@ import { writeBackpack, writePetParameter } from 'lib/WriteData';
 import { useParameter } from '@context/ParameterContext';
 import { useAuthContext } from '@context/AuthContext';
 import { BackpackItem, useBackpackContext } from '@context/BackpackContext';
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback } from 'react';
 import { PetParameter } from '@context/ParameterContext';
 import { useMessageContext } from '@context/MessageContext';
 

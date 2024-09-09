@@ -7,11 +7,14 @@ import { writePetEnding, writePetParameter } from 'lib/WriteData';
 import { findBestMatch } from 'utils/findBestMatch';
 import petData from 'public/items/pet.json';
 import { getEndingsCount } from 'lib/LoadData';
+import { useMessageContext } from '@context/MessageContext';
 
 
 export const Ending = () => { 
     const { petParameter, setPetParameter } = useParameter();  
     const {user} = useAuthContext();
+    const {message, setMessage} = useMessageContext();
+
     const AnimationComponent = animations[`Animation${petParameter.petid}`]
 
     const [endingsCount, setEndingsCount] = useState<number>(0);
@@ -36,6 +39,22 @@ export const Ending = () => {
                     ...petParameter,
                     petid: bestMatchId,
                 })
+                
+                //寫入資料庫
+                writePetParameter(
+                    petParameter.petname,
+                    bestMatchId,
+                    petParameter.round,
+                    petParameter.brave,
+                    petParameter.perseverance,
+                    petParameter.cool,
+                    petParameter.dexterity,
+                    petParameter.dedication,
+                    petParameter.happy,
+                    petParameter.full,
+                    petParameter.fullUpdateTime,
+                    user?.uid
+                )
             }
         }
     }, [petParameter.round]);
@@ -83,8 +102,11 @@ export const Ending = () => {
                 dedication: 奉獻,
                 happy: 30,
                 full: 30,
-                fullUpdateTime: new Date()
+                fullUpdateTime: new Date()            
             });
+
+            setMessage("");
+            
         } else {
             console.error("未找到對應的寵物");
         }

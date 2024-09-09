@@ -141,7 +141,7 @@ export const Training = () => {
                     > 犧牲訓練
                     </div>
                     <span className = 'training__word' style = {{color:"red"}}>奉獻↑</span>
-                    <span className = 'training__word' style = {{color:"green"}}>  堅韌↓</span>
+                    <span className = 'training__word' style = {{color:"green"}}>  堅毅↓</span>
                 </div>
             ): null
             }
