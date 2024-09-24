@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInAnonymously, EmailAuthProvider, linkWithCredential, onAuthStateChanged, signOut} from "firebase/auth";
 import { useState ,useEffect } from "react";
 import { User } from "firebase/auth";
 
@@ -25,34 +25,64 @@ export const auth = getAuth();
 //調用firebase註冊功能
 
 interface AuthError extends Error {
-    code?: string;
-    message: string;  // message 需要是 string
-  }
+  code?: string;
+  message: string;  // message 需要是 string
+}
 
 export const registerUser = (email: string, password: string) =>{
-    return createUserWithEmailAndPassword(auth,email,password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            return user;
-        })
-        .catch((error) => {
-            throw new Error(`Error ${error.Code}: ${error.Message}`)
-        });
+  return createUserWithEmailAndPassword(auth,email,password)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        return user;
+    })
+    .catch((error) => {
+        throw new Error(`Error ${error.Code}: ${error.Message}`)
+    });
 
 } 
 
 
 //調用firebase登入功能
 export const signinUser = (email: string, password: string) =>{
-    return signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            return user;
-        })
-        .catch((error) => {
-            throw new Error(`Error ${error.Code}: ${error.Message}`)
-        });
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        const user = userCredential.user;
+        return user;
+    })
+    .catch((error) => {
+        throw new Error(`Error ${error.Code}: ${error.Message}`)
+    });
 }
+
+//調用firebase匿名登入功能
+export const signinAnonymously = async () => {
+  const auth = getAuth();
+  try {
+    const result = await signInAnonymously(auth);
+  //   console.log("Anonymous user signed in:", result.user);
+    return result.user; // 返回用戶物件，方便其他地方使用
+  } catch (error) {
+    console.error("Error during anonymous sign-in", error);
+    throw error; // 抛出錯誤，方便在前端捕獲
+  }
+};
+
+//調用綁定匿名帳號的功能
+export const linkAnonymousAccount = async (email: string, password: string) => {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (user) {
+    const credential = EmailAuthProvider.credential(email, password);
+    try {
+      const result = await linkWithCredential(user, credential);
+      // console.log("Anonymous account linked to email:", result.user);
+      return result.user;
+    } catch (error) {
+      console.error("Error linking anonymous account", error);
+      throw error;
+    }
+  }
+};
 
 
 //調用firebase 檢查登入狀態功能

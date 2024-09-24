@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import { useState } from "react";
-import { signinOut, signinUser } from "lib/FirebaseAuth";
+import { signinOut, signinUser, signinAnonymously } from "lib/FirebaseAuth";
 import Link from "next/link";
 import { useAuthContext } from "@context/AuthContext";
+import { AccountBinding } from "./account_binding";
 
 type SigninProps = {
     toggleSignup : () => void;
@@ -13,7 +14,12 @@ export const Signin : React.FC<SigninProps> = ({toggleSignup}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const {user} = useAuthContext();
-    
+    const [switchAccountBinding, setSwitchAccountBinding] = useState(false);
+
+    const toggleAccountBinding = () => {
+        setSwitchAccountBinding((preState) => !preState);
+    }
+
     const handleSignin = () => {
         if (email.trim() === "" || password.trim() === "") {
             alert("請輸入電子信箱和密碼");
@@ -38,6 +44,10 @@ export const Signin : React.FC<SigninProps> = ({toggleSignup}) => {
 
     const handleSignout = () => {
         signinOut();
+    };
+
+    const handleSignInAnonymously = () => {
+        signinAnonymously();
     };
 
     return(
@@ -80,27 +90,57 @@ export const Signin : React.FC<SigninProps> = ({toggleSignup}) => {
                     >
                         註冊新帳號
                     </button>
+                    <button 
+                        onClick = {handleSignInAnonymously}
+                        style = {{backgroundColor : "pink", color : "white"}}
+                        className="button__type1"
+                    >
+                        立即玩
+                    </button>
                 </div>
             ) : (
-                // 有登入
-                <div className="signup_title">
-                    {user.email}，歡迎回來！
-                    <div className="index__button_bg">
-                        <Link href="/main" style={{ textDecoration: 'none' }}>
-                            <button 
-                                className="button__type1"
-                            >
-                                點此開始
-                            </button>
-                        </Link>
-                        <button
-                            onClick={handleSignout}
-                            className="button__type1"
-                        >
-                            切換帳號
-                        </button>
-                    </div>
-                </div>
+                <>
+                    {switchAccountBinding ? (
+                        <AccountBinding toggleAccountBinding={toggleAccountBinding}/>
+                    ) : (
+                        // 有登入，且未切到綁定帳號
+                        <div className="signup_title">
+                            {user.email} 歡迎回來！
+                            <div className="index__button_bg">
+                                <Link href="/main" style={{ textDecoration: 'none' }}>
+                                    <button 
+                                        className="button__type1"
+                                    >
+                                        點此開始
+                                    </button>
+                                </Link>
+                                <button
+                                    onClick={handleSignout}
+                                    className="button__type1"
+                                >
+                                    登出
+                                </button>
+                                {user.isAnonymous ?(
+                                    <>
+                                        <button
+                                            onClick={toggleAccountBinding}
+                                            style = {{backgroundColor : "pink", color : "white"}}
+                                            className="button__type1"
+                                        >
+                                            綁定帳號
+                                        </button> 
+                                        <p
+                                            style = {{fontSize : "16px", margin : "-20px 0px"}}
+                                        >
+                                            避免登出後帳號遺失，請盡速綁定帳號
+                                        </p>
+                                    </>
+                                ) : null
+                                }
+                            </div>
+                        </div>
+                    )}
+                </>
             )}
         </>
     )
